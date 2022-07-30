@@ -8,6 +8,7 @@ public class HelloWorldController {
     @RequestMapping
     public String helloWorld(){
         return "Hello World from Spring boot";
+
     }
 }
 
