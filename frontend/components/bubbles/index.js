@@ -50,7 +50,7 @@ export const WideBubble = (props) => {
                     src={props.image}
                     alt={`picture of ${props.text}`}
                     layout="fill"
-                    objectFit="contain"
+                    objectFit="cover"
                 />
             </div>
         </Link>
