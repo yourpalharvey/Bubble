@@ -24,6 +24,7 @@ export const SquareBubble = (props) => {
                     src={props.image}
                     alt={`picture of ${props.text}`}
                     layout="fill"
+                    objectFit="contain"
                 />
             </div>
         </Link>
@@ -49,6 +50,7 @@ export const WideBubble = (props) => {
                     src={props.image}
                     alt={`picture of ${props.text}`}
                     layout="fill"
+                    objectFit="contain"
                 />
             </div>
         </Link>
@@ -74,6 +76,7 @@ export const TallBubble = (props) => {
                     src={props.image}
                     alt={`picture of ${props.text}`}
                     layout="fill"
+                    objectFit="contain"
                 />
             </div>
         </Link>
