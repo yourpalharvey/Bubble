@@ -10,6 +10,7 @@ backend-testing:
     stage: testBackend
     script:
         - cd backend
+        - gradle test
         - echo -e "Backend is being tested"
     only:
         changes:
@@ -18,7 +19,7 @@ backend-testing:
 backend-deploying:
     stage: deployBackend
     script:
-        - echo -e "Backend sis being deployed"
+        - echo -e "Backend is being deployed"
     only:
         changes:
             - backend/*
