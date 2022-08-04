@@ -21,8 +21,7 @@ backend-deploying:
     script:
         - echo -e "Backend is being deployed"
     only:
-        changes:
-            - backend/*
+        - main
 
 frontend-testing:       # This job runs in the build stage, which runs first.
     image: node:6.9.1
@@ -39,11 +38,10 @@ frontend-testing:       # This job runs in the build stage, which runs first.
 
 frontend-deploying:
     stage: deployFrontend
+    only:
+        - main
     script:
         - echo -e "Frontend is being deployed"
-    only:
-        changes:
-            - frontend/*
 
 
 
