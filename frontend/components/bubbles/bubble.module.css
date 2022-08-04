@@ -1,0 +1,45 @@
+.squareBubbleContainer {
+    width: 28vw;
+    height: 25vw;
+
+    background-color: var(--yellow);
+
+    border-radius: 1vh;
+    position: relative;
+}
+
+.squareText {
+    position: absolute;
+    z-index: 10;
+    top: 1vw;
+    left: 1vw;
+    color: var(--white);
+}
+
+.tallBubbleContainer {
+    width: 13.5vw;
+    height: 24vw;
+
+    background-color: var(--yellow);
+
+    border-radius: 1vh;
+    position: relative;
+}
+
+.wideBubbleContainer {
+    height: 11vw;
+    width: 20vw;
+
+    background-color: var(--yellow);
+
+    border-radius: 1vh;
+    position: relative;
+}
+
+.wideText {
+    position: absolute;
+    color: var(--white);
+    z-index: 10;
+    bottom: 1vw;
+    left: 1vw;
+}
