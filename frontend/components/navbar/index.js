@@ -1,5 +1,5 @@
 import styles from './Navbar.module.css'
-import { BrowserView, MobileView } from 'react-device-detect';
+import { BrowserView, MobileOnlyView, MobileView } from 'react-device-detect';
 import Image from 'next/image';
 import Link from 'next/link';
 

@@ -1,24 +1,38 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {Navbar} from '../components/navbar';
-import Logo from '../objects/logo.svg';
-import styles from '../styles/404.module.css';
+import messyPic from '../public/messy.png'
+import { Background } from '../components/background'
+import {Button} from '../objects/button';
+import {Shadow} from '../objects/shadow';
+import styles from '../styles/404.module.css'
 
 const fourOhFour = () => {
 
     return (
-        <>
-            <Navbar />
-            <div style={{width: '100vw', height: '10vh'}}></div>
-            <div className={styles.container}>
-                <Logo height={400} width={400}/>
-                <div>
-                    <h1>404</h1>
-                    <h3>Sorry, this page doesnt exist or has moved</h3>
-                    <Link href="/">Click here to go home</Link>
+        <div>
+            <Background>
+                <div className={styles.container}>
+                    <div className={styles.image}>
+                    <Image
+                        src={messyPic}
+                        alt=""
+                    />
+                    </div>
+                    <h1 className={styles.title}>404 - Page not found</h1>
+                    <p className={styles.message}>
+                        Sorry, but the page you are looking for
+                        might have been removed, had it’s name changed or is tempory unavalible.
+                    </p>
+                    <Link href="/">
+                        <div className={styles.browserRHSContainer}>
+                            <Shadow>
+                                <Button text="Go to home page" colour={true}/>
+                            </Shadow>
+                        </div>
+                    </Link>
                 </div>
-            </div>
-        </>
+            </Background>
+        </div>
     )
 }
 
