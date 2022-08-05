@@ -9,7 +9,7 @@
     
 }
 
-.footerContainer {
+.footerContainer{
     display: flex;
     margin: 2px 4vw;
 }
@@ -33,4 +33,3 @@
 .footerBtnContainer {
     margin: 15px 0px 15px auto;
 }
-    

@@ -9,14 +9,14 @@
     color: #3A3A3A;
     font-family: 'Lato';
     font-style: normal;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .container {
-    /* width: 8vw;
-    height: 6vh; */
-    height: 48px;
-    width: 108px;
+    width: 8vw;
+    height: 6vh;
+    /* height: 48px;
+    width: 108px; */
 
     display: flex;
     justify-content: center;
@@ -29,10 +29,10 @@
 }
 
 .containerColour {
-    /* height: 6vh;
-    width: 8vw; */
-    height: 48px;
-    width: 108px;
+    height: 6vh;
+    width: 8vw;
+    /* height: 48px;
+    width: 108px; */
 
     display: flex;
     justify-content: center;

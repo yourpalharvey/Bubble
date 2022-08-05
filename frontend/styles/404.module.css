@@ -16,32 +16,22 @@
 }
 
 .title {
-    margin-top: 50px;
+    margin: 20px;
     width: 375px;
     height: 40px;
-
-    /* Headings/H1 40px | 40px */
     font-family: 'Lato';
-    font-style: normal;
     font-weight: 700;
     font-size: 40px;
-    line-height: 40px;
-    /* Text/Red */
     color: #FE8668;
 }
 
 .message {
+    margin: 20px;
     width: 848px;
     height: 72px;
-
-    /* Headings/H2 32px | 36px */
     font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 36px;
-
+    font-weight: 400;
+    font-size: 24px;
     text-align: center;
-    /* Text/Gray 80 */
     color: #3A3A3A;
 }
