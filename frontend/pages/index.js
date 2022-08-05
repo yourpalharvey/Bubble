@@ -4,11 +4,13 @@ import styles from '../styles/Home.module.css'
 import { Navbar } from '../components/navbar'
 import {HomeTopContainer} from "../containers/bubbleContainer"
 import {SquareBubble, TallBubble, WideBubble} from '../components/bubbles'
+import { Footer } from '../components/footer'
 
 export default function Home() {
   return (
     <Background>
       <Navbar />
+      
     
       <Head>
         <title>Bubble</title>
@@ -117,9 +119,10 @@ export default function Home() {
               url="categories/1"
           />
         </HomeTopContainer>
-
       </div>
+      <Footer />
     </Background>
+    
   )
 }
 

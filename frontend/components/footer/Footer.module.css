@@ -1,0 +1,36 @@
+.footerBox {
+    width: 100vw;
+    height: 86px;
+    margin: 0%;
+    background-color: #FFE202;
+    ;
+    position: fixed;
+    bottom: 0%;
+    
+}
+
+.footerContainer {
+    display: flex;
+    margin: 2px 4vw;
+}
+
+.footerTitle {
+    margin: 29px 5px;
+    font-family: 'Lato';
+    color: #3A3A3A;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.footerMessage {
+    margin: 29px 5px;
+    font-family: 'Lato';
+    font-weight: 300;
+    font-size: 20px;
+    color: #3A3A3A;
+}
+
+.footerBtnContainer {
+    margin: 15px 0px 15px auto;
+}
+    
