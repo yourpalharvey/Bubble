@@ -59,6 +59,7 @@ export const Navbar = () => {
                 </nav>
 
             </BrowserView>
+
         </>
 
     )
