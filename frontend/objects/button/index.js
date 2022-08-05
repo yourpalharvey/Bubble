@@ -12,7 +12,8 @@ export const Button = (props) => {
                 onClick={props.onClick}
                 type={props.type}
             >
-                {props.text}
+                <div className={styles.containerText}>{props.text}</div>
+                
             </button>
         )
     }
@@ -24,7 +25,17 @@ export const Button = (props) => {
                 onClick={props.onClick}
                 type={props.type}
             >
-                {props.text}
+                <div className={styles.containerText}>{props.text}</div>
+            </button>
+        )
+    } else if (props.colorWide) {
+        return (
+            <button
+                className={styles.containerColorWide}
+                onClick={props.onClick}
+                type={props.type}
+            >
+                <div className={styles.containerTextWide}>{props.text}</div>
             </button>
         )
     }
@@ -36,7 +47,7 @@ export const Button = (props) => {
                 onClick={props.onClick}
                 type={props.type}
             >
-                {props.text}
+                <div className={styles.containerText}>{props.text}</div>
             </button>
         )
     }

@@ -26,7 +26,7 @@ const fourOhFour = () => {
                     <Link href="/">
                         <div className={styles.browserRHSContainer}>
                             <Shadow>
-                                <Button text="Go to home page" colour={true}/>
+                                <Button text="Go to home page" colorWide={true} />
                             </Shadow>
                         </div>
                     </Link>

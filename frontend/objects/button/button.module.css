@@ -1,31 +1,47 @@
+.containerText {
+    color: #3A3A3A;
+    font-family: 'Lato';
+    font-style: normal;
+    font-size: 16px;
+}
+
+.containerTextWide {
+    color: #3A3A3A;
+    font-family: 'Lato';
+    font-style: normal;
+    font-size: 20px;
+}
+
 .container {
-    width: 8vw;
-    height: 6vh;
+    /* width: 8vw;
+    height: 6vh; */
+    height: 48px;
+    width: 108px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    color: var(--text);
-    background-color: var(--white);
+    background-color: #FFFFFF;
 
     border: none;
-    border-radius: 1vh;
+    border-radius: 15px;
 }
 
 .containerColour {
-    width: 8vw;
-    height: 6vh;
+    /* height: 6vh;
+    width: 8vw; */
+    height: 48px;
+    width: 108px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: var(--yellow);
-    color: var(--text);
-
+    background-color: #FFE202;
+    
     border: none;
-    border-radius: 1vh;
+    border-radius: 15px;
 }
 
 .containerWide {
@@ -37,9 +53,23 @@
     justify-content: center;
     align-items: center;
 
-    color: var(--text);
-    background-color: var(--white);
+    background-color: #FFFFFF;
     
     border: none;
-    border-radius: 1vh;
+    border-radius: 15px;
+}
+
+.containerColorWide {
+    width: 16vw;
+    height: 6vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #FFE202;
+    
+    border: none;
+    border-radius: 15px;
 }

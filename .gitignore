@@ -46,6 +46,7 @@ out/
 /coverage
 
 # next.js
+/objects
 /.next/
 /out/
 
