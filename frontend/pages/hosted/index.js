@@ -2,7 +2,8 @@ import Head from 'next/head'
 import { Background } from '../../components/background'
 import styles from '../../styles/HostedEvents.module.css'
 import { Navbar } from '../../components/navbar'
-import {SquareBubble, TallBubble, WideBubble, FullBubble} from '../../components/bubbles'
+// import {SquareBubble, TallBubble, WideBubble} from '../../components/bubbles'
+import { FullBubble, MiniWideBubble } from '../../components/HostedEventBubble'
 import { HomeTopContainer } from '../../containers/bubbleContainer'
 import { HostedEventsContainer } from '../../containers/eventsContainer'
 import { Button } from '../../objects/button'
@@ -34,33 +35,35 @@ export default function HostedEvents(props) {
                 </HostedEventsContainer>
 
                 <HostedEventsContainer title={`Streams from the event`}>
-                <WideBubble
-              text="testing" 
-              date="July 28th"
-              image="/phoebeBridges.png"
-              url="categories/1"
-          />
-          
-          <WideBubble
-              text="testing 2" 
-              date="July 28th"
-              image="/phoebeBridges.png"
-              url="categories/2"
-          />
-          
-          <WideBubble
-              text="testing 3" 
-              date="July 28th"
-              image="/phoebeBridges.png"
-              url="categories/3"
-          />  
 
-          <WideBubble
-              text="testing" 
-              date="July 28th"
-              image="/phoebeBridges.png"
-              url="categories/1"
-          />
+                    <MiniWideBubble
+                        eventName="testing" 
+                        userName="July 28th"
+                        image="/phoebeStream.png"
+                        url="categories/1"
+                    />
+                    
+                    <MiniWideBubble
+                        text="testing 2" 
+                        date="July 28th"
+                        image="/phoebeStream.png"
+                        url="categories/2"
+                    />
+                    
+                    <MiniWideBubble
+                        text="testing 3" 
+                        date="July 28th"
+                        image="/phoebeStream.png"
+                        url="categories/3"
+                    />  
+
+                    <MiniWideBubble
+                        text="testing" 
+                        date="July 28th"
+                        image="/phoebeStream.png"
+                        url="categories/1"
+                    />
+
                 </HostedEventsContainer>
 
 
