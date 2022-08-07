@@ -1,0 +1,44 @@
+.container {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: var(--white);
+
+}
+
+.blob1 {
+    width: 35vw;
+    height: 35vw;
+    border-radius: 17.5vw;
+    background-color: var(--yellow);
+    opacity: 0.1;
+    position: fixed;
+    top: 10vh;
+    left: 15vh;
+}
+
+.blob2 {
+    width: 45vw;
+    height: 45vw;
+    border-radius: 22.5vw;
+    background-color: var(--secondary-green);
+    position: fixed;
+    top: 25vh;
+    right: 5vh;
+}
+
+.blob3 {
+    width: 55vw;
+    height: 55vw;
+    border-radius: 27.5vw;
+    background-color: var(--secondary-blue);
+    position: fixed;
+    top: 60vh;
+    left: 22.50vw;
+}
+
+.content {
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}

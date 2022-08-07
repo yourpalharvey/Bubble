@@ -1,0 +1,55 @@
+.container {
+  padding-top: 10vh;
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+  
+.loginBox {
+  width: 30vw;
+  height: 80vh;
+  background-color: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginTextBox {
+  width: 30vw;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.alternativeLoginBox {
+  width: 30vw;
+  height: 20vh;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailsBox {
+  width: 30vw;
+  height: 30vh;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spacerBox {
+  width: 100%;
+  height: 5vw;
+}
