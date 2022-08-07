@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./bubble.module.css";
+import liveButtonFunc from "../background/buttons";
+
 
 
 // square bubble
@@ -96,13 +98,18 @@ export const FullBubble = (props) => {
                     <p className={styles.fullVenue}>
                         {props.venue}
                     </p>
-                    <p className={styles.fullDate}>
+                    </div>
+                    <div className={styles.fullDate}>
+                    <p className={styles.fullEventDate}>
                         {props.date}
                     </p>
-                    <p className={styles.fullTime}>
+                    </div>
+                    <div className={styles.fullTime}>
+                    <p className={styles.fullEventTime}>
                         {props.time}
                     </p>
                     </div>
+                    <liveButtonFunc></liveButtonFunc>
                 </div>
 
                 <Image
@@ -116,4 +123,34 @@ export const FullBubble = (props) => {
         </Link>
 
 )
+}
+
+// Mini wide Grids
+
+export const miniWideBubble = (props) => {
+    return (
+        <Link href={`/${props.url}`}>
+            <div className={styles.miniWideContainer}>
+                <div className={styles.miniWideText}>
+                    <h3 className={styles.miniWideHeading}>
+                        {props.eventName}
+                    </h3>
+                    <div className={styles.miniWideUser}>
+                    <p className={styles.miniWideUserName}>
+                        {props.userName}
+                    </p>
+                    </div>
+                </div>
+
+                <Image
+                    src={props.image}
+                    alt={`picture of ${props.text}`}
+                    layout="fill"
+                    objectFit="contain"
+                    objectPosition="right"
+                />
+            </div>
+                
+        </Link>
+    )
 }
