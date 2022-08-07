@@ -36,6 +36,34 @@
     position: relative;
 }
 
+.fullBubbleContainer {
+    height: 25vw;
+    width: 100vw;
+
+    background-color: var(--orange);
+
+    border-radius: 1vh;
+    position: relative;
+}
+
+.fullText {
+    position: absolute;
+    z-index: 10;
+    top: 1vw;
+    left: 3vw;
+    color: var(--white);
+    font-size: 25px;
+}
+
+.fullPText {
+    position: absolute;
+    z-index: 10;
+    top: 4vw;
+    left: 0vw;
+    color: var(--white);
+    font-size: 18px;
+}
+
 .wideText {
     position: absolute;
     color: var(--white);

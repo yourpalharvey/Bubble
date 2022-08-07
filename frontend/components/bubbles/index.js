@@ -79,3 +79,41 @@ export const TallBubble = (props) => {
         </Link>
     )
 }
+
+// Full Grid Bubble
+
+export const FullBubble = (props) => {
+
+
+    return (
+        <Link href={`/${props.url}`}>
+            <div className={styles.fullBubbleContainer}>
+                <div className={styles.fullText}>
+                    <h3 className={styles.fullHeading}>
+                        {props.text}
+                    </h3>
+                    <div className={styles.fullPText}>
+                    <p className={styles.fullVenue}>
+                        {props.venue}
+                    </p>
+                    <p className={styles.fullDate}>
+                        {props.date}
+                    </p>
+                    <p className={styles.fullTime}>
+                        {props.time}
+                    </p>
+                    </div>
+                </div>
+
+                <Image
+                    src={props.image}
+                    alt={`picture of ${props.text}`}
+                    layout="fill"
+                    objectFit="contain"
+                    objectPosition="right"
+                />
+            </div>
+        </Link>
+
+)
+}
