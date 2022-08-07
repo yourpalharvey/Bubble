@@ -1,5 +1,13 @@
 # Team 44A - Party Watch
 
+# running frontend
+if on windows, run the commands:
+> npm install
+> npx next dev
+
+If on Mac:
+> yarn install
+> yarn dev
 
 
 ## Getting started
