@@ -7,7 +7,8 @@ import { Footer } from '../../components/footer'
 import { FullBubble, MiniWideBubble } from '../../components/HostedEventBubble'
 import { HomeTopContainer } from '../../containers/bubbleContainer'
 import { HostedEventsContainer } from '../../containers/eventsContainer'
-import { Button } from '../../objects/button'
+import Link from 'next/link'
+import { BubbleBtn } from '../../objects/bubbleBtn'
 
 export default function HostedEvents(props) {
     return (
@@ -30,8 +31,7 @@ export default function HostedEvents(props) {
                         date="26th July 2022"
                         time="19:00 - 21:00"
                         image="/phoebeBridges.png"
-                        url="joinbubble/1"
-                    />  
+                    />
 
                 </HostedEventsContainer>
 

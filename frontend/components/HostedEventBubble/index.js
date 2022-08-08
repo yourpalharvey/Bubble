@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./hostedBubble.module.css";
 import { LiveNowPill } from "../../objects/liveNowPill";
+import { BubbleBtn } from "../../objects/bubbleBtn";
 
 // Full Grid Bubble
 
@@ -9,7 +10,6 @@ export const FullBubble = (props) => {
 
 
     return (
-        <Link href={`/${props.url}`}>
             <div className={styles.fullBubbleContainer}>
                 <div className={styles.fullText}>
                     <h3 className={styles.fullHeading}>
@@ -41,11 +41,17 @@ export const FullBubble = (props) => {
                     layout="fill"
                     objectFit="contain"
                     objectPosition="right"
-                />
+                    />
+                <Link href="/">
+                    <div className={styles.closeBtn}>
+                        <BubbleBtn closeBtn={true}/>
+                    </div>
+            </Link>
+            
+                    
+                
             </div>
-        </Link>
-
-)
+    )
 }
 
 // Mini wide Grids

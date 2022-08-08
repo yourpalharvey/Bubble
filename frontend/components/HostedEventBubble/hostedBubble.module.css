@@ -53,6 +53,13 @@
     font-size: 18px;
 }
 
+.closeBtn {
+    position: absolute;
+    z-index: 10;
+    bottom: 1px;
+    right: 1px;
+}
+
 .miniWideContainer {
     margin-top: 2v;
     height: 10vw;
