@@ -17,13 +17,9 @@
     "next": "12.2.3",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.2",
-<<<<<<< HEAD
     "react-dom": "18.2.0",
     "react-webcam": "^7.0.1"
-=======
-    "react-dom": "^18.2.0",
-    "reactstrap": "^9.1.3"
->>>>>>> hosted-events
+
   },
   "devDependencies": {
     "eslint": "8.20.0",

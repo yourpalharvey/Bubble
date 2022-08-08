@@ -1,7 +1,6 @@
 .container {
-  
     padding-top: 10vh;
-    text-align: center;
+    /* text-align: center; */
     width: 100vw;
     min-height: 100vh;
     position: relative;

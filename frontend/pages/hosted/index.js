@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Background } from '../../components/background'
 import styles from '../../styles/HostedEvents.module.css'
 import { Navbar } from '../../components/navbar'
+import { Footer } from '../../components/footer'
 // import {SquareBubble, TallBubble, WideBubble} from '../../components/bubbles'
 import { FullBubble, MiniWideBubble } from '../../components/HostedEventBubble'
 import { HomeTopContainer } from '../../containers/bubbleContainer'
@@ -65,12 +66,9 @@ export default function HostedEvents(props) {
                     />
 
                 </HostedEventsContainer>
-
-
-
-
-            
             </div>
+            <Footer loggedIn={false}/>
         </Background>
+            
     )
 }

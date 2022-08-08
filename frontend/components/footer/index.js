@@ -42,6 +42,7 @@ export const Footer = (props) => {
     return (
         <div>
             <BrowserView>
+                <div className={styles.footerSpacer}></div>
                 <footer className={styles.footerBox}>
                     <div className={styles.footerContainer}>
                         {footerImageInfo}

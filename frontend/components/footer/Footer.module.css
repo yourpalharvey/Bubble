@@ -1,3 +1,8 @@
+.footerSpacer {
+    height: 100px;
+    width: 100vw;
+}
+
 .footerBox {
     width: 100vw;
     height: 86px;
