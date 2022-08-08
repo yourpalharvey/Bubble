@@ -13,7 +13,7 @@ export const Footer = (props) => {
     let footerButtonInfo;
     
     // If user is not logged in
-    if (props.LoggedIn) {
+    if (props.loggedIn) {
         footerImageInfo = <Image src="/footerLoggedInPic.png" alt="" height="70px" width="88px" />;
         footerTitleText = <h2 className={styles.footerTitle}>Watch, Stream, Enjoy!</h2>;
         footerMessageText = <p className={styles.footerMessage}>Explore awesome events, create a new bubble, or join someone else’s.</p>;

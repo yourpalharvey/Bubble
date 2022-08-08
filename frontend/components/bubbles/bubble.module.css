@@ -44,3 +44,10 @@
     bottom: 1vw;
     left: 1vw;
 }
+
+.openBubbleBtn{
+    position: absolute;
+    z-index: 10;
+    bottom: 10px;
+    right: 10px;
+}

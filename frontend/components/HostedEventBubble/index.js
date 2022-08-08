@@ -67,6 +67,11 @@ export const MiniWideBubble = (props) => {
                         src={props.image}
                         alt={`picture of ${props.text}`}
                         layout="fill"
+                        style={{
+                            borderRadius: '10px',
+                            overflow: 'hidden',
+                        }}
+                        
                         // objectFit="fill"
                         // objectPosition="right"
                     />
@@ -81,6 +86,9 @@ export const MiniWideBubble = (props) => {
                         {props.userName}
                     </p>
                     </div>
+                </div>
+                <div className={styles.openBtn}>
+                    <BubbleBtn openBtn/>
                 </div>
             </div>
                 

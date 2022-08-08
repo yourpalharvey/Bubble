@@ -56,8 +56,15 @@
 .closeBtn {
     position: absolute;
     z-index: 10;
-    bottom: 1px;
-    right: 1px;
+    bottom: 20px;
+    right: 20px;
+}
+
+.openBtn{
+    position: absolute;
+    z-index: 10;
+    bottom: 10px;
+    right: 10px;
 }
 
 .miniWideContainer {
@@ -67,11 +74,11 @@
 
     background-color: var(--orange);
 
-    border-radius: 1vh;
+    border-radius: 10px;
     position: relative;
 }
 
 .miniWideImage {
-    border-radius: 50;
+    border-radius: 50px;
     overflow: 'hidden';
 }
