@@ -22,7 +22,7 @@
     font-family: 'Lato';
     font-weight: 700;
     font-size: 40px;
-    color: #FE8668;
+    color: var(--accent-red);
 }
 
 .message {
@@ -33,5 +33,5 @@
     font-weight: 400;
     font-size: 24px;
     text-align: center;
-    color: #3A3A3A;
+    color: var(--text);
 }

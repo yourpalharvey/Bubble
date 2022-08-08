@@ -1,12 +1,12 @@
 .containerText {
-    color: #3A3A3A;
+    color: var(--text);
     font-family: 'Lato';
     font-style: normal;
     font-size: 16px;
 }
 
 .containerTextWide {
-    color: #3A3A3A;
+    color: var(--text);
     font-family: 'Lato';
     font-style: normal;
     font-size: 16px;
@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #FFFFFF;
+    background-color: var(--white);
 
     border: none;
     border-radius: 15px;
@@ -38,7 +38,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #FFE202;
+    background-color: var(--yellow);
     
     border: none;
     border-radius: 15px;
@@ -53,7 +53,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #FFFFFF;
+    background-color: var(--white);
     
     border: none;
     border-radius: 15px;
@@ -68,7 +68,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #FFE202;
+    background-color: var(--yellow);
     
     border: none;
     border-radius: 15px;
