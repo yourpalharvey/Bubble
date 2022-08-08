@@ -136,7 +136,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "295e21791d7c35a8"; }
+=======
+/******/ 		__webpack_require__.h = function() { return "be370a6473acee03"; }
+>>>>>>> hosted-events
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

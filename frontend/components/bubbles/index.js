@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./bubble.module.css";
 
 
+
 // square bubble
 export const SquareBubble = (props) => {
 
