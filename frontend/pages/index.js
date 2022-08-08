@@ -120,7 +120,7 @@ export default function Home() {
           />
         </HomeTopContainer>
       </div>
-      <Footer notLoggedIn={true} />
+      <Footer LoggedIn={false} />
     </Background>
     
   )
