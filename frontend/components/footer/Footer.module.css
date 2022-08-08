@@ -1,9 +1,11 @@
 .footerSpacer {
+    
     height: 100px;
     width: 100vw;
 }
 
 .footerBox {
+    z-index: 15;
     width: 100vw;
     height: 86px;
     margin: 0%;

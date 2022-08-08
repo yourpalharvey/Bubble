@@ -46,7 +46,7 @@ export const WideBubble = (props) => {
                     </h3>
                 </div>
 
-                
+            
                 <Image
                     src={props.image}
                     alt={`picture of ${props.text}`}

@@ -11,7 +11,7 @@ export default function Home() {
     <Background>
       <Navbar />
       
-    
+      
       <Head>
         <title>Bubble</title>
         <meta name="description" content="Where live action meets livestream" />
