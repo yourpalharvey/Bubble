@@ -1,0 +1,27 @@
+.container {
+    padding-top: 10vh;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.videoContainer {
+    width: 100vw;
+    height: 90vh;
+    object-fit: cover;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.videoButtonContainer {
+    position: fixed;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
