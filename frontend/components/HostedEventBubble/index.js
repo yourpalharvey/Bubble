@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./hostedBubble.module.css";
+import { LiveNowPill } from "../../objects/liveNowPill";
 
 // Full Grid Bubble
 
@@ -28,6 +29,9 @@ export const FullBubble = (props) => {
                     <p className={styles.fullEventTime}>
                         {props.time}
                     </p>
+                    </div>
+                    <div className={styles.liveButton}>
+                        <LiveNowPill/>
                     </div>
                 </div>
 
