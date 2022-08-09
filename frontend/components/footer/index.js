@@ -1,4 +1,4 @@
-import styles from './Footer.module.css';
+import styles from './footer.module.css';
 import { BrowserView, MobileOnlyView, MobileView } from 'react-device-detect';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,12 +7,13 @@ import { Button } from '../../objects/button';
 import { Shadow } from '../../objects/shadow';
 
 import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import { LogInModal } from '../LogInModal';
 
 export const Footer = (props) => {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+
     let footerImageInfo;
     let footerTitleText;
     let footerMessageText;
@@ -61,20 +62,7 @@ export const Footer = (props) => {
                 </BrowserView>
             </div>
 
-            <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-                <Shadow>
-                    <Button text="Close" colour={false} onClick={handleClose} />
-                </Shadow>
-                <Shadow>
-                    <Button text="Save Changes" colour={true} onClick={handleClose}/>
-                </Shadow>
-            </Modal.Footer>
-            </Modal>
+            <LogInModal show={show} handleShow={handleShow} handleClose={handleClose} />
         </>
     )
 };

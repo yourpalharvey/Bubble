@@ -28,10 +28,10 @@ export const Button = (props) => {
                 <div className={styles.containerText}>{props.text}</div>
             </button>
         )
-    } else if (props.colorWide) {
+    } else if (props.colourWide) {
         return (
             <button
-                className={styles.containerColorWide}
+                className={styles.containerColourWide}
                 onClick={props.onClick}
                 type={props.type}
             >

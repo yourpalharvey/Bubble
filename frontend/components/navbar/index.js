@@ -9,13 +9,12 @@ import {Shadow} from '../../objects/shadow';
 import SettingsIcon from '../../objects/settingsIcon';
 
 import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import { TestModal } from '../testModal';
+import { LogInModal } from '../LogInModal';
 
 
 export const Navbar = () => {
     const [show, setShow] = useState(false);
-    const handleShow = () => setShow(true); // ? jfksd : jfkdsjf
+    const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
     return (
@@ -58,7 +57,7 @@ export const Navbar = () => {
 
             </BrowserView>
 
-            <TestModal show={show} handleShow={handleShow} handleClose={handleClose} />
+            <LogInModal show={show} handleShow={handleShow} handleClose={handleClose} />
 
         </>
 
