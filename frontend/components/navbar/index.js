@@ -8,7 +8,15 @@ import {Button} from '../../objects/button';
 import {Shadow} from '../../objects/shadow';
 import SettingsIcon from '../../objects/settingsIcon';
 
+import React, { useState } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import { TestModal } from '../testModal';
+
+
 export const Navbar = () => {
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(true); // ? jfksd : jfkdsjf
+    const handleClose = () => setShow(false);
 
     return (
         <>
@@ -35,21 +43,11 @@ export const Navbar = () => {
                         <TextInput search={true}/>
                     </div>
 
-                    <Link href="/login">
-                        <div className={styles.browserRHSContainer}>
-                            <Shadow>
-                                <Button text="Log In" colour={true}/>
-                            </Shadow>
-                        </div>
-                    </Link>
-
-                    <Link href="/signup">
-                        <div className={styles.browserRHSContainer}>
-                            <Shadow>
-                                <Button text="Sign Up" colour={false}/>
-                            </Shadow>
-                        </div>
-                    </Link>
+                    <div className={styles.browserRHSContainer}>
+                        <Shadow>
+                        <Button text="Log in" colour={true} onClick={handleShow} />
+                        </Shadow>
+                    </div>
 
                     <Link href="/settings">
                         <div className={styles.browserRHSContainer}>
@@ -59,6 +57,8 @@ export const Navbar = () => {
                 </nav>
 
             </BrowserView>
+
+            <TestModal show={show} handleShow={handleShow} handleClose={handleClose} />
 
         </>
 

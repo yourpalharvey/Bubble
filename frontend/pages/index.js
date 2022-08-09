@@ -6,6 +6,7 @@ import {HomeTopContainer} from "../containers/bubbleContainer"
 import {SquareBubble, TallBubble, WideBubble} from '../components/bubbles'
 import { Footer } from '../components/footer'
 
+
 export default function Home() {
   return (
     <Background>
