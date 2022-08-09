@@ -31,8 +31,7 @@ const bubbleStream = ({}) => {
     // end stream and turn off camera
     const endStream = () => {
         stream.getTracks()[0].stop()
-        router.push('/')
-        router.reload('/')
+        window.close()
     }
 
     useEffect(

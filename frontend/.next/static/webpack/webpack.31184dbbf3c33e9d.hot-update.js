@@ -16,7 +16,11 @@ self["webpackHotUpdate_N_E"]("webpack",{},
 /******/ 
 /******/ /* webpack/runtime/getFullHash */
 /******/ !function() {
+<<<<<<< HEAD:frontend/.next/static/webpack/webpack.31184dbbf3c33e9d.hot-update.js
 /******/ 	__webpack_require__.h = function() { return "d42302e4379a08c4"; }
+=======
+/******/ 	__webpack_require__.h = function() { return "83bc10eb738d1326"; }
+>>>>>>> bubble-buttons-objects:frontend/.next/static/webpack/webpack.16d966a39f2da57d.hot-update.js
 /******/ }();
 /******/ 
 /******/ }

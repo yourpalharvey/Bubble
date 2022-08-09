@@ -136,7 +136,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "480e4fc83e7e9f73"; }
+=======
+/******/ 		__webpack_require__.h = function() { return "36bdd140dff5d816"; }
+>>>>>>> bubble-buttons-objects
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
