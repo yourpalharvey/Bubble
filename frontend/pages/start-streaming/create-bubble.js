@@ -10,7 +10,7 @@ const createBubble = () => {
             <Navbar />
 
             <Head>
-                <title>Bubble - Start Streaming</title>
+                <title>Bubble - Create Bubble</title>
                 <meta name="description" content="Where live action meets livestream" />
                 <link rel="icon" href="/logo.png" />
             </Head>
