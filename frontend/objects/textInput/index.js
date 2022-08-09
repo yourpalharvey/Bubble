@@ -1,4 +1,5 @@
 import styles from "./textInput.module.css";
+import {validInputColor} from '../../logic/color';
 
 export const TextInput = (props) => {
 
@@ -15,7 +16,7 @@ export const TextInput = (props) => {
             </div>
             :<></>}
 
-            <input type="text" value={props.value} onChange={props.onChange} className={styles.input} placeholder={props.placeholder} name={props.name} id={props.name}/>
+            <input type="text" value={props.value} onChange={props.onChange} className={styles.input} style={{borderColor: validInputColor(props.valid)}} placeholder={props.placeholder} name={props.name} id={props.name}/>
         </div>
     )
 }
