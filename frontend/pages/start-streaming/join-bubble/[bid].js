@@ -31,12 +31,7 @@ const bubbleStream = ({}) => {
     // end stream and turn off camera
     const endStream = () => {
         stream.getTracks()[0].stop()
-<<<<<<< HEAD
-        router.push('/')
-        router.reload('/')
-=======
         window.close()
->>>>>>> origin/main
     }
 
     useEffect(
@@ -76,8 +71,4 @@ export const getServerSideProps = async (context) => {
 }
 
 
-<<<<<<< HEAD
 export default bubbleStream;
-=======
-export default bubbleStream;
->>>>>>> origin/main

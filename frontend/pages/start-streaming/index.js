@@ -88,20 +88,12 @@ const startStream= (props) => {
                 />
 
                 <Shadow>
-<<<<<<< HEAD
-                    <Button 
-                        text="Join Stream"
-                        wide={true}
-                        onClick={() => router.push(`/start-streaming/join-bubble/${currentBubble}`)}
-                    />
-=======
                     <a target="_blank" href={`/start-streaming/join-bubble/${currentBubble}`} rel="noopener noreferrer">
                         <Button 
                             text="Join Stream"
                             wide={true}
                         />
                     </a>
->>>>>>> origin/main
                 </Shadow>
 
                 <Button 
@@ -138,8 +130,5 @@ export const getServerSideProps = async (context) => {
             },
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/main
+
