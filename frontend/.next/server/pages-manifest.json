@@ -1,6 +1,15 @@
 {
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/_error": "pages/_error.js",
   "/": "pages/index.js"
+=======
+  "/": "pages/index.js",
+  "/404": "pages/404.js",
+  "/start-streaming/create-bubble": "pages/start-streaming/create-bubble.js",
+  "/joinbubble/[bid]": "pages/joinbubble/[bid].js",
+  "/start-streaming": "pages/start-streaming.js",
+  "/start-streaming/join-bubble/[bid]": "pages/start-streaming/join-bubble/[bid].js"
+>>>>>>> origin/main
 }
