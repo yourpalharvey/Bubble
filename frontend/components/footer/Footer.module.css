@@ -21,7 +21,7 @@
 }
 
 .footerTitle {
-    margin: 29px 5px;
+    margin: 33px 5px;
     font-family: 'Lato';
     color: var(--text);
     font-weight: 700;
@@ -38,4 +38,24 @@
 
 .footerBtnContainer {
     margin: 15px 0px 15px auto;
+}
+
+.footerBtnContainerTwo {
+    margin: 15px 0px 15px 15px;
+}
+
+.buttonStyling {
+  padding-right: 25px;
+  padding-left: 25px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: var(--text);
+  background-color: var(--white);
+  border: 2px solid var(--text);
+}
+
+.buttonStyling:hover{
+    background-color: var(--white);
+    box-shadow: 6px 6px var(--text);
+    border: 2px solid var(--text);
 }

@@ -7,6 +7,7 @@ import { TextInput } from "../../objects/textInput";
 import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 import SettingsIcon from "../../objects/settingsIcon";
+import Button from "react-bootstrap/Button";
 
 import React, { useState } from "react";
 import { LogInModal } from "../logInModal";
@@ -35,9 +36,25 @@ export const Navbar = () => {
           </div>
 
           <div className={styles.browserRHSContainer}>
-            <Shadow>
-              <ButtonCustom text="Log in" colour={true} onClick={handleShow} />
-            </Shadow>
+            <Button
+              variant="light"
+              size="lg"
+              className={styles.buttonStyling}
+              onClick={handleShow}
+            >
+              Log in
+            </Button>
+          </div>
+
+          <div className={styles.browserRHSContainer}>
+            <Button
+              variant="light"
+              size="lg"
+              className={styles.buttonStylingSecondary}
+              onClick={handleShow}
+            >
+              Sign up
+            </Button>
           </div>
 
           <Link href="/settings">

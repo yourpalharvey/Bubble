@@ -3,6 +3,11 @@ import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
 import Link from "next/link";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+
 import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 
@@ -18,6 +23,7 @@ export const Footer = (props) => {
   let footerTitleText;
   let footerMessageText;
   let footerButtonInfo;
+  let footerButtonTwo;
 
   // If user is not logged in
   if (props.loggedIn) {
@@ -34,16 +40,14 @@ export const Footer = (props) => {
     );
     footerButtonInfo = (
       <Link href="/start-streaming">
-        <div>
-          <Shadow>
-            <ButtonCustom text="Go Live!" colour={false} />
-          </Shadow>
-        </div>
+        <Button variant="light" size="lg" className={styles.buttonStyling}>
+          Go Live
+        </Button>
       </Link>
     );
   } else {
     footerImageInfo = (
-      <Image src="/footerSignUpPic.png" alt="" height="75px" width="55px" />
+      <Image src="/footerSignUpPic.png" alt="" height="35px" width="60px" />
     );
     footerTitleText = (
       <h2 className={styles.footerTitle}>Welcome to Bubble!</h2>
@@ -55,32 +59,43 @@ export const Footer = (props) => {
       </p>
     );
     footerButtonInfo = (
-      <div>
-        <Shadow>
-          <ButtonCustom text="Log in" colour={false} onClick={handleShow} />
-        </Shadow>
-      </div>
+      <Button
+        variant="light"
+        size="lg"
+        className={styles.buttonStyling}
+        onClick={handleShow}
+      >
+        Log in
+      </Button>
+    );
+    footerButtonTwo = (
+      <Button
+        variant="light"
+        size="lg"
+        className={styles.buttonStyling}
+        onClick={handleShow}
+      >
+        Sign up
+      </Button>
     );
   }
 
   return (
     <>
-      <div>
-        <BrowserView>
-          <div className={styles.footerSpacer}></div>
-          <footer className={styles.footerBox}>
-            <div className={styles.footerContainer}>
-              {footerImageInfo}
-              {footerTitleText}
-              {footerMessageText}
-              <div className={styles.footerBtnContainer}>
-                {footerButtonInfo}
-              </div>
+      <BrowserView>
+        <div className={styles.footerSpacer}></div>
+        <footer className={styles.footerBox}>
+          <div className={styles.footerContainer}>
+            {footerImageInfo}
+            {footerTitleText}
+            {footerMessageText}
+            <div className={styles.footerBtnContainer}>{footerButtonInfo}</div>
+            <div className={styles.footerBtnContainerTwo}>
+              {footerButtonTwo}
             </div>
-          </footer>
-        </BrowserView>
-      </div>
-
+          </div>
+        </footer>
+      </BrowserView>
       <LogInModal
         show={show}
         handleShow={handleShow}
