@@ -1,0 +1,8 @@
+.modalFooter {
+  /* Log in button and sign up like are centered */
+  justify-content: center;
+}
+
+.formLink {
+  color: var(--accent-red);
+}
