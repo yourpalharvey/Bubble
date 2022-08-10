@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
 
-import { Button } from "../../objects/button";
+import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 import { InputForms } from "../../objects/inputForms";
 import { handleSignup } from "../../logic/auth";
@@ -36,7 +36,7 @@ export const SignUpModal = (props) => {
         </Modal.Body>
 
         <Modal.Footer className={styles.modalFooter}>
-          <Button
+          <ButtonCustom
             text="Sign up"
             colourWide={true}
             onClick={handleSignup(username, password, dateOfBirth, email)}

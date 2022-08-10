@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { TextInput } from "../../objects/textInput";
-import { Button } from "../../objects/button";
+import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 import SettingsIcon from "../../objects/settingsIcon";
 
@@ -36,7 +36,7 @@ export const Navbar = () => {
 
           <div className={styles.browserRHSContainer}>
             <Shadow>
-              <Button text="Log in" colour={true} onClick={handleShow} />
+              <ButtonCustom text="Log in" colour={true} onClick={handleShow} />
             </Shadow>
           </div>
 

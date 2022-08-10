@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import { useEffect, useRef, useState } from "react";
 import { Background } from "../../../components/background";
 import { Navbar } from "../../../components/navbar";
-import { Button } from "../../../objects/button";
+import { ButtonCustom } from "../../../objects/buttonCustom";
 import styles from '../../../styles/StartStreaming.module.css'
 
 const bubbleStream = ({}) => {
@@ -43,23 +43,14 @@ const bubbleStream = ({}) => {
     );
 
     return (
-        <Background>
-            {/*<Navbar />*/}
-            <video
-                className={styles.videoContainer}
-                ref={videoRef}
-            />
-            <div className={styles.videoButtonContainer}>
-                <Button
-                    text="Stop streaming"
-                    onClick={endStream}
-                    wide={true}
-                />
-            </div>
-
-            
-        </Background>
-    )
+      <Background>
+        {/*<Navbar />*/}
+        <video className={styles.videoContainer} ref={videoRef} />
+        <div className={styles.videoButtonContainer}>
+          <ButtonCustom text="Stop streaming" onClick={endStream} wide={true} />
+        </div>
+      </Background>
+    );
 }
 
 export const getServerSideProps = async (context) => {

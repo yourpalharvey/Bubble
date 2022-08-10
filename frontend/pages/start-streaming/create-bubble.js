@@ -4,8 +4,4 @@ const createBubble = () => {
     )
 }
 
-<<<<<<< HEAD
 export default createBubble;
-=======
-export default createBubble;
->>>>>>> origin/main

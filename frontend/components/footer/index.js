@@ -3,7 +3,7 @@ import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "../../objects/button";
+import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 
 import React, { useState } from "react";
@@ -36,7 +36,7 @@ export const Footer = (props) => {
       <Link href="/start-streaming">
         <div>
           <Shadow>
-            <Button text="Go Live!" colour={false} />
+            <ButtonCustom text="Go Live!" colour={false} />
           </Shadow>
         </div>
       </Link>
@@ -57,7 +57,7 @@ export const Footer = (props) => {
     footerButtonInfo = (
       <div>
         <Shadow>
-          <Button text="Log in" colour={false} onClick={handleShow} />
+          <ButtonCustom text="Log in" colour={false} onClick={handleShow} />
         </Shadow>
       </div>
     );

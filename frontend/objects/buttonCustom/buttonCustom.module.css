@@ -1,0 +1,75 @@
+.containerText {
+    color: var(--text);
+    font-family: 'Lato';
+    font-style: normal;
+    font-size: 16px;
+}
+
+.containerTextWide {
+    color: var(--text);
+    font-family: 'Lato';
+    font-style: normal;
+    font-size: 16px;
+}
+
+.container {
+    width: 8vw;
+    height: 6vh;
+    /* height: 48px;
+    width: 108px; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--white);
+
+    border: none;
+    border-radius: 15px;
+}
+
+.containerColour {
+    height: 6vh;
+    width: 8vw;
+    /* height: 48px;
+    width: 108px; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--yellow);
+    
+    border: none;
+    border-radius: 15px;
+}
+
+.containerWide {
+    width: 16vw;
+    height: 6vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--white);
+    
+    border: none;
+    border-radius: 15px;
+}
+
+.containerColourWide {
+    width: 16vw;
+    height: 6vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--yellow);
+    
+    border: none;
+    border-radius: 15px;
+}

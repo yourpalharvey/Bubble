@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 
 import React, { useState } from "react";
 
-import { Button } from "../../objects/button";
+import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 import { InputForms } from "../../objects/inputForms";
 import { handleSignup } from "../../logic/auth";
@@ -59,7 +59,7 @@ export const SignUpCard = (props) => {
               </Card.Body>
 
               <Card.Body>
-                <Button
+                <ButtonCustom
                   text="Sign up"
                   colourWide={true}
                   onClick={handleSignup(username, password, dateOfBirth, email)}
