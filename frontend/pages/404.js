@@ -1,13 +1,17 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import messyPic from '../public/messy.png'
-import { Background } from '../components/background'
-import Button from "react-bootstrap/Button";
-import { ButtonCustom } from "../objects/buttonCustom";
-import { Shadow } from "../objects/shadow";
 import styles from "../styles/404.module.css";
 
-const fourOhFour = () => {
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+import messyPic from "../public/messy.png";
+import { Background } from "../components/background";
+
+import { ButtonBootstrap } from "../objects/buttonBootstrap";
+
+const fourOhFour = (props) => {
+  // handle going back to home page
+  const router = useRouter();
+
   return (
     <div>
       <Background>
@@ -21,15 +25,11 @@ const fourOhFour = () => {
             it’s name changed or is tempory unavalible.
           </p>
 
-          <Link href="/">
-            <Button
-              variant="warning"
-              size="lg"
-              className={styles.buttonStyling}
-            >
-              Go to home page
-            </Button>
-          </Link>
+          <ButtonBootstrap
+            primaryWide={true}
+            text="Go back home"
+            onClick={() => router.push("/")}
+          ></ButtonBootstrap>
         </div>
       </Background>
     </div>

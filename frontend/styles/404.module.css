@@ -35,19 +35,3 @@
     text-align: center;
     color: var(--text);
 }
-
-.buttonStyling {
-    background-color: var(--yellow);
-  padding-right: 30px;
-  padding-left: 30px;
-  border-radius: 10px;
-  transition: 0.3s;
-  color: var(--text);
-  border: 2px solid var(--text);
-}
-
-.buttonStyling:hover{
-    background-color: var(--yellow);
-    box-shadow: 6px 6px var(--text);
-    border: 2px solid var(--text);
-}

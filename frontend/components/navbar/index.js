@@ -2,20 +2,24 @@ import styles from "./Navbar.module.css";
 import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { TextInput } from "../../objects/textInput";
 import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 import SettingsIcon from "../../objects/settingsIcon";
 import Button from "react-bootstrap/Button";
+import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 
 import React, { useState } from "react";
 import { LogInModal } from "../logInModal";
 
 export const Navbar = () => {
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const router = useRouter();
+
+  const [showLogin, setShowLogin] = useState(false);
+  const handleShowLogin = () => setShowLogin(true);
+  const handleCloseLogin = () => setShowLogin(false);
 
   return (
     <>
@@ -36,25 +40,19 @@ export const Navbar = () => {
           </div>
 
           <div className={styles.browserRHSContainer}>
-            <Button
-              variant="light"
-              size="lg"
-              className={styles.buttonStyling}
-              onClick={handleShow}
-            >
-              Log in
-            </Button>
+            <ButtonBootstrap
+              primaryLarge={true}
+              text="Log in"
+              onClick={handleShowLogin}
+            ></ButtonBootstrap>
           </div>
 
           <div className={styles.browserRHSContainer}>
-            <Button
-              variant="light"
-              size="lg"
-              className={styles.buttonStylingSecondary}
-              onClick={handleShow}
-            >
-              Sign up
-            </Button>
+            <ButtonBootstrap
+              secondaryLarge={true}
+              text="Sign up"
+              onClick={handleShowLogin}
+            ></ButtonBootstrap>
           </div>
 
           <Link href="/settings">
@@ -66,9 +64,9 @@ export const Navbar = () => {
       </BrowserView>
 
       <LogInModal
-        show={show}
-        handleShow={handleShow}
-        handleClose={handleClose}
+        showLogin={showLogin}
+        handleShowLogin={handleShowLogin}
+        handleCloseLogin={handleCloseLogin}
       />
     </>
   );

@@ -13,7 +13,7 @@ export const InputForms = (props) => {
             type="text"
             placeholder=""
             value={props.username}
-            onChange={(e) => props.getUsername(e.target.value)}
+            onChange={(e) => props.setUsername(e.target.value)}
           />
         </Form.Group>
 
@@ -23,7 +23,7 @@ export const InputForms = (props) => {
             type={props.passwordShown ? "text" : "password"}
             placeholder=""
             value={props.password}
-            onChange={(e) => props.getPassword(e.target.value)}
+            onChange={(e) => props.setPassword(e.target.value)}
           />
           <InputGroup.Text>
             <Image

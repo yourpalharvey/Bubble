@@ -7,10 +7,12 @@ import { ButtonCustom } from "../../objects/buttonCustom";
 import { Shadow } from "../../objects/shadow";
 import { InputForms } from "../../objects/inputForms";
 import { handleSignup } from "../../logic/auth";
+import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 
 export const LogInModal = (props) => {
-  const [username, getUsername] = useState("");
-  const [password, getPassword] = useState("");
+  // handling form functions
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [passwordShown, setPasswordShown] = useState(false);
   // Password toggle handler, shows password as text.
@@ -20,7 +22,7 @@ export const LogInModal = (props) => {
 
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose}>
+      <Modal show={props.showLogin} onHide={props.handleCloseLogin}>
         <Modal.Header closeButton>
           <Modal.Title>Log in</Modal.Title>
         </Modal.Header>
@@ -29,34 +31,24 @@ export const LogInModal = (props) => {
           <InputForms
             passwordShown={passwordShown}
             togglePassword={togglePassword}
+            setUsername={setUsername}
+            setPassword={setPassword}
             logInForm={true}
           />
           <a href="/404" className={styles.formLink}>
             Forgotten password?
           </a>
-        </Modal.Body>
-
-        <Modal.Footer className={styles.modalFooter}>
-          <Shadow>
-            <ButtonCustom
+          <div className="d-grid gap-2 mt-4 mb-2">
+            <ButtonBootstrap
+              primaryWide={true}
               text="Log in"
-              colourWide={true}
-              onClick={(props.handleClose, handleSignup(username, password))}
+              onClick={
+                (() => handleLogin(username, password), props.handleCloseLogin)
+              }
               type="submit"
-            />
-          </Shadow>
-        </Modal.Footer>
-
-        {/* second footer for link to sign up */}
-        <Modal.Footer className={styles.modalFooter}>
-          {/* TODO anchor tag opens another modal for sign up? */}
-          <p>
-            Don't have a Bubble account?{" "}
-            <a href="/signup" className={styles.formLink}>
-              Sign up
-            </a>
-          </p>
-        </Modal.Footer>
+            ></ButtonBootstrap>
+          </div>
+        </Modal.Body>
       </Modal>
     </>
   );

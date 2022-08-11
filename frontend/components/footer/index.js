@@ -2,6 +2,7 @@ import styles from "./footer.module.css";
 import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -13,11 +14,14 @@ import { Shadow } from "../../objects/shadow";
 
 import React, { useState } from "react";
 import { LogInModal } from "../logInModal";
+import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 
 export const Footer = (props) => {
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const router = useRouter();
+
+  const [showLogin, setShowLogin] = useState(false);
+  const handleShowLogin = () => setShowLogin(true);
+  const handleCloseLogin = () => setShowLogin(false);
 
   let footerImageInfo;
   let footerTitleText;
@@ -39,11 +43,11 @@ export const Footer = (props) => {
       </p>
     );
     footerButtonInfo = (
-      <Link href="/start-streaming">
-        <Button variant="light" size="lg" className={styles.buttonStyling}>
-          Go Live
-        </Button>
-      </Link>
+      <ButtonBootstrap
+        secondaryLarge={true}
+        text="Go Live"
+        onClick={() => router.push("/start-streaming")}
+      ></ButtonBootstrap>
     );
   } else {
     footerImageInfo = (
@@ -59,24 +63,19 @@ export const Footer = (props) => {
       </p>
     );
     footerButtonInfo = (
-      <Button
-        variant="light"
-        size="lg"
-        className={styles.buttonStyling}
-        onClick={handleShow}
-      >
-        Log in
-      </Button>
+      <ButtonBootstrap
+        secondaryLarge={true}
+        text="Log in"
+        onClick={handleShowLogin}
+      ></ButtonBootstrap>
     );
     footerButtonTwo = (
-      <Button
-        variant="light"
-        size="lg"
-        className={styles.buttonStyling}
-        onClick={handleShow}
-      >
-        Sign up
-      </Button>
+      <ButtonBootstrap
+        secondaryLarge={true}
+        text="Sign up"
+        onClick={handleShowLogin}
+        // Handle show for sign up modal!
+      ></ButtonBootstrap>
     );
   }
 
@@ -97,9 +96,9 @@ export const Footer = (props) => {
         </footer>
       </BrowserView>
       <LogInModal
-        show={show}
-        handleShow={handleShow}
-        handleClose={handleClose}
+        showLogin={showLogin}
+        handleShowLogin={handleShowLogin}
+        handleCloseLogin={handleCloseLogin}
       />
     </>
   );
