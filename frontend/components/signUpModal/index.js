@@ -37,11 +37,11 @@ export const SignUpModal = (props) => {
           />
           <div className={styles.agreeStatementContainer}>
             <p>
-              By clicking Sign Up, you are agreeing to Bubble’s -
+              By clicking Sign Up, you are agreeing to Bubble’s{" "}
               <a href="/404" className={styles.formLink}>
                 Terms of service
-              </a>
-              - and are acknowledging our -
+              </a>{" "}
+              and are acknowledging our{" "}
               <a href="/404" className={styles.formLink}>
                 Privacy Notice.
               </a>

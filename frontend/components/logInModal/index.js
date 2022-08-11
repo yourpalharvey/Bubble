@@ -6,8 +6,13 @@ import React, { useState } from "react";
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 import { handleLogin } from "../../logic/auth/index";
+import { SignUpModal } from "../signUpModal";
 
 export const LogInModal = (props) => {
+  const [showSignUp, setShowSignUp] = useState(false);
+  const handleShowSignUp = () => setShowSignUp(true);
+  const handleCloseSignUp = () => setShowSignUp(false);
+
   // handling form functions
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,8 +51,25 @@ export const LogInModal = (props) => {
               type="submit"
             ></ButtonBootstrap>
           </div>
+          <div className="text-center mt-4">
+            <p>
+              Don't have a Bubble account?{" "}
+              <a
+                // Props.handleCloseLogin not calling, leaving the login modal to remain on show
+                onClick={(props.handleCloseLogin, handleShowSignUp)}
+                className={styles.formLink}
+              >
+                Sign up
+              </a>
+            </p>
+          </div>
         </Modal.Body>
       </Modal>
+      <SignUpModal
+        showSignUp={showSignUp}
+        handleShowSignUp={handleShowSignUp}
+        handleCloseSignUp={handleCloseSignUp}
+      />
     </>
   );
 };
