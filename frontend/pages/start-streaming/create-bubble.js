@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { Background } from "../../components/background"
 import { Navbar } from "../../components/navbar"
-import { ProgressBar } from "../../components/progressBar"
+import { CreateBubbble } from "../../containers/createBubble"
 import styles from '../../styles/StartStreaming.module.css'
 
 const createBubble = () => {
@@ -17,8 +17,7 @@ const createBubble = () => {
             </Head>
 
             <div className={styles.container}>
-
-                <ProgressBar progress='10' />
+                <CreateBubbble />
 
             </div>
         </Background>
