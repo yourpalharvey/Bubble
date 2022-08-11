@@ -45,9 +45,10 @@ export const LogInModal = (props) => {
             <ButtonBootstrap
               primaryWide={true}
               text="Log In"
-              onClick={
-                (() => handleLogin(username, password), props.handleCloseLogin)
-              }
+              onClick={() => {
+                handleLogin(username, password);
+                props.handleCloseLogin();
+              }}
               type="submit"
             ></ButtonBootstrap>
           </div>
@@ -55,8 +56,11 @@ export const LogInModal = (props) => {
             <p>
               Don't have a Bubble account?{" "}
               <a
-                // Props.handleCloseLogin not calling, leaving the login modal to remain on show
-                onClick={(props.handleCloseLogin, handleShowSignUp)}
+                href="#"
+                onClick={() => {
+                  props.handleCloseLogin();
+                  handleShowSignUp();
+                }}
                 className={styles.formLink}
               >
                 Sign up

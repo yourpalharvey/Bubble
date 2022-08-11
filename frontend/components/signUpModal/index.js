@@ -52,10 +52,10 @@ export const SignUpModal = (props) => {
             <ButtonBootstrap
               primaryWide={true}
               text="Sign Up"
-              onClick={
-                (() => handleSignup(username, password, dateOfBirth, email),
-                props.handleCloseSignUp)
-              }
+              onClick={() => {
+                handleSignup(username, password, dateOfBirth, email),
+                  props.handleCloseSignUp();
+              }}
               type="submit"
             ></ButtonBootstrap>
           </div>
