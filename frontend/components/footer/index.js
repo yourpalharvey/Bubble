@@ -1,20 +1,12 @@
 import styles from "./footer.module.css";
 import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-
-import { ButtonCustom } from "../../objects/buttonCustom";
-import { Shadow } from "../../objects/shadow";
-
 import React, { useState } from "react";
-import { LogInModal } from "../logInModal";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
+import { LogInModal } from "../logInModal";
+import { SignUpModal } from "../signUpModal";
 
 export const Footer = (props) => {
   const router = useRouter();
@@ -22,6 +14,10 @@ export const Footer = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
+
+  const [showSignUp, setShowSignUp] = useState(false);
+  const handleShowSignUp = () => setShowSignUp(true);
+  const handleCloseSignUp = () => setShowSignUp(false);
 
   let footerImageInfo;
   let footerTitleText;
@@ -65,15 +61,15 @@ export const Footer = (props) => {
     footerButtonInfo = (
       <ButtonBootstrap
         secondaryLarge={true}
-        text="Log in"
+        text="Log In"
         onClick={handleShowLogin}
       ></ButtonBootstrap>
     );
     footerButtonTwo = (
       <ButtonBootstrap
         secondaryLarge={true}
-        text="Sign up"
-        onClick={handleShowLogin}
+        text="Sign Up"
+        onClick={handleShowSignUp}
         // Handle show for sign up modal!
       ></ButtonBootstrap>
     );
@@ -99,6 +95,11 @@ export const Footer = (props) => {
         showLogin={showLogin}
         handleShowLogin={handleShowLogin}
         handleCloseLogin={handleCloseLogin}
+      />
+      <SignUpModal
+        showSignUp={showSignUp}
+        handleShowSignUp={handleShowSignUp}
+        handleCloseSignUp={handleCloseSignUp}
       />
     </>
   );

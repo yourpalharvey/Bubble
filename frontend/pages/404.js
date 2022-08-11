@@ -19,7 +19,7 @@ const fourOhFour = (props) => {
           <div className={styles.image}>
             <Image src={messyPic} alt="" />
           </div>
-          <h1 className={styles.title}>404 - Page not found</h1>
+          <h1 className={styles.title}>404 - Page Not Found</h1>
           <p className={styles.message}>
             Sorry, but the page you are looking for might have been removed, had
             it’s name changed or is tempory unavalible.
@@ -27,7 +27,7 @@ const fourOhFour = (props) => {
 
           <ButtonBootstrap
             primaryWide={true}
-            text="Go back home"
+            text="Go Home"
             onClick={() => router.push("/")}
           ></ButtonBootstrap>
         </div>

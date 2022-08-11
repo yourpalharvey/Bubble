@@ -3,9 +3,8 @@ import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
 
-import { ButtonCustom } from "../../objects/buttonCustom";
-import { Shadow } from "../../objects/shadow";
 import { InputForms } from "../../objects/inputForms";
+import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 import { handleSignup } from "../../logic/auth";
 
 export const SignUpModal = (props) => {
@@ -22,33 +21,45 @@ export const SignUpModal = (props) => {
 
   return (
     <>
-      <Modal show={props.show}>
+      <Modal show={props.showSignUp} onHide={props.handleCloseSignUp}>
         <Modal.Header closeButton>
-          <Modal.Title>Sign up</Modal.Title>
+          <Modal.Title>Sign Up</Modal.Title>
         </Modal.Header>
-
         <Modal.Body>
           <InputForms
             passwordShown={passwordShown}
             togglePassword={togglePassword}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            setDateOfBirth={setDateOfBirth}
+            setEmail={setEmail}
             signUpForm={true}
           />
+          <div className={styles.agreeStatementContainer}>
+            <p>
+              By clicking Sign Up, you are agreeing to Bubble’s -
+              <a href="/404" className={styles.formLink}>
+                Terms of service
+              </a>
+              - and are acknowledging our -
+              <a href="/404" className={styles.formLink}>
+                Privacy Notice.
+              </a>
+            </p>
+          </div>
+
+          <div className="d-grid gap-2 mt-4 mb-2">
+            <ButtonBootstrap
+              primaryWide={true}
+              text="Sign Up"
+              onClick={
+                (() => handleSignup(username, password, dateOfBirth, email),
+                props.handleCloseSignUp)
+              }
+              type="submit"
+            ></ButtonBootstrap>
+          </div>
         </Modal.Body>
-
-        <Modal.Footer className={styles.modalFooter}>
-          <ButtonCustom
-            text="Sign up"
-            colourWide={true}
-            onClick={handleSignup(username, password, dateOfBirth, email)}
-            type="submit"
-          />
-        </Modal.Footer>
-
-        {/* second footer for link to sign up */}
-        <Modal.Footer className={styles.modalFooter}>
-          {/* TODO anchor tag opens another modal for sign up? */}
-          <p>Privacy Stuff!</p>
-        </Modal.Footer>
       </Modal>
     </>
   );

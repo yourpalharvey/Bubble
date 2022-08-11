@@ -70,7 +70,7 @@ export const InputForms = (props) => {
         </InputGroup>
 
         <Form.Group className="mb-3" controlId="signUpForm.DateOfBirth">
-          <Form.Label>Date of birth</Form.Label>
+          <Form.Label>Date of Birth</Form.Label>
           <Form.Control
             type="date"
             placeholder=""

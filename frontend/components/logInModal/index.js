@@ -3,11 +3,9 @@ import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
 
-import { ButtonCustom } from "../../objects/buttonCustom";
-import { Shadow } from "../../objects/shadow";
 import { InputForms } from "../../objects/inputForms";
-import { handleSignup } from "../../logic/auth";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
+import { handleLogin } from "../../logic/auth/index";
 
 export const LogInModal = (props) => {
   // handling form functions
@@ -24,7 +22,7 @@ export const LogInModal = (props) => {
     <>
       <Modal show={props.showLogin} onHide={props.handleCloseLogin}>
         <Modal.Header closeButton>
-          <Modal.Title>Log in</Modal.Title>
+          <Modal.Title>Log In</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -36,12 +34,12 @@ export const LogInModal = (props) => {
             logInForm={true}
           />
           <a href="/404" className={styles.formLink}>
-            Forgotten password?
+            Forgotten your password?
           </a>
           <div className="d-grid gap-2 mt-4 mb-2">
             <ButtonBootstrap
               primaryWide={true}
-              text="Log in"
+              text="Log In"
               onClick={
                 (() => handleLogin(username, password), props.handleCloseLogin)
               }

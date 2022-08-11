@@ -5,14 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { TextInput } from "../../objects/textInput";
-import { ButtonCustom } from "../../objects/buttonCustom";
-import { Shadow } from "../../objects/shadow";
 import SettingsIcon from "../../objects/settingsIcon";
-import Button from "react-bootstrap/Button";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 
 import React, { useState } from "react";
 import { LogInModal } from "../logInModal";
+import { SignUpModal } from "../signUpModal";
 
 export const Navbar = () => {
   const router = useRouter();
@@ -20,6 +18,10 @@ export const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
+
+  const [showSignUp, setShowSignUp] = useState(false);
+  const handleShowSignUp = () => setShowSignUp(true);
+  const handleCloseSignUp = () => setShowSignUp(false);
 
   return (
     <>
@@ -42,7 +44,7 @@ export const Navbar = () => {
           <div className={styles.browserRHSContainer}>
             <ButtonBootstrap
               primaryLarge={true}
-              text="Log in"
+              text="Log In"
               onClick={handleShowLogin}
             ></ButtonBootstrap>
           </div>
@@ -50,8 +52,8 @@ export const Navbar = () => {
           <div className={styles.browserRHSContainer}>
             <ButtonBootstrap
               secondaryLarge={true}
-              text="Sign up"
-              onClick={handleShowLogin}
+              text="Sign Up"
+              onClick={handleShowSignUp}
             ></ButtonBootstrap>
           </div>
 
@@ -67,6 +69,11 @@ export const Navbar = () => {
         showLogin={showLogin}
         handleShowLogin={handleShowLogin}
         handleCloseLogin={handleCloseLogin}
+      />
+      <SignUpModal
+        showSignUp={showSignUp}
+        handleShowSignUp={handleShowSignUp}
+        handleCloseSignUp={handleCloseSignUp}
       />
     </>
   );
