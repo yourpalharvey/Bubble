@@ -8,7 +8,7 @@ export const TextInput = (props) => {
         <div>
             {props.label ?
             <>
-                <label for={props.name}>
+                <label htmlFor={props.name}>
                     {props.name}
                 </label>
                 <br />
@@ -25,8 +25,8 @@ export const TextInput = (props) => {
                 </div>
                 :<></>}
 
-                <input type="text" value={props.value} onChange={props.onChange} className={styles.input} placeholder={props.placeholder} name={props.name} id={props.name}/>
-                {props.value != "" ? <div className={styles.containerRight} onClick={props.onClear}>x</div> : <></>}
+                <input type="text" value={props.value} onChange={(e) => props.onChange(e.target.value)} className={styles.input} placeholder={props.placeholder} name={props.name} id={props.name}/>
+                {props.value != "" ? <div className={styles.containerRight} onClick={() => props.clear()}>x</div> : <></>}
             </div>
         </div>
     )

@@ -29,6 +29,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/start-streaming/create-bubble.js"
+    ],
+    "/start-streaming/create-bubble/[bid]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/start-streaming/create-bubble/[bid].js"
     ]
   },
   "ampFirstPages": []

@@ -2,6 +2,7 @@ import styles from './Navbar.module.css'
 import { BrowserView, MobileView } from 'react-device-detect';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import {TextInput} from '../../objects/textInput';
 import {Button} from '../../objects/button';
@@ -9,6 +10,12 @@ import {Shadow} from '../../objects/shadow';
 import SettingsIcon from '../../objects/settingsIcon';
 
 export const Navbar = () => {
+
+    const [search, setSearch] = useState("");
+
+    const clearSearch = () => {
+        setSearch("")
+    }
 
     return (
         <>
@@ -32,7 +39,7 @@ export const Navbar = () => {
                     </Link>
                     
                     <div className={styles.browserSearchContainer}>
-                        <TextInput search={true}/>
+                        <TextInput value={search} onChange={setSearch} clear={clearSearch} name="search" search={true}/>
                     </div>
 
                     <Link href="/login">

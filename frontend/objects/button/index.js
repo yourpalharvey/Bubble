@@ -11,6 +11,7 @@ export const Button = (props) => {
                 className={styles.containerColour}
                 onClick={props.onClick}
                 type={props.type}
+                active={props.active}
             >
                 {props.text}
             </button>
@@ -21,8 +22,9 @@ export const Button = (props) => {
         return (
             <button
                 className={styles.containerWide}
-                onClick={props.onClick}
+                onClick={() => props.onClick()}
                 type={props.type}
+                disabled={props.active}
             >
                 {props.text}
             </button>
@@ -35,6 +37,7 @@ export const Button = (props) => {
                 className={styles.container}
                 onClick={props.onClick}
                 type={props.type}
+                active={props.active}
             >
                 {props.text}
             </button>
