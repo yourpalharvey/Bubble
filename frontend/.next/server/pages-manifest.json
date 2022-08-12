@@ -2,6 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/start-streaming/create-bubble/[bid]": "pages/start-streaming/create-bubble/[bid].js",
   "/start-streaming/create-bubble": "pages/start-streaming/create-bubble.js"
 }

@@ -1,10 +1,13 @@
 import Head from "next/head"
+import { useState } from "react"
 import { Background } from "../../components/background"
 import { Navbar } from "../../components/navbar"
-import { CreateBubbble } from "../../containers/createBubble"
+import {CreateBubble1, CreateBubble2} from "../../containers/createBubble"
 import styles from '../../styles/StartStreaming.module.css'
 
 const createBubble = () => {
+
+    const [progress, setProgress] = useState(5);
 
     return (
         <Background>
@@ -17,7 +20,14 @@ const createBubble = () => {
             </Head>
 
             <div className={styles.container}>
-                <CreateBubbble />
+                {  
+                    progress <= 50
+                ?
+                    <CreateBubble1 progress={progress} setProgress={setProgress} />
+                :
+                    <CreateBubble2 progress={progress} setProgress={setProgress} />
+                }
+
 
             </div>
         </Background>

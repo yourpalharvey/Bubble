@@ -7,13 +7,13 @@ import styles from "./createbubble.module.css";
 import {useState, useEffect} from 'react';
 import { useRouter } from 'next/router'
 
-export const CreateBubbble = () => {
+export const CreateBubble1 = ({setProgress, progress}) => {
 
     const router = useRouter();
 
     const [bubble,setBubble] = useState("");
     const [category,setCategory] = useState("");
-    const [active, setActive] = useState(true);
+    const [deactivate, setDeactivate] = useState(true);
 
     const clearBubble = () => {
         setBubble("")
@@ -27,11 +27,17 @@ export const CreateBubbble = () => {
     const handleActiveButton = () => {
         if ((bubble != "") & (category != ""))
         {
-            setActive(false)
+            setDeactivate(false)
+            setProgress(45)
+        }
+        else if (bubble != "")
+        {
+            setProgress(25)
         }
         else
         {
-            setActive(true)
+            setDeactivate(true)
+            setProgress(5)
         }
     }
 
@@ -42,7 +48,7 @@ export const CreateBubbble = () => {
         const id = 213;
 
         // router.push to next page
-        router.push(`/start-streaming/create-bubble/${id}`);
+        setProgress(65);
     }
 
     // run handleActivateButton
@@ -52,16 +58,28 @@ export const CreateBubbble = () => {
         },
         [bubble, category]
     );
+
+
     return (
         <div className={styles.container}>
-            <ProgressBar progress='25' />
+            <ProgressBar progress={progress} />
 
             <Text text="Choose a bubble name and category so others know what it is youre streaming" />
 
             <TextInput value={bubble} onChange={setBubble} clear={clearBubble} label={true} wide={true} name="Bubble Name" placeholder="Bubble Name"/>
             <TextInput value={category} onChange={setCategory} clear={clearCategory} label={true} wide={true} name="Category" placeholder="Category"/>
 
-            <Button wide={true} text="Next" onClick={handleData} active={active}/>
+            <Button wide={true} text="Next" onClick={handleData} active={deactivate}/>
+        </div>
+    )
+}
+
+export const CreateBubble2 = ({setProgress, progress}) => {
+    return (
+        <div className={styles.container}>
+            <ProgressBar progress={progress} />
+
+            <Text text="Choose a bubble name and category so others know what it is youre streaming" />
         </div>
     )
 }
