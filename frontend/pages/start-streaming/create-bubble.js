@@ -10,7 +10,7 @@ const createBubble = () => {
 
   return (
     <Background>
-      <Navbar />
+      <Navbar loggedIn={false} />
 
       <Head>
         <title>Bubble - Create Bubble</title>

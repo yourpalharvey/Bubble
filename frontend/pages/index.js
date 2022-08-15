@@ -10,7 +10,7 @@ import { Footer } from '../components/footer'
 export default function Home() {
   return (
     <Background>
-      <Navbar />
+      <Navbar loggedIn={true} />
 
       <Head>
         <title>Bubble</title>

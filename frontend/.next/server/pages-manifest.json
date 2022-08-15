@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/start-streaming": "pages/start-streaming.js",
+  "/404": "pages/404.js",
   "/": "pages/index.js",
-  "/start-streaming/join-bubble/[bid]": "pages/start-streaming/join-bubble/[bid].js"
+  "/start-streaming": "pages/start-streaming.js"
 }
