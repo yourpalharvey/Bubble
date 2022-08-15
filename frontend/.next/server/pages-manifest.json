@@ -1,5 +1,10 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
+<<<<<<< HEAD
   "/_document": "pages/_document.js"
+=======
+  "/_document": "pages/_document.js",
+  "/start-streaming/create-bubble": "pages/start-streaming/create-bubble.js"
+>>>>>>> origin/3-as-a-streamer-i-would-like-to-create-a-new-bubble-for-other-people-to-join-and-watch-so-that-i-can-share-my-experiences
 }

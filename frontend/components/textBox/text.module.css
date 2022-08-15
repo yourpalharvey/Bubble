@@ -1,0 +1,10 @@
+.textContainer {
+    width: 100vw;
+    
+    margin: 1vw 1vh;
+    color: var(--text);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

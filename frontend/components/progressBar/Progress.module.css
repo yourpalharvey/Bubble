@@ -1,0 +1,21 @@
+.container {
+    width: 80vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.progressLine {
+    background-color: var(--light-text);
+    width: 75vw;
+    height: 1vh;
+}
+
+.progressMarker {
+    width: 5vw;
+    height: 1vh;
+    background-color: var(--yellow);
+}
