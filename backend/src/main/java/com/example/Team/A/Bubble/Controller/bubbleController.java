@@ -41,6 +41,8 @@ public class bubbleController {
             
             // get JSON object
             JSONObject object = new JSONObject(json);
+            
+            // get data from json request
             String tag1, tag2, tag3;
             try {
                 tag1 = object.getString("tag1");
