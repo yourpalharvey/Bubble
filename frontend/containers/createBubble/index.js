@@ -1,121 +1,153 @@
 import { MobileView } from "react-device-detect";
-import {Button} from "../../objects/button";
-import { ProgressBar } from "../../components/progressBar"
-import { Text } from "../../components/textBox"
+import { ProgressBar } from "../../components/progressBar";
+import { Text } from "../../components/textBox";
 import { TextInput } from "../../objects/textInput";
 import styles from "./createbubble.module.css";
-import {useState, useEffect} from 'react';
-import { useRouter } from 'next/router'
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 
-export const CreateBubble1 = ({setProgress, progress}) => {
+export const CreateBubble1 = ({ setProgress, progress }) => {
+  const [bubble, setBubble] = useState("");
+  const [category, setCategory] = useState("");
+  const [deactivate, setDeactivate] = useState(true);
 
-    const [bubble,setBubble] = useState("");
-    const [category,setCategory] = useState("");
-    const [deactivate, setDeactivate] = useState(true);
+  const clearBubble = () => {
+    setBubble("");
+  };
+  const clearCategory = () => {
+    setCategory("");
+  };
 
-    const clearBubble = () => {
-        setBubble("")
+  // handle submit
+  // active button if data in
+  const handleActiveButton = () => {
+    if ((bubble != "") & (category != "")) {
+      setDeactivate(false);
+      setProgress(45);
+    } else if (bubble != "") {
+      setProgress(25);
+    } else {
+      setDeactivate(true);
+      setProgress(5);
     }
-    const clearCategory = () => {
-        setCategory("")
-    }
+  };
 
-    // handle submit
-    // active button if data in
-    const handleActiveButton = () => {
-        if ((bubble != "") & (category != ""))
-        {
-            setDeactivate(false)
-            setProgress(45)
-        }
-        else if (bubble != "")
-        {
-            setProgress(25)
-        }
-        else
-        {
-            setDeactivate(true)
-            setProgress(5)
-        }
-    }
+  const handleData = () => {
+    console.log(`title:\t\t\t\t${bubble}\ncategory:\t${category}`);
 
-    const handleData = () => {
-        console.log(`title:\t\t\t\t${bubble}\ncategory:\t${category}`)
+    // send data to api
+    const id = 213;
 
-        // send data to api
-        const id = 213;
+    // router.push to next page
+    setProgress(65);
+  };
 
-        // router.push to next page
-        setProgress(65);
-    }
+  // run handleActivateButton
+  useEffect(() => {
+    handleActiveButton();
+  }, [bubble, category]);
 
-    // run handleActivateButton
-    useEffect(
-        () => {
-            handleActiveButton()
-        },
-        [bubble, category]
-    );
+  return (
+    <div className={styles.container}>
+      <ProgressBar progress={progress} />
 
+      <Text text="Choose a bubble name and category so others know what it is youre streaming" />
 
-    return (
-        <div className={styles.container}>
-            <ProgressBar progress={progress} />
+      <TextInput
+        value={bubble}
+        onChange={setBubble}
+        clear={clearBubble}
+        label={true}
+        wide={true}
+        name="Bubble Name"
+        placeholder="Bubble Name"
+      />
+      <TextInput
+        value={category}
+        onChange={setCategory}
+        clear={clearCategory}
+        label={true}
+        wide={true}
+        name="Category"
+        placeholder="Category"
+      />
+      <div className={styles.createBubbleButton}>
+        <ButtonBootstrap primaryWide={true} text="Next" onClick={handleData} />
+      </div>
+    </div>
+  );
+};
 
-            <Text text="Choose a bubble name and category so others know what it is youre streaming" />
+export const CreateBubble2 = ({ setProgress, progress }) => {
+  const router = useRouter();
 
-            <TextInput value={bubble} onChange={setBubble} clear={clearBubble} label={true} wide={true} name="Bubble Name" placeholder="Bubble Name"/>
-            <TextInput value={category} onChange={setCategory} clear={clearCategory} label={true} wide={true} name="Category" placeholder="Category"/>
+  const [tag1, setTag1] = useState("");
+  const [tag2, setTag2] = useState("");
+  const [tag3, setTag3] = useState("");
 
-            <Button wide={true} text="Next" onClick={handleData} disabled={deactivate}/>
-        </div>
-    )
-}
+  const clearTag1 = () => {
+    setTag1("");
+  };
+  const clearTag2 = () => {
+    setTag2("");
+  };
+  const clearTag3 = () => {
+    setTag3("");
+  };
 
-export const CreateBubble2 = ({setProgress, progress}) => {
-    
-    const router = useRouter();
+  const handleData = () => {
+    console.log(tag1 + tag2 + tag3);
 
-    const [tag1,setTag1] = useState("");
-    const [tag2,setTag2] = useState("");
-    const [tag3,setTag3] = useState("");
+    // get location at this point
 
-    const clearTag1 = () => {
-        setTag1("")
-    }
-    const clearTag2 = () => {
-        setTag2("")
-    }
-    const clearTag3 = () => {
-        setTag3("")
-    }
-    
+    // send data to api
+    const id = 213;
 
-    const handleData = () => {
-        console.log(tag1 + tag2 + tag3);
+    // router.push to next page
+    router.push("/");
+  };
 
-        // get location at this point
+  return (
+    <div className={styles.container}>
+      <ProgressBar progress={progress} />
 
-        // send data to api
-        const id = 213;
+      <Text text="Choose tags to make your bubble easy to find" />
 
-        // router.push to next page
-        router.push("/")
-    }
-
-    
-    return (
-        <div className={styles.container}>
-            <ProgressBar progress={progress} />
-
-            <Text text="Choose tags to make your bubble easy to find" />
-
-            <TextInput value={tag1} onChange={setTag1} clear={clearTag1} label={true} wide={true} name="Tag 1" placeholder="Tag 1" />
-            <TextInput value={tag2} onChange={setTag2} clear={clearTag2} label={true} wide={true} name="Tag 2" placeholder="Tag 2" />
-            <TextInput value={tag3} onChange={setTag3} clear={clearTag3} label={true} wide={true} name="Tag 3" placeholder="Tag 3" />
-
-            <Button wide={true} text="Create Bubble" onClick={handleData} disabled={false}/>
-
-        </div>
-    )
-}
+      <TextInput
+        value={tag1}
+        onChange={setTag1}
+        clear={clearTag1}
+        label={true}
+        wide={true}
+        name="Tag 1"
+        placeholder="Tag 1"
+      />
+      <TextInput
+        value={tag2}
+        onChange={setTag2}
+        clear={clearTag2}
+        label={true}
+        wide={true}
+        name="Tag 2"
+        placeholder="Tag 2"
+      />
+      <TextInput
+        value={tag3}
+        onChange={setTag3}
+        clear={clearTag3}
+        label={true}
+        wide={true}
+        name="Tag 3"
+        placeholder="Tag 3"
+      />
+      <div className={styles.createBubbleButton}>
+        <ButtonBootstrap
+          PrimaryWide={true}
+          text="Create Bubble"
+          onClick={handleData}
+        />
+      </div>
+    </div>
+  );
+};

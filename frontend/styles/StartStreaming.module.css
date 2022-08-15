@@ -25,3 +25,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.startStreamingButton {
+    margin: 10px;
+}

@@ -5,3 +5,8 @@
     align-items: center;
     justify-content: flex-start;
 }
+
+.createBubbleButton {
+    margin-top: 15px;
+}
+

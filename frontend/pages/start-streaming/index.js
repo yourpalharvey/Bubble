@@ -64,11 +64,13 @@ const startStream = (props) => {
       </Head>
 
       <div className={styles.container}>
-        <ButtonBootstrap
-          text="Create stream"
-          primaryWide={true}
-          onClick={() => router.push("/start-straming/create-bubble")}
-        />
+        <div className={styles.startStreamingButton}>
+          <ButtonBootstrap
+            text="Create stream"
+            primaryWide={true}
+            onClick={() => router.push("/start-straming/create-bubble")}
+          />
+        </div>
 
         <Select
           label="Available bubbles"
@@ -76,19 +78,23 @@ const startStream = (props) => {
           onChange={(e) => setCurrentBubble(e.target.value)}
         />
 
-        <a
-          target="_blank"
-          href={`/start-streaming/join-bubble/${currentBubble}`}
-          rel="noopener noreferrer"
-        >
-          <ButtonBootstrap text="Join Stream" primaryWide={true} />
-        </a>
+        <div className={styles.startStreamingButton}>
+          <a
+            target="_blank"
+            href={`/start-streaming/join-bubble/${currentBubble}`}
+            rel="noopener noreferrer"
+          >
+            <ButtonBootstrap text="Join Stream" primaryWide={true} />
+          </a>
+        </div>
 
-        <ButtonBootstrap
-          onClick={() => router.back()}
-          text="Go back"
-          primaryWide={true}
-        />
+        <div className={styles.startStreamingButton}>
+          <ButtonBootstrap
+            onClick={() => router.back()}
+            text="Go back"
+            primaryWide={true}
+          />
+        </div>
       </div>
     </Background>
   );
