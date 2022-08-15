@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { MobileView, isMobile } from 'react-device-detect'
 import { Background } from '../../components/background';
 import { Navbar } from '../../components/navbar';
-import { Button } from '../../objects/button';
+import { ButtonCustom } from "../../objects/buttonCustom";
 import styles from '../../styles/StartStreaming.module.css'
 import {useRouter} from 'next/router'
 import { Shadow } from '../../objects/shadow';
@@ -61,49 +61,47 @@ const startStream= (props) => {
 
 
     return (
-        <Background>
-            
-            {/*<Navbar />*/}
+      <Background>
+        {/*<Navbar />*/}
 
-            <Head>
-                <title>Bubble - Start Streaming</title>
-                <meta name="description" content="Where live action meets livestream" />
-                <link rel="icon" href="/logo.png" />
-            </Head>
+        <Head>
+          <title>Bubble - Start Streaming</title>
+          <meta
+            name="description"
+            content="Where live action meets livestream"
+          />
+          <link rel="icon" href="/logo.png" />
+        </Head>
 
-            <div className={styles.container}>
+        <div className={styles.container}>
+          <Shadow>
+            <ButtonCustom
+              text="Create stream"
+              wide={true}
+              onClick={() => router.push("/start-straming/create-bubble")}
+            />
+          </Shadow>
 
-                <Shadow>
-                    <Button 
-                        text="Create stream"
-                        wide={true}
-                        onClick={() => router.push('/start-straming/create-bubble')}
-                    />
-                </Shadow>
+          <Select
+            label="Available bubbles"
+            options={bubbles}
+            onChange={(e) => setCurrentBubble(e.target.value)}
+          />
 
-                <Select 
-                    label="Available bubbles"
-                    options={bubbles}
-                    onChange={(e) => setCurrentBubble(e.target.value)}
-                />
+          <Shadow>
+            <a
+              target="_blank"
+              href={`/start-streaming/join-bubble/${currentBubble}`}
+              rel="noopener noreferrer"
+            >
+              <ButtonCustom text="Join Stream" wide={true} />
+            </a>
+          </Shadow>
 
-                <Shadow>
-                    <a target="_blank" href={`/start-streaming/join-bubble/${currentBubble}`} rel="noopener noreferrer">
-                        <Button 
-                            text="Join Stream"
-                            wide={true}
-                        />
-                    </a>
-                </Shadow>
-
-                <Button 
-                    onClick={() => router.back()}
-                    text="Go back"
-                />
-
-            </div>
-        </Background>
-    )
+          <ButtonCustom onClick={() => router.back()} text="Go back" />
+        </div>
+      </Background>
+    );
 
 }
 
@@ -131,3 +129,4 @@ export const getServerSideProps = async (context) => {
         }
     }
 }
+

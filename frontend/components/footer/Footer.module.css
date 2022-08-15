@@ -1,0 +1,45 @@
+.footerSpacer {
+    
+    height: 100px;
+    width: 100vw;
+}
+
+.footerBox {
+    z-index: 15;
+    width: 100vw;
+    height: 86px;
+    margin: 0%;
+    background-color: var(--yellow);
+    position: fixed;
+    bottom: 0%;
+    
+}
+
+.footerContainer{
+    display: flex;
+    margin: 2px 4vw;
+}
+
+.footerTitle {
+    margin: 33px 5px;
+    font-family: 'Lato';
+    color: var(--text);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.footerMessage {
+    margin: 29px 5px;
+    font-family: 'Lato';
+    font-weight: 300;
+    font-size: 20px;
+    color: var(--text)
+}
+
+.footerBtnContainer {
+    margin: 20px 0px 15px auto;
+}
+
+.footerBtnContainerTwo {
+    margin: 20px 0px 15px 15px;
+}

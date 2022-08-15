@@ -1,0 +1,78 @@
+/* Text font colour and family */
+.smallButtonText, .largeButtonText, .wideButtonText {
+    color: var(--text);
+    font-family: 'Lato';
+}
+
+/* Small button font size and type */
+.smallButtonText{
+    font-size: 12px;
+    font-style: normal;
+}
+
+/* Large button font size and type */
+.largeButtonText {
+    font-size: 16px;
+    font-style: normal;
+}
+
+/* Wide button font size and type */
+.wideButtonText{
+    font-size: 20px;
+    font-style: normal;
+}
+
+
+/* Button transiston, border and text colour - all buttons */
+.primarySmallBtn, .secondarySmallBtn, .primaryLargeBtn, .secondaryLargeBtn, .primaryWideBtn, .secondaryWideBtn {
+  transition: 0.3s;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+/* Small button padding - give the buttons a pill shape */
+.primarySmallBtn, .secondarySmallBtn {
+    padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 20px;
+}
+
+/* Large button padding - smaller radius to give buttons squarer shape*/
+.primaryLargeBtn, .secondaryLargeBtn  {
+    padding-right: 25px;
+  padding-left: 25px;
+  border-radius: 15px;
+}
+
+/* Wide button padding - smaller radius to give buttons squarer shape*/
+.primaryWideBtn, .secondaryWideBtn {
+    padding-right: 50px;
+  padding-left: 50px;
+  border-radius: 15px;
+}
+
+/* Created shadow on hover - all buttons */
+.primarySmallBtn:hover, .secondarySmallBtn:hover, .primaryLargeBtn:hover, .secondaryLargeBtn:hover, .primaryWideBtn:hover, .secondaryWideBtn:hover{
+    box-shadow: 6px 6px var(--text);
+    border: 2px solid var(--text);
+}
+
+/* Primary colour - yellow */
+.primarySmallBtn, .primaryLargeBtn, .primaryWideBtn {
+    background-color: var(--yellow);
+}
+
+/* Primary colour - yellow */
+.primarySmallBtn:hover, .primaryLargeBtn:hover, .primaryWideBtn:hover {
+    background-color: var(--yellow);
+}
+
+/* Secondary colour - white */
+.secondarySmallBtn, .secondaryLargeBtn, .secondaryWideBtn  {
+    background-color: var(--white);
+}
+
+/* Secondary colour - white */
+.secondarySmallBtn:hover, .secondaryLargeBtn:hover, .secondaryWideBtn:hover {
+    background-color: var(--white);
+}

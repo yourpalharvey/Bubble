@@ -6,14 +6,14 @@ const handleLogin = (username, password) => {
     return username;
 }
 
-const handleSignup = (username, password, email) => {
+const handleSignup = (username, password, dateOfBirth, email) => {
+  console.log(username);
+  console.log(password);
+  console.log(dateOfBirth);
+  console.log(email);
 
-    console.log(username);
-    console.log(password);
-    console.log(email);
-
-    return username;
-}
+  return username;
+};
 
 module.exports= {
     handleLogin,

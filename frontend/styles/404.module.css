@@ -1,7 +1,35 @@
 .container {
+    /* Container copied from home.module.css Make globle?*/
+    padding-top: 10vh;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
     display: flex;
-    flex-direction: row;
-
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: space-evenly;
+}
+
+.image  {
+    height: 362px;
+    width: 456px;
+}
+
+.title {
+    text-align: center;
+    margin: 20px;
+    font-family: 'Lato';
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--accent-red);
+}
+
+.message {
+    text-align: center;
+    margin: 0 auto 20px auto;
+    font-family: 'Lato';
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    color: var(--text);
 }
