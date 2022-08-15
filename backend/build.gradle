@@ -24,6 +24,12 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java:8.0.29'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 	testImplementation 'com.h2database:h2:2.1.212'
+	// https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence
+	implementation group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.2.1'
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+	implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.2'
+	implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.1.2.Final', ext: 'pom'
+
 }
 
 tasks.named('test') {
