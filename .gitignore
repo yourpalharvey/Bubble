@@ -39,7 +39,10 @@ out/
 
 # dependencies
 */node_modules/
+<<<<<<< HEAD
 */.next/
+=======
+>>>>>>> main
 /.pnp
 .pnp.js
 
@@ -68,4 +71,3 @@ yarn-error.log*
 
 # vercel
 .vercel
-

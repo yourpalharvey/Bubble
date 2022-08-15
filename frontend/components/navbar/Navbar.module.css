@@ -43,3 +43,37 @@
     position: relative;
     display: block;
 }
+
+.buttonStyling {
+  padding-right: 25px;
+  padding-left: 25px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: var(--text);
+  background-color: var(--yellow);
+    border: 2px solid black;
+}
+
+.buttonStyling:hover{
+    background-color: var(--yellow);
+    box-shadow: 6px 6px var(--text);
+    border: 2px solid black;
+}
+
+.buttonStylingSecondary {
+  padding-right: 25px;
+  padding-left: 25px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: var(--text);
+  background-color: var(--white);
+  border-color: var(--text);
+  border: 2px solid var(--text);
+
+}
+
+.buttonStylingSecondary:hover{
+    background-color: var(--white);
+    box-shadow: 6px 6px var(--text);
+    border: 2px solid var(--text);
+}
