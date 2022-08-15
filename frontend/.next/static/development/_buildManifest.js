@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-self.__BUILD_MANIFEST = {__rewrites:{beforeFiles:[],afterFiles:[],fallback:[]},"/":["static\u002Fchunks\u002Fpages\u002Findex.js"],"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],"/joinbubble/[bid]":["static\u002Fchunks\u002Fpages\u002Fjoinbubble\u002F[bid].js"],sortedPages:["\u002F","\u002F_app","\u002F_error","\u002Fjoinbubble\u002F[bid]"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
-=======
-self.__BUILD_MANIFEST = {__rewrites:{beforeFiles:[],afterFiles:[],fallback:[]},"/":["static\u002Fchunks\u002Fpages\u002Findex.js"],"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],"/start-streaming/create-bubble":["static\u002Fchunks\u002Fpages\u002Fstart-streaming\u002Fcreate-bubble.js"],sortedPages:["\u002F","\u002F_app","\u002F_error","\u002Fstart-streaming\u002Fcreate-bubble"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
->>>>>>> origin/3-as-a-streamer-i-would-like-to-create-a-new-bubble-for-other-people-to-join-and-watch-so-that-i-can-share-my-experiences
+self.__BUILD_MANIFEST = {__rewrites:{beforeFiles:[],afterFiles:[],fallback:[]},"/":["static\u002Fchunks\u002Fpages\u002Findex.js"],"/_error":["static\u002Fchunks\u002Fpages\u002F_error.js"],sortedPages:["\u002F","\u002F_app","\u002F_error"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

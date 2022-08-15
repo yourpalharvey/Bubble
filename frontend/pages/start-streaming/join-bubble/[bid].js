@@ -1,8 +1,7 @@
 import { useRouter } from "next/router"
 import { useEffect, useRef, useState } from "react";
 import { Background } from "../../../components/background";
-import { Navbar } from "../../../components/navbar";
-import { ButtonCustom } from "../../../objects/buttonCustom";
+import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import styles from '../../../styles/StartStreaming.module.css'
 
 const bubbleStream = ({}) => {
@@ -47,7 +46,11 @@ const bubbleStream = ({}) => {
         {/*<Navbar />*/}
         <video className={styles.videoContainer} ref={videoRef} />
         <div className={styles.videoButtonContainer}>
-          <ButtonCustom text="Stop streaming" onClick={endStream} wide={true} />
+          <ButtonBootstrap
+            text="Stop streaming"
+            onClick={endStream}
+            primaryWide={true}
+          />
         </div>
       </Background>
     );

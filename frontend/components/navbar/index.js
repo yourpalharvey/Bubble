@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import styles from "./Navbar.module.css";
 import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-=======
-import styles from './Navbar.module.css'
-import { BrowserView, MobileView } from 'react-device-detect';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
->>>>>>> origin/3-as-a-streamer-i-would-like-to-create-a-new-bubble-for-other-people-to-join-and-watch-so-that-i-can-share-my-experiences
 
 import { TextInput } from "../../objects/textInput";
 import SettingsIcon from "../../objects/settingsIcon";
@@ -23,7 +15,6 @@ import { SignUpModal } from "../signUpModal";
 export const Navbar = () => {
   const router = useRouter();
 
-<<<<<<< HEAD
   const [showLogin, setShowLogin] = useState(false);
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
@@ -31,41 +22,15 @@ export const Navbar = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const handleShowSignUp = () => setShowSignUp(true);
   const handleCloseSignUp = () => setShowSignUp(false);
-=======
-    const [search, setSearch] = useState("");
 
-    const clearSearch = () => {
-        setSearch("")
-    }
+  const [search, setSearch] = useState("");
 
-    return (
-        <>
-            <BrowserView>
-                <nav className={styles.browserContainer}>
-                    <Link href="/">
-                        <div className={styles.browserLHSContainer}>
-                            <Image
-                                src="/logo.png" 
-                                alt="logo"
-                                height="50%"
-                                width="50%"
-                            />
-                        </div>
-                    </Link>
-
-                    <Link href="/explore">
-                        <div className={styles.browserLHSContainer}>
-                            explore
-                        </div>
-                    </Link>
-                    
-                    <div className={styles.browserSearchContainer}>
-                        <TextInput value={search} onChange={setSearch} clear={clearSearch} name="search" search={true}/>
-                    </div>
->>>>>>> origin/3-as-a-streamer-i-would-like-to-create-a-new-bubble-for-other-people-to-join-and-watch-so-that-i-can-share-my-experiences
+  const clearSearch = () => {
+    setSearch("");
+  };
 
   return (
-    <>
+    <div>
       <BrowserView>
         <nav className={styles.browserContainer}>
           <Link href="/">
@@ -79,7 +44,13 @@ export const Navbar = () => {
           </Link>
 
           <div className={styles.browserSearchContainer}>
-            <TextInput search={true} />
+            <TextInput
+              value={search}
+              onChange={setSearch}
+              clear={clearSearch}
+              name="search"
+              search={true}
+            />
           </div>
 
           <div className={styles.browserRHSContainer}>
@@ -116,6 +87,6 @@ export const Navbar = () => {
         handleShowSignUp={handleShowSignUp}
         handleCloseSignUp={handleCloseSignUp}
       />
-    </>
+    </div>
   );
 };
