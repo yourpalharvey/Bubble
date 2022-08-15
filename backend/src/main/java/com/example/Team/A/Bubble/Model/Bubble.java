@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public class Bubble {
-    
-    private int id;
 
     @JsonProperty("title")
     private String title;
