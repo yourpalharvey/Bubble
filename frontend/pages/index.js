@@ -25,6 +25,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="joinbubble/1"
+            colour="var(--accent-red)"
           />
 
           <SquareBubble
@@ -32,6 +33,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="joinbubble/2"
+            colour="var(--green)"
           />
 
           <SquareBubble
@@ -39,6 +41,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="joinbubble/3"
+            colour="var(--orange)"
           />
         </HomeTopContainer>
 
@@ -48,6 +51,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/1"
+            colour="var(--accent-red)"
           />
 
           <TallBubble
@@ -55,6 +59,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/2"
+            colour="var(--teal)"
           />
 
           <TallBubble
@@ -62,6 +67,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/3"
+            colour="var(--indigo)"
           />
 
           <TallBubble
@@ -69,6 +75,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/1"
+            colour="var(--orange)"
           />
 
           <TallBubble
@@ -76,6 +83,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/2"
+            colour="var(--blue)"
           />
 
           <TallBubble
@@ -83,6 +91,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/3"
+            colour="var(--green)"
           />
         </HomeTopContainer>
 
@@ -92,6 +101,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/1"
+            colour="var(--blue)"
           />
 
           <WideBubble
@@ -99,6 +109,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/2"
+            colour="var(--green)"
           />
 
           <WideBubble
@@ -106,6 +117,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/3"
+            colour="var(--teal)"
           />
 
           <WideBubble
@@ -113,6 +125,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/1"
+            colour="var(--indigo)"
           />
         </HomeTopContainer>
       </div>

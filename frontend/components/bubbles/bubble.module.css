@@ -2,8 +2,6 @@
     width: 28vw;
     height: 25vw;
 
-    background-color: var(--yellow);
-
     border-radius: 1vh;
     position: relative;
 }
@@ -20,17 +18,22 @@
     width: 13.5vw;
     height: 24vw;
 
-    background-color: var(--yellow);
+    border-radius: 1vh;
+        position: relative;
+    }
+    
+    .categoryBubbleContainer {
+        width: 21vw;
+        height: 6vw;
+    
+        /* background-color: var(--accent-red); */
 
     border-radius: 1vh;
     position: relative;
 }
-
 .wideBubbleContainer {
     height: 11vw;
     width: 20vw;
-
-    background-color: var(--yellow);
 
     border-radius: 1vh;
     position: relative;

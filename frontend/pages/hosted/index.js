@@ -29,6 +29,7 @@ export default function HostedEvents(props) {
               date="26th July 2022"
               time="19:00 - 21:00"
               image="/phoebeBridges.png"
+              colour="var(--accent-red)"
             />
           </HostedEventsContainer>
 

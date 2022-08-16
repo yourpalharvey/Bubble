@@ -2,8 +2,6 @@
     height: 25vw;
     width: 100vw;
 
-    background-color: var(--orange);
-
     border-radius: 1vh;
     position: relative;
 }
@@ -71,8 +69,6 @@
     margin-top: 2v;
     height: 10vw;
     width: 18vw;
-
-    background-color: var(--orange);
 
     border-radius: 10px;
     position: relative;
