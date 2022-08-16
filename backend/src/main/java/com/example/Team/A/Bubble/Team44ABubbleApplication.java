@@ -10,8 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-@EnableJpaRepositories(basePackages = {"com.example.Team.A.Bubble.repositories"})
-@EntityScan({"com.example.Team.A.Bubble"})
+
 @SpringBootApplication
 public class Team44ABubbleApplication {
 
@@ -19,11 +18,5 @@ public class Team44ABubbleApplication {
 		SpringApplication.run(Team44ABubbleApplication.class, args);
 	}
 
-	@Bean(name="entityManagerFactory")
-	public LocalSessionFactoryBean sessionFactory() {
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-
-		return sessionFactory;
-	}
 
 }

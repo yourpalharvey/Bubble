@@ -11,7 +11,7 @@ import javax.persistence.Column;
 public class UsersModel {
 
     private int id;
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,12 +19,11 @@ public class UsersModel {
 
     public UsersModel(Users users) {
         this.id = users.getId();
-        this.userName = users.getUserName();
+        this.username = users.getUsername();
         this.firstName = users.getFirstName();
         this.lastName = users.getLastName();
         this.email = users.getEmail();
         this.password = users.getPassword();
-
     }
 }
 
