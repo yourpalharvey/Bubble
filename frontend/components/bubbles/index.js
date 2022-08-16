@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./bubble.module.css";
+import { BubbleBtn  } from "../../objects/bubbleBtn";
+
 
 
 // square bubble
@@ -26,6 +28,9 @@ export const SquareBubble = (props) => {
                     layout="fill"
                     objectFit="contain"
                 />
+                <div className={styles.openBubbleBtn}>
+                    <BubbleBtn openBtn/>
+                </div>
             </div>
         </Link>
     )
@@ -45,13 +50,16 @@ export const WideBubble = (props) => {
                     </h3>
                 </div>
 
-                
+            
                 <Image
                     src={props.image}
                     alt={`picture of ${props.text}`}
                     layout="fill"
                     objectFit="cover"
                 />
+                <div className={styles.openBubbleBtn}>
+                    <BubbleBtn openBtn/>
+                </div>
             </div>
         </Link>
     )
@@ -78,6 +86,9 @@ export const TallBubble = (props) => {
                     layout="fill"
                     objectFit="contain"
                 />
+                <div className={styles.openBubbleBtn}>
+                    <BubbleBtn openBtn/>
+                </div>
             </div>
         </Link>
     )

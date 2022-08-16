@@ -1,25 +1,39 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import {Navbar} from '../components/navbar';
-import Logo from '../objects/logo.svg';
-import styles from '../styles/404.module.css';
+import styles from "../styles/404.module.css";
 
-const fourOhFour = () => {
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-    return (
-        <>
-            <Navbar />
-            <div style={{width: '100vw', height: '10vh'}}></div>
-            <div className={styles.container}>
-                <Logo height={400} width={400}/>
-                <div>
-                    <h1>404</h1>
-                    <h3>Sorry, this page doesnt exist or has moved</h3>
-                    <Link href="/">Click here to go home</Link>
-                </div>
-            </div>
-        </>
-    )
-}
+import messyPic from "../public/messy.png";
+import { Background } from "../components/background";
+
+import { ButtonBootstrap } from "../objects/buttonBootstrap";
+
+const fourOhFour = (props) => {
+  // handle going back to home page
+  const router = useRouter();
+
+  return (
+    <div>
+      <Background>
+        <div className={styles.container}>
+          <div className={styles.image}>
+            <Image src={messyPic} alt="" />
+          </div>
+          <h1 className={styles.title}>404 - Page Not Found</h1>
+          <p className={styles.message}>
+            Sorry, but the page you are looking for might have been removed, had
+            it’s name changed or is tempory unavalible.
+          </p>
+
+          <ButtonBootstrap
+            primaryWide={true}
+            text="Go Home"
+            onClick={() => router.push("/")}
+          ></ButtonBootstrap>
+        </div>
+      </Background>
+    </div>
+  );
+};
 
 export default fourOhFour;

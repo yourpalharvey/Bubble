@@ -10,3 +10,13 @@ CREATE TABLE `users` (
   `email` varchar(25),
   `password` varchar(25)
   );
+
+DROP TABLE IF EXISTS `bubbles`;
+CREATE TABLE `bubbles`(
+    `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `title` varchar(25),
+    `category` varchar(25),
+    `tag1` varchar(25),
+    `tag2` varchar(25),
+    `tag3` varchar(25)
+);
