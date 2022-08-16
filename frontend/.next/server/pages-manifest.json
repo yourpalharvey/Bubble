@@ -1,11 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-<<<<<<< HEAD
-  "/start-streaming/join-bubble/[bid]": "pages/start-streaming/join-bubble/[bid].js"
-=======
-  "/": "pages/index.js",
-  "/404": "pages/404.js"
->>>>>>> origin/23-as-a-developer-i-would-like-to-a-backend-to-be-able-to-find-and-create-bubbles
+  "/_document": "pages/_document.js"
 }

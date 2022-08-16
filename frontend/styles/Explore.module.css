@@ -1,0 +1,11 @@
+.container {
+    padding-top: 10vh;
+    /* text-align: center; */
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
