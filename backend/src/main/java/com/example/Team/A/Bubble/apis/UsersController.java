@@ -36,7 +36,7 @@ public class UsersController {
         return ResponseEntity.ok(new UsersModel(usersService.signIn(signInModel)));
     }
 
-    @RequestMapping(value = "/forgetPassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/forgetPassword", method = RequestMethod.PUT)
     public ResponseEntity<UsersModel> signInUser(@RequestBody ForgetPasswordModel forgetPasswordModel){
         return ResponseEntity.ok(new UsersModel(usersService.forgetPassword(forgetPasswordModel)));
     }
