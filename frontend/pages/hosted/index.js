@@ -62,7 +62,7 @@ export default function HostedEvents(props) {
             />
           </HostedEventsContainer>
         </div>
-        <Footer loggedIn={false} />
+        <Footer loggedInJoinBubble={true} />
       </Background>
     );
 }
