@@ -15,19 +15,11 @@
   ],
   "rootMainFiles": [],
   "pages": {
-<<<<<<< HEAD
-=======
     "/": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/404": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/404.js"
-    ],
->>>>>>> origin/main
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -37,24 +29,21 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-<<<<<<< HEAD
-    ],
-    "/hosted": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/hosted.js"
     ],
     "/start-streaming": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/start-streaming.js"
     ],
+    "/start-streaming/create-bubble": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/start-streaming/create-bubble.js"
+    ],
     "/start-streaming/join-bubble/[bid]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/start-streaming/join-bubble/[bid].js"
-=======
->>>>>>> origin/main
     ]
   },
   "ampFirstPages": []
