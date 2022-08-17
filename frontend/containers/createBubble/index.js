@@ -1,5 +1,5 @@
 import { MobileView } from "react-device-detect";
-import {Button} from "../../objects/button";
+import {ButtonCustom} from "../../objects/buttonCustom";
 import { ProgressBar } from "../../components/progressBar"
 import { Text } from "../../components/textBox"
 import { TextInput } from "../../objects/textInput";
@@ -67,7 +67,7 @@ export const CreateBubble1 = ({setProgress, progress}) => {
             <TextInput value={bubble} onChange={setBubble} clear={clearBubble} label={true} wide={true} name="Bubble Name" placeholder="Bubble Name"/>
             <TextInput value={category} onChange={setCategory} clear={clearCategory} label={true} wide={true} name="Category" placeholder="Category"/>
 
-            <Button wide={true} text="Next" onClick={handleData} disabled={deactivate}/>
+            <ButtonCustom wide={true} text="Next" onClick={handleData} disabled={deactivate}/>
         </div>
     )
 }
@@ -114,7 +114,7 @@ export const CreateBubble2 = ({setProgress, progress}) => {
             <TextInput value={tag2} onChange={setTag2} clear={clearTag2} label={true} wide={true} name="Tag 2" placeholder="Tag 2" />
             <TextInput value={tag3} onChange={setTag3} clear={clearTag3} label={true} wide={true} name="Tag 3" placeholder="Tag 3" />
 
-            <Button wide={true} text="Create Bubble" onClick={handleData} disabled={false}/>
+            <ButtonCustom wide={true} text="Create Bubble" onClick={handleData} disabled={false}/>
 
         </div>
     )
