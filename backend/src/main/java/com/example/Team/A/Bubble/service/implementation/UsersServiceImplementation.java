@@ -2,6 +2,7 @@ package com.example.Team.A.Bubble.service.implementation;
 
 import com.example.Team.A.Bubble.dto.Users;
 import com.example.Team.A.Bubble.exceptions.UsernameException;
+import com.example.Team.A.Bubble.models.SignInModel;
 import com.example.Team.A.Bubble.models.UsersModel;
 import com.example.Team.A.Bubble.repositories.UsersRepository;
 import com.example.Team.A.Bubble.service.UsersService;
@@ -40,5 +41,15 @@ public class UsersServiceImplementation implements UsersService {
         usersRepository.save(user);
 
         return user;
+    }
+
+    @Override
+    public Users signIn(SignInModel signInModel) {
+        Users user = usersRepository.findByUserNameAndPassword(signInModel.getUsername(), signInModel.getPassword());
+
+        if (null != user){
+            return user;
+        }else
+            throw new RuntimeException("User Not Found");
     }
 }

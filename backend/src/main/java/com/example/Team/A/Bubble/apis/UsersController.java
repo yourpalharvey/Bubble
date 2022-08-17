@@ -1,5 +1,6 @@
 package com.example.Team.A.Bubble.apis;
 
+import com.example.Team.A.Bubble.models.SignInModel;
 import com.example.Team.A.Bubble.models.UsersModel;
 import com.example.Team.A.Bubble.service.UsersService;
 import lombok.NonNull;
@@ -27,5 +28,10 @@ public class UsersController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UsersModel> signUpUser(@RequestBody UsersModel usersModel){
         return ResponseEntity.ok(new UsersModel(usersService.createUser(usersModel)));
+    }
+
+    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
+    public ResponseEntity<UsersModel> signInUser(@RequestBody SignInModel signInModel){
+        return ResponseEntity.ok(new UsersModel(usersService.signIn(signInModel)));
     }
 }

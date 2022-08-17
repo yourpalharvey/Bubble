@@ -20,3 +20,6 @@ CREATE TABLE `bubbles`(
     `tag2` varchar(25),
     `tag3` varchar(25)
 );
+
+Select * 
+from users
