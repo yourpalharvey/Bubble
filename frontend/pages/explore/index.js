@@ -3,8 +3,6 @@ import Head from "next/head";
 import { Background } from "../../components/background";
 import { Footer } from "../../components/footer";
 import { Navbar } from "../../components/navbar";
-import { HomeTopContainer } from "../../containers/bubbleContainer";
-import { ExploreContainer } from "../../containers/exploreContainer";
 import { TallBubble, CategoryBubble } from "../../components/bubbles";
 import { CategoryContainer } from "../../containers/categoryContainer";
 import { ExploreCategories } from "../../components/exploreCategories";
