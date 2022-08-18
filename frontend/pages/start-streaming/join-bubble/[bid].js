@@ -80,6 +80,25 @@ const WS_SERVER_CONFIG = {
   port: 8999
 };
 
+const getRecorderSettings = () => {
+    const settings = {};
+    if (MediaRecorder.isTypeSupported('video/mp4')) {
+      settings.format = 'mp4';
+      settings.video = 'h264';
+      settings.audio = 'aac';
+    } else {
+      settings.format = 'webm';
+      settings.audio = 'opus';
+      settings.video = MediaRecorder.isTypeSupported('video/webm;codecs=h264') ? 'h264' : 'vp8';
+    }
+    return settings;
+}
+const getRecorderMimeType = () => {
+    const settings = getRecorderSettings();
+    const codecs = settings.format === 'webm' ? `;codecs="${settings.video}, ${settings.audio}"` : '';
+    return `video/${settings.format}${codecs}`;
+}
+
 
 const bubbleStream = ({streamKey}) => {
 
@@ -140,7 +159,7 @@ const bubbleStream = ({streamKey}) => {
   // stop streaming function
   const stopStreaming = () => {
     // update mediaRecorderRef to stop
-    streaming === true ? mediaRecorderRef.current.stop() : console.log('not streaming');
+    mediaRecorderRef.current.state === 'recording' ? mediaRecorderRef.current.stop() : console.log('not streaming');
     
     // set streaming to false
     setStreaming(false);
@@ -154,8 +173,13 @@ const bubbleStream = ({streamKey}) => {
     setStreaming(true);
 
     // create websocket connection
+    // const settings = getRecorderSettings();
+    const wsUrl = new URL(`${WS_SERVER_CONFIG.protocol}://${WS_SERVER_CONFIG.hostname}:${WS_SERVER_CONFIG.port}`);
+    // wsUrl.searchParams.set('video', settings.video);
+    // wsUrl.searchParams.set('audio', settings.audio);
+
     wsRef.current = new WebSocket(
-      `${WS_SERVER_CONFIG.protocol}://${WS_SERVER_CONFIG.hostname}:${WS_SERVER_CONFIG.port}`
+        wsUrl
     );
 
     // add event listeners for open and close
@@ -192,12 +216,13 @@ const bubbleStream = ({streamKey}) => {
     
     // configure output stream
     mediaRecorderRef.current = new MediaRecorder(outputStream, {
-      mimeType: 'video/webm',
-      videoBitsPerSecond: 3000000
+      mimeType: getRecorderMimeType(),
+      videoBitsPerSecond: 3000000,
+      audioBitsPerSecond: 64000,
     });
     
     //  when data is available, send the data to the server
-    mediaRecorderRef.current.addEventListener('dataavailable', e => {
+    mediaRecorderRef.current.addEventListener('dataavailable', (e) => {
       wsRef.current.send(e.data);
     });
     
