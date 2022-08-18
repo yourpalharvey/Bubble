@@ -7,12 +7,12 @@ import { HomeTopContainer } from "../../containers/bubbleContainer";
 import { ExploreContainer } from "../../containers/exploreContainer";
 import { TallBubble, CategoryBubble } from "../../components/bubbles";
 import { CategoryContainer } from "../../containers/categoryContainer";
-import Nav from "react-bootstrap/Nav";
 import { ExploreCategories } from "../../components/exploreCategories";
 import { ExploreBubbles } from "../../components/exploreBubbles";
 import { ExploreStreams } from "../../components/exploreStreams";
 
 import React, { useState } from "react";
+import { ExploreNav } from "../../objects/exploreNav";
 
 export default function Explore(props) {
   const [showCategories, setShowCategories] = useState(true);
@@ -54,45 +54,21 @@ export default function Explore(props) {
           <CategoryBubble text="Art" colour="var(--orange)" />
           <CategoryBubble text="Theatre" colour="var(--teal)" />
         </CategoryContainer>
-
-        <Nav activeKey="/categories">
-          <Nav.Item>
-            <Nav.Link
-              onClick={() => {
-                handleCloseBubbles();
-                handleCloseStreams();
-                handleShowCategories();
-              }}
-            >
-              Categories
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              onClick={() => {
-                handleCloseCategories();
-                handleCloseStreams();
-                handleShowBubbles();
-              }}
-            >
-              Bubbles
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              onClick={() => {
-                handleCloseCategories();
-                handleCloseBubbles();
-                handleShowStreams();
-              }}
-            >
-              Streams
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-
-        <div>{contentRendered}</div>
       </div>
+
+      <ExploreNav
+        showCategories={showCategories}
+        handleShowCategories={handleShowCategories}
+        handleCloseCategories={handleCloseCategories}
+        showBubbles={showBubbles}
+        handleShowBubbles={handleShowBubbles}
+        handleCloseBubbles={handleCloseBubbles}
+        showStreams={showStreams}
+        handleShowStreams={handleShowStreams}
+        handleCloseStreams={handleCloseStreams}
+      />
+
+      <div className={styles.contentContainer}>{contentRendered}</div>
 
       <Footer loggedIn={false} />
     </Background>
