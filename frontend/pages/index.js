@@ -31,7 +31,7 @@ export default function Home() {
           <SquareBubble
             text="testing 2"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Rock_qbeh2v.png"
             url="joinbubble/2"
             colour="var(--green)"
           />
@@ -57,7 +57,7 @@ export default function Home() {
           <TallBubble
             text="testing 2"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Paintball_fc4abo.png"
             url="categories/2"
             colour="var(--teal)"
           />
@@ -99,7 +99,7 @@ export default function Home() {
           <WideBubble
             text="testing"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png"
             url="categories/1"
             colour="var(--blue)"
           />

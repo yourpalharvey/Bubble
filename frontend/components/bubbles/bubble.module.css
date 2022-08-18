@@ -16,25 +16,24 @@
 
 .tallBubbleContainer {
     width: 13.5vw;
-    height: 24vw;
-
+    height: 20vw;
     border-radius: 1vh;
-        position: relative;
+    position: relative;
     }
     
-    .categoryBubbleContainer {
-        width: 21vw;
-        height: 6vw;
+.categoryBubbleContainer {
+    width: 21vw;
+    height: 6vw;
     
-        /* background-color: var(--accent-red); */
+    /* background-color: var(--accent-red); */
 
     border-radius: 1vh;
     position: relative;
 }
+
 .wideBubbleContainer {
     height: 11vw;
     width: 21.5vw;
-
     border-radius: 1vh;
     position: relative;
 }
@@ -53,8 +52,4 @@
     z-index: 10;
     bottom: 10px;
     right: 10px;
-}
-.images {
-    width: 188px;
-    height: 269px;
 }

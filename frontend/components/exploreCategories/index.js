@@ -9,7 +9,7 @@ export const ExploreCategories = () => {
         <TallBubble
           text="testing"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Kendrick_rzjge0.png"
           url="categories/1"
           colour="var(--accent-red)"
         />
@@ -17,7 +17,7 @@ export const ExploreCategories = () => {
         <TallBubble
           text="testing 2"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/ManU_poggqm.png"
           url="categories/2"
           colour="var(--teal)"
         />
@@ -25,7 +25,7 @@ export const ExploreCategories = () => {
         <TallBubble
           text="testing 3"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Skateboard_l6mtul.png"
           url="categories/3"
           colour="var(--indigo)"
         />

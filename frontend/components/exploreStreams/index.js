@@ -9,7 +9,7 @@ export const ExploreStreams = () => {
         <WideBubble
           text="testing"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/FleetFoxes_gbtgck.png"
           url="categories/1"
           colour="var(--blue)"
         />
@@ -17,7 +17,7 @@ export const ExploreStreams = () => {
         <WideBubble
           text="testing 2"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/F1_nkmcwj.png"
           url="categories/2"
           colour="var(--green)"
         />

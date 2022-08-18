@@ -48,6 +48,10 @@ export const WideBubble = (props) => {
           alt={`picture of ${props.text}`}
           layout="fill"
           objectFit="cover"
+          style={{
+            borderRadius: "10px",
+            overflow: "hidden",
+          }}
         />
         <div className={styles.openBubbleBtn}>
           <BubbleBtn openBtn />
@@ -73,7 +77,7 @@ export const TallBubble = (props) => {
           src={props.image}
           alt={`picture of ${props.text}`}
           layout="fill"
-          objectFit="contain"
+          objectFit="cover"
         />
         <div className={styles.openBubbleBtn}>
           <BubbleBtn openBtn />
