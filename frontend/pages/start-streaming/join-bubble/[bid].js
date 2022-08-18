@@ -77,7 +77,7 @@ const CAMERA_CONSTRAINTS = {
 const WS_SERVER_CONFIG = {
   protocol: "ws",
   hostname: "localhost",
-  port: 1000
+  port: 8999
 };
 
 
@@ -166,6 +166,10 @@ const bubbleStream = ({streamKey}) => {
     wsRef.current.addEventListener('close', () => {
       setConnected(false);
       stopStreaming();
+    });
+
+    wsRef.current.addEventListener('message', (message) => {
+        console.log(message);
     });
 
     // capture stream at 30fps (1920x1080@30fps)
