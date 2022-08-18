@@ -1,8 +1,8 @@
-import styles from "./exploreCategoriesContainer.module.css";
+import styles from "./exploreContentContainer.module.css";
 import { SeeMore } from "../../objects/seeMore";
 import { ContainerHeader } from "../../objects/containerHeader";
 
-export const ExploreCategoriesContainer = (props) => {
+export const ExploreContentContainer = (props) => {
   if (props.topRow) {
     return (
       <div className={styles.container}>

@@ -1,11 +1,11 @@
-import { ExploreCategoriesContainer } from "../../containers/exploreCategoriesContainer";
+import { ExploreContentContainer } from "../../containers/exploreContentContainer";
 import { TallBubble } from "../bubbles";
 import styles from "./exploreCategories.module.css";
 
 export const ExploreCategories = () => {
   return (
     <>
-      <ExploreCategoriesContainer topRow={true} title="All categories">
+      <ExploreContentContainer topRow={true} title="All categories">
         <TallBubble
           text="testing"
           date="July 28th"
@@ -53,9 +53,9 @@ export const ExploreCategories = () => {
           url="categories/3"
           colour="var(--green)"
         />
-      </ExploreCategoriesContainer>
+      </ExploreContentContainer>
 
-      <ExploreCategoriesContainer middleRow={true}>
+      <ExploreContentContainer middleRow={true}>
         <TallBubble
           text="testing"
           date="July 28th"
@@ -103,12 +103,9 @@ export const ExploreCategories = () => {
           url="categories/3"
           colour="var(--green)"
         />
-      </ExploreCategoriesContainer>
+      </ExploreContentContainer>
 
-      <ExploreCategoriesContainer
-        bottomRow={true}
-        seeMore="See more categories"
-      >
+      <ExploreContentContainer bottomRow={true} seeMore="See more categories">
         <TallBubble
           text="testing"
           date="July 28th"
@@ -156,7 +153,7 @@ export const ExploreCategories = () => {
           url="categories/3"
           colour="var(--green)"
         />
-      </ExploreCategoriesContainer>
+      </ExploreContentContainer>
     </>
   );
 };
