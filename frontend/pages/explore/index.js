@@ -7,8 +7,36 @@ import { HomeTopContainer } from "../../containers/bubbleContainer";
 import { ExploreContainer } from "../../containers/exploreContainer";
 import { TallBubble, CategoryBubble } from "../../components/bubbles";
 import { CategoryContainer } from "../../containers/categoryContainer";
+import Nav from "react-bootstrap/Nav";
+import { ExploreCategories } from "../../components/exploreCategories";
+import { ExploreBubbles } from "../../components/exploreBubbles";
+import { ExploreStreams } from "../../components/exploreStreams";
 
-export default function Explore() {
+import React, { useState } from "react";
+
+export default function Explore(props) {
+  const [showCategories, setShowCategories] = useState(true);
+  const handleShowCategories = () => setShowCategories(true);
+  const handleCloseCategories = () => setShowCategories(false);
+
+  const [showBubbles, setShowBubbles] = useState(false);
+  const handleShowBubbles = () => setShowBubbles(true);
+  const handleCloseBubbles = () => setShowBubbles(false);
+
+  const [showStreams, setShowStreams] = useState(false);
+  const handleShowStreams = () => setShowStreams(true);
+  const handleCloseStreams = () => setShowStreams(false);
+
+  let contentRendered;
+
+  if (showCategories == true) {
+    contentRendered = <ExploreCategories />;
+  } else if (showBubbles == true) {
+    contentRendered = <ExploreBubbles />;
+  } else {
+    contentRendered = <ExploreStreams />;
+  }
+
   return (
     <Background>
       <Head>
@@ -27,50 +55,43 @@ export default function Explore() {
           <CategoryBubble text="Theatre" colour="var(--teal)" />
         </CategoryContainer>
 
-        <ExploreContainer title="Top categories" seeMore="See more categories">
-          <TallBubble
-            text="testing"
-            image="/phoebeBridges.png"
-            url="categories/1"
-            colour="var(--accent-red)"
-          />
+        <Nav activeKey="/categories">
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                handleCloseBubbles();
+                handleCloseStreams();
+                handleShowCategories();
+              }}
+            >
+              Categories
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                handleCloseCategories();
+                handleCloseStreams();
+                handleShowBubbles();
+              }}
+            >
+              Bubbles
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() => {
+                handleCloseCategories();
+                handleCloseBubbles();
+                handleShowStreams();
+              }}
+            >
+              Streams
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
 
-          <TallBubble
-            text="testing 2"
-            image="/phoebeBridges.png"
-            url="categories/2"
-            colour="var(--teal)"
-          />
-
-          <TallBubble
-            text="testing 3"
-            image="/phoebeBridges.png"
-            url="categories/3"
-            colour="var(--indigo)"
-          />
-
-          <TallBubble
-            text="testing"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/1"
-            colour="var(--orange)"
-          />
-
-          <TallBubble
-            text="testing 2"
-            image="/phoebeBridges.png"
-            url="categories/2"
-            colour="var(--blue)"
-          />
-
-          <TallBubble
-            text="testing 3"
-            image="/phoebeBridges.png"
-            url="categories/3"
-            colour="var(--green)"
-          />
-        </ExploreContainer>
+        <div>{contentRendered}</div>
       </div>
 
       <Footer loggedIn={false} />
