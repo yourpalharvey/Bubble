@@ -49,7 +49,7 @@ export default function Home() {
           <TallBubble
             text="testing"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660828077/Bubble/TaylorSwift_xoyk4t.png"
             url="categories/1"
             colour="var(--accent-red)"
           />
@@ -133,5 +133,4 @@ export default function Home() {
     </Background>
   );
 }
-
 
