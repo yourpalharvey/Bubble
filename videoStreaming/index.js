@@ -1,5 +1,6 @@
 // import the websocket library
 const WebSocket = require('ws')
+const child_process = require('child_process');
 
 // create a new server instance
 const server = new WebSocket.Server({port: 1000});
