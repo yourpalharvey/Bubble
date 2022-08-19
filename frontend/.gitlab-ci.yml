@@ -10,7 +10,7 @@ install:
   script: 
     - echo -e "Testing frontend ci"
     - cd frontend
-    - ls
+    - yarn install
     
 
 test:
