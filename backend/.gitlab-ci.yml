@@ -1,5 +1,4 @@
-default:
-  image: gradle:jdk11
+image: gradle:jdk11
   
 
 stages:
