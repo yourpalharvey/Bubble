@@ -9,18 +9,20 @@ install:
   stage: install
   script: 
     - |
-      echo -e "Testing frontend ci"
-      ls
+      echo -e "Installing dependencies"
       cd frontend
-      ls
-      npm install
+      npm install --global yarn
+      yarn install
+
     
     
 
 test:
   stage: test
   script:
-    - yarn test
+    - |
+      echo -e "Testing"
+      yarn test
 
 deploy:
   stage: deploy
