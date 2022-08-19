@@ -2,27 +2,28 @@ stages:
   - test
   - deploy
 
-before_script:
-  - cd backend
-  - |
-    apt install mariadb-server
-    systemctl stop mariadb
-    mysql -u root -e "FLUSH PRIVILEGES;"
-    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'comsc';"
-    systemctl start mariadb
-  - |
-    mysql -u root -pcomsc -e "DROP DATABASE IF EXISTS bubble;"
-    mysql -u root -pcomsc -e "CREATE DATABASE bubble;"
-  - cd database
-  - mysql -u root -pcomsc bubble < bubble.sql
-  - cd ../
+#before_script:
+  #- |
+    # cd backend
+    # |
+    # apt install mariadb-server
+    # systemctl stop mariadb
+    # mysql -u root -e "FLUSH PRIVILEGES;"
+    # mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'comsc';"
+    # systemctl start mariadb
+    # |
+    # mysql -u root -pcomsc -e "DROP DATABASE IF EXISTS bubble;"
+    # mysql -u root -pcomsc -e "CREATE DATABASE bubble;"
+    # cd database
+    # mysql -u root -pcomsc bubble < bubble.sql
+    # cd ../
 
 
 test:
-  image: gradle:jdk11
+  #image: gradle:jdk11
   stage: test
   script:
-    - gradle test
+    - echo -e "Gradle test"
 
 
 
