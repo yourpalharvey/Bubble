@@ -9,10 +9,7 @@ install:
   stage: install
   script: 
     - echo -e "Testing frontend ci"
-    - cd frontend
-    - npm install yarn --global
-    - sudo rm -rf node_modules
-    - yarn install
+
 
 test:
   stage: test
