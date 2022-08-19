@@ -1,10 +1,5 @@
 default:
-  image: gradle:alpine
-  services:
-    - mysql:latest
-
-variables: 
-  MYSQL_ROOT_PASSWORD: comsc
+  image: gradle:jdk11
   
 
 stages:
@@ -13,9 +8,17 @@ stages:
 
 before_script:
   - cd backend
-  - mysql -u root -pcomsc -e "DROP DATABASE IF EXISTS bubble;"
+  - |
+    apt-get install mariadb-server
+    systemctl stop mariadb
+    mysql -u root -e "FLUSH PRIVILEGES;"
+    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'comsc';"
+    systemctl start mariadb
+  - |
+    mysql -u root -pcomsc -e "DROP DATABASE IF EXISTS bubble;"
+    mysql -u root -pcomsc -e "CREATE DATABASE bubble;"
   - cd database
-  - mysql -u root -pcomsc co_creative < schema.sql
+  - mysql -u root -pcomsc bubble < bubble.sql
   - cd ../
 
 
