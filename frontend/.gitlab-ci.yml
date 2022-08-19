@@ -18,11 +18,19 @@ install:
     
 test:
   stage: test
+  cache:
+    paths:
+    - node_modules/
+    - .yarn
   script:
     - yarn test
 
 deploy:
   stage: deploy
+  cache:
+    paths:
+    - node_modules/
+    - .yarn
   script:
     - echo -e "Deploying frontend"
   only:
