@@ -8,9 +8,13 @@ stages:
 install:
   stage: install
   script: 
-    - echo -e "Testing frontend ci"
-    - cd frontend
-    - ls
+    - |
+      echo -e "Testing frontend ci"
+      ls
+      cd frontend
+      ls
+      npm install
+    
     
 
 test:
