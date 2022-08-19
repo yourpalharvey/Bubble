@@ -1,9 +1,5 @@
 image: node:latest
 
-before_script:
-  - cd frontend
-  - npm -v
-
 stages:
   - install
   - test
@@ -12,6 +8,8 @@ stages:
 install:
   stage: install
   script: 
+    - cd frontend
+    - npm -v
     - npm install
 
     
