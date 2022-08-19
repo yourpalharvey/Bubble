@@ -8,7 +8,7 @@ stages:
 before_script:
   - cd backend
   - |
-    apt-get install mariadb-server
+    apt install mariadb-server
     systemctl stop mariadb
     mysql -u root -e "FLUSH PRIVILEGES;"
     mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'comsc';"
