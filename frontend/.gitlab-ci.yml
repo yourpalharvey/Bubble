@@ -20,9 +20,7 @@ install:
 test:
   stage: test
   script:
-    - |
-      echo -e "Testing"
-      yarn test
+    - yarn test
 
 deploy:
   stage: deploy
