@@ -2,6 +2,9 @@ default:
   image: gradle:alpine
   services:
     - mysql:latest
+
+variables: 
+  MYSQL_ROOT_PASSWORD: comsc
   
 
 stages:
@@ -10,11 +13,10 @@ stages:
 
 before_script:
   - cd backend
-  - mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'comsc';"
-  - sudo mysql -u root -e "FLUSH PRIVILEGES;"
-  - sudo mysql -u root -pcomsc -e "DROP DATABASE IF EXISTS bubble;"
+  - mysql -u root -pcomsc -e "DROP DATABASE IF EXISTS bubble;"
   - cd database
   - mysql -u root -pcomsc co_creative < schema.sql
+  - cd ../
 
 
 test:
