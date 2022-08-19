@@ -1,28 +1,19 @@
 image: node:latest
 
 stages:
-  - install
   - test
   - deploy
 
 before_script:
   - cd frontend
-
-install:
-  stage: install
-  cache:
-    paths:
-      - node_modules/
-  script: 
-    - npm -v
-    - npm install
+  - yarn install --cache-folder .yarn
 
     
 test:
   stage: test
   script:
-    - npm -v
-    - npm test
+    - yarn -v
+    - yarn test
 
 deploy:
   stage: deploy
