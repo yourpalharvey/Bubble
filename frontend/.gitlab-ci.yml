@@ -5,18 +5,23 @@ stages:
   - test
   - deploy
 
+before_script:
+  - cd frontend
+
 install:
   stage: install
+  cache:
+    paths:
+      - node_modules/
   script: 
-    - cd frontend
     - npm -v
     - npm install
 
     
 test:
-  image: node:latest
   stage: test
   script:
+    - npm -v
     - npm test
 
 deploy:
