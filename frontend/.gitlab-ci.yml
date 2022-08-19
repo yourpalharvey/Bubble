@@ -1,9 +1,9 @@
 image: node:latest
 
 before_script:
+  - cd frontend
   - yarn install --cache-folder .yarn
   - yarn -v
-  - cd frontend
 
 stages:
   - install
