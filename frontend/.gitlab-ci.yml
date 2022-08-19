@@ -2,7 +2,7 @@ image: node:latest
 
 before_script:
   - yarn install --cache-folder .yarn
-  - npm install --global yarn
+  - yarn -v
   - cd frontend
 
 stages:
