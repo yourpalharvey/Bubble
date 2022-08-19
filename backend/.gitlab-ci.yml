@@ -4,6 +4,7 @@ stages:
   - install
   - test
   - build
+  - deploy
 
 install:
   stage: install
