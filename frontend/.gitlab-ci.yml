@@ -9,8 +9,7 @@ install:
   stage: install
   script: 
     - echo -e "Testing frontend ci"
-    - npm install yarn --global
-    
+    - ls
     
 
 test:
