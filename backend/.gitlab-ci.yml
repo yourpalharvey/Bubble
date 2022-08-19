@@ -1,0 +1,30 @@
+image: gradle:alpine
+
+stages:
+  - install
+  - test
+  - build
+
+install:
+  stage: install
+  script:
+    - echo -e "set up mariadb here"
+
+test:
+  stage: test
+  script:
+    - cd backend
+    - gradle test
+
+build:
+  stage: build
+  script:
+    - gradle build
+
+
+deploy:
+  stage: deploy
+  script:
+    - echo -e "Backend is being deployed here"
+  only:
+    - main

@@ -1,0 +1,26 @@
+image: node:10
+
+stages:
+  - install
+  - test
+  - deploy
+
+install:
+  stage: install
+  script: 
+    - cd frontend
+    - npm install yarn --global
+    - sudo rm -rf node_modules
+    - yarn install
+
+test:
+  stage: test
+  script:
+    - yarn test
+
+deploy:
+  stage: deploy
+  script:
+    - echo -e "Deploying frontend"
+  only:
+    - main
