@@ -1,4 +1,8 @@
-image: node:latest
+image: node:9.11.1
+
+before_script:
+  - yarn install --cache-folder .yarn
+  - cd frontend
 
 stages:
   - install
@@ -8,14 +12,9 @@ stages:
 install:
   stage: install
   script: 
-    - | 
-      cd frontend
-      npm install --global yarn
-      yarn install
+    - yarn install
 
     
-    
-
 test:
   stage: test
   script:
