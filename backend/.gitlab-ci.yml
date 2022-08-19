@@ -1,26 +1,17 @@
 image: gradle:alpine
 
 stages:
-  - install
   - test
-  - build
   - deploy
 
-install:
-  stage: install
-  script:
-    - echo -e "set up mariadb here"
+before_script:
+  - cd backend
 
 test:
   stage: test
   script:
-    - cd backend
     - gradle test
 
-build:
-  stage: build
-  script:
-    - gradle build
 
 
 deploy:
