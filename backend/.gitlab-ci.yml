@@ -1,6 +1,3 @@
-image: gradle:jdk11
-  
-
 stages:
   - test
   - deploy
@@ -22,6 +19,7 @@ before_script:
 
 
 test:
+  image: gradle:jdk11
   stage: test
   script:
     - gradle test
