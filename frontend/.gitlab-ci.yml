@@ -8,8 +8,7 @@ stages:
 install:
   stage: install
   script: 
-    - |
-      echo -e "Installing dependencies"
+    - | 
       cd frontend
       npm install --global yarn
       yarn install
