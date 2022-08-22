@@ -65,4 +65,18 @@ public class UsersServiceImplementation implements UsersService {
 
         return user;
     }
+
+    @Override
+    public boolean checkUsernameIsAvailable(String username) {
+        
+        // find user
+        Users user = usersRepository.findByUserName(username);
+
+        // if user is null, return true
+        if (user == null) {
+            return true;
+        }
+        
+        return false;
+    }
 }

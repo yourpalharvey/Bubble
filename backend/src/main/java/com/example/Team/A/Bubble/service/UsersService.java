@@ -13,4 +13,5 @@ public interface UsersService {
     Users createUser(UsersModel usersModel);
     Users signIn(SignInModel signInModel);
     Users forgetPassword(ForgetPasswordModel forgetPasswordModel);
+    boolean checkUsernameIsAvailable(String username);
 }

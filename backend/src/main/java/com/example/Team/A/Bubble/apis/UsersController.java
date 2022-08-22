@@ -8,11 +8,13 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.json.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/users")
 @RequiredArgsConstructor
 @ResponseBody
@@ -39,5 +41,19 @@ public class UsersController {
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.PUT)
     public ResponseEntity<UsersModel> signInUser(@RequestBody ForgetPasswordModel forgetPasswordModel){
         return ResponseEntity.ok(new UsersModel(usersService.forgetPassword(forgetPasswordModel)));
+    }
+
+    @RequestMapping(value = "/check-username", method = RequestMethod.POST)
+    public boolean checkUsername(@RequestBody String json) {
+        try {
+            // get data from json
+            JSONObject object = new JSONObject(json);
+            String username = object.getString("username");
+            
+            // return from username
+            return usersService.checkUsernameIsAvailable(username);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
