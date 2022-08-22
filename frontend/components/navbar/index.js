@@ -115,7 +115,7 @@ function DropdownMenu(props) {
 
   function DropdownItem(props) {
     return (
-      <a href={Link} className={styles.menuItem}>
+      <a href={`/${props.url}`} className={styles.menuItem}>
         <span className={styles.iconButton}>{props.leftIcon}</span>
 
         {props.children}
@@ -127,16 +127,16 @@ function DropdownMenu(props) {
 
   return (
     <div className={styles.dropdown}>
-      <DropdownItem href="/explore">
+      <DropdownItem url="explore">
         {/* <Link href="/explore" className={"link"}> */}
           My Profile
         {/* </Link> */}
       </DropdownItem>
-      <DropdownItem href="/myaccount">
+      <DropdownItem url="myaccount">
           Settings
       </DropdownItem>
       <hr></hr>
-      <DropdownItem href="/explore">
+      <DropdownItem url="explore">
           Privacy Policy
       </DropdownItem>
       <hr></hr>
