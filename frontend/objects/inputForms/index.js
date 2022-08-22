@@ -47,6 +47,8 @@ export const InputForms = (props) => {
             placeholder=""
             value={props.username}
             onChange={(e) => props.setUsername(e.target.value)}
+            isValid={props.usernameValid}
+            
           />
         </Form.Group>
 
@@ -57,6 +59,8 @@ export const InputForms = (props) => {
             placeholder=""
             value={props.password}
             onChange={(e) => props.setPassword(e.target.value)}
+            isValid={props.passwordValid}
+            
           />
           <InputGroup.Text>
             <Image
@@ -76,6 +80,8 @@ export const InputForms = (props) => {
             placeholder=""
             value={props.dateOfBirth}
             onChange={(e) => props.setDateOfBirth(e.target.value)}
+            isValid={props.ageValid}
+            
           />
         </Form.Group>
 
@@ -86,6 +92,8 @@ export const InputForms = (props) => {
             placeholder=""
             value={props.email}
             onChange={(e) => props.setEmail(e.target.value)}
+            isValid={props.emailValid}
+            
           />
         </Form.Group>
       </Form>

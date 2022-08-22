@@ -38,7 +38,11 @@ const handleSignup = (username, password, dateOfBirth, email) => {
 
 // check if username exists
 const checkUsername = (username) => {
-	if (cleanText(username) != false)
+	if (username === "")
+	{
+		return null;
+	}
+	else if (cleanText(username) != false)
 	{
 		let requestJson = {"username": username};
 		return postRequest(`${URLBASE}users/check-username`, requestJson);
@@ -55,7 +59,7 @@ const checkAge = (birthdate, age) => {
 	try {
 		if (birthdate === "")
 		{
-			return false;
+			return null;
 		};
 		
 		const birthdateClean = birthdate.split("-");
@@ -96,11 +100,12 @@ const checkAge = (birthdate, age) => {
 }
 
 const checkPasswordValidBool = (password) => {
-	return cleanPassword(password);
+	
+	return password === "" ? null : cleanPassword(password);
 }
 
 const checkEmailValidBool = (email) => {
-	return cleanEmail(email);
+	return email === "" ? null : cleanEmail(email);
 }
 
 module.exports= {

@@ -16,17 +16,17 @@ export const SignUpModal = (props) => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [email, setEmail] = useState("");
   const [old, setOld] = useState(false);
-  const [original, setOriginal] = useState(false);
-  const [disabled, setDisabled] =  useState(false);
-  const [validPassword, setValidPassword] = useState(false);
-  const [validEmail, setValidEmail] = useState(false);
+  const [original, setOriginal] = useState(null);
+  const [disabled, setDisabled] =  useState(null);
+  const [validPassword, setValidPassword] = useState(null);
+  const [validEmail, setValidEmail] = useState(null);
 
   const [passwordShown, setPasswordShown] = useState(false);
   // Password toggle handler, shows password as text.
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
-
+  
   // check if age added is above threshold
   useEffect(
     () => {
@@ -73,6 +73,7 @@ export const SignUpModal = (props) => {
     },
     [old, original, validPassword, validEmail]
   )
+  
 
   return (
     <>
@@ -85,9 +86,13 @@ export const SignUpModal = (props) => {
             passwordShown={passwordShown}
             togglePassword={togglePassword}
             setUsername={setUsername}
+            usernameValid={original}
             setPassword={setPassword}
+            passwordValid={validPassword}
             setDateOfBirth={setDateOfBirth}
+            ageValid={old}
             setEmail={setEmail}
+            emailValid={validEmail}
             signUpForm={true}
           />
           <div className={styles.agreeStatementContainer}>
