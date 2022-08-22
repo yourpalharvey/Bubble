@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
-import { handleSignup, checkAge } from "../../logic/auth";
+import { handleSignup, checkAge, checkUsername, checkPasswordValidBool, checkEmailValidBool } from "../../logic/auth";
 
 // set minimum age
 const age = 18;
@@ -16,6 +16,10 @@ export const SignUpModal = (props) => {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [email, setEmail] = useState("");
   const [old, setOld] = useState(false);
+  const [original, setOriginal] = useState(false);
+  const [disabled, setDisabled] =  useState(false);
+  const [validPassword, setValidPassword] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
 
   const [passwordShown, setPasswordShown] = useState(false);
   // Password toggle handler, shows password as text.
@@ -23,12 +27,51 @@ export const SignUpModal = (props) => {
     setPasswordShown(!passwordShown);
   };
 
+  // check if age added is above threshold
   useEffect(
     () => {
-      console.log(`date: ${dateOfBirth} \noldEnough: ${checkAge(dateOfBirth, 18)}`);
       setOld(checkAge(dateOfBirth, 18));
     },
     [dateOfBirth]
+  )
+
+  // check username is original
+  useEffect(
+    () => {
+      setOriginal(checkUsername(username));
+    },
+    [username]
+  )
+
+  // check username is valid
+  useEffect(
+    () => {
+      setValidPassword(checkPasswordValidBool(password));
+    },
+    [password]
+  )
+
+  // check password
+  useEffect(
+    () => {
+      setValidEmail(checkEmailValidBool(email));
+    },
+    [email]
+  )
+
+  // toggle disabled
+  useEffect(
+    () => {
+      if (original && old && validPassword, validEmail)
+      {
+        setDisabled(false);
+      }
+      else
+      {
+        setDisabled(true);
+      };
+    },
+    [old, original, validPassword, validEmail]
   )
 
   return (
@@ -62,7 +105,7 @@ export const SignUpModal = (props) => {
 
           <div className="d-grid gap-2 mt-4 mb-2">
             <ButtonBootstrap
-              disabled={!old}
+              disabled={disabled}
               primaryWide={true}
               text="Sign Up"
               onClick={() => {

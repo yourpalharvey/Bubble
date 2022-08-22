@@ -1,4 +1,4 @@
-const cleanEmail = require('./index')
+const { cleanEmail, cleanText } = require('./index')
 
 test(
     'cleanEmailValid',
