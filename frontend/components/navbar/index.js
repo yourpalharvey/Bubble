@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import { LogInModal } from "../logInModal";
 import { SignUpModal } from "../signUpModal";
 
-export const Navbar = () => {
+export const Navbar = (props) => {
   const router = useRouter();
 
   const [showLogin, setShowLogin] = useState(false);
@@ -23,58 +23,114 @@ export const Navbar = () => {
   const handleShowSignUp = () => setShowSignUp(true);
   const handleCloseSignUp = () => setShowSignUp(false);
 
-  return (
-    <>
-      <BrowserView>
-        <nav className={styles.browserContainer}>
-          <Link href="/">
-            <div className={styles.browserLHSContainer}>
-              <Image src="/logo.png" alt="logo" height="50%" width="50%" />
+  const [search, setSearch] = useState("");
+
+  const clearSearch = () => {
+    setSearch("");
+  };
+
+  if (props.loggedIn) {
+    return (
+      <div>
+        <BrowserView>
+          <nav className={styles.browserContainer}>
+            <Link href="/">
+              <div className={styles.browserLHSContainer}>
+                <Image src="/logo.png" alt="logo" height="50%" width="50%" />
+              </div>
+            </Link>
+
+            <Link href="/explore">
+              <div className={styles.browserLHSContainer}>explore</div>
+            </Link>
+
+            <div className={styles.browserSearchContainer}>
+              <TextInput
+                value={search}
+                onChange={setSearch}
+                clear={clearSearch}
+                name="search"
+                search={true}
+              />
             </div>
-          </Link>
 
-          <Link href="/explore">
-            <div className={styles.browserLHSContainer}>explore</div>
-          </Link>
-
-          <div className={styles.browserSearchContainer}>
-            <TextInput search={true} />
-          </div>
-
-          <div className={styles.browserRHSContainer}>
-            <ButtonBootstrap
-              primaryLarge={true}
-              text="Log In"
-              onClick={handleShowLogin}
-            ></ButtonBootstrap>
-          </div>
-
-          <div className={styles.browserRHSContainer}>
-            <ButtonBootstrap
-              secondaryLarge={true}
-              text="Sign Up"
-              onClick={handleShowSignUp}
-            ></ButtonBootstrap>
-          </div>
-
-          <Link href="/settings">
             <div className={styles.browserRHSContainer}>
-              <SettingsIcon />
+              <ButtonBootstrap
+                primaryLarge={true}
+                text="Go Live"
+                onClick={() => router.push("/start-streaming")}
+              ></ButtonBootstrap>
             </div>
-          </Link>
-        </nav>
-      </BrowserView>
 
-      <LogInModal
-        showLogin={showLogin}
-        handleShowLogin={handleShowLogin}
-        handleCloseLogin={handleCloseLogin}
-      />
-      <SignUpModal
-        showSignUp={showSignUp}
-        handleShowSignUp={handleShowSignUp}
-        handleCloseSignUp={handleCloseSignUp}
-      />
-    </>
-  );
+            <Link href="/settings">
+              <div className={styles.browserRHSContainer}>
+                <SettingsIcon />
+              </div>
+            </Link>
+          </nav>
+        </BrowserView>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <BrowserView>
+          <nav className={styles.browserContainer}>
+            <Link href="/">
+              <div className={styles.browserLHSContainer}>
+                <Image src="/logo.png" alt="logo" height="50%" width="50%" />
+              </div>
+            </Link>
+
+            <Link href="/explore">
+              <div className={styles.browserLHSContainer}>explore</div>
+            </Link>
+
+            <div className={styles.browserSearchContainer}>
+              <TextInput
+                value={search}
+                onChange={setSearch}
+                clear={clearSearch}
+                name="search"
+                search={true}
+              />
+            </div>
+
+            <div className={styles.browserRHSContainer}>
+              <ButtonBootstrap
+                primaryLarge={true}
+                text="Log In"
+                onClick={handleShowLogin}
+              ></ButtonBootstrap>
+            </div>
+
+            <div className={styles.browserRHSContainer}>
+              <ButtonBootstrap
+                secondaryLarge={true}
+                text="Sign Up"
+                onClick={handleShowSignUp}
+              ></ButtonBootstrap>
+            </div>
+
+            <Link href="/settings">
+              <div className={styles.browserRHSContainer}>
+                <SettingsIcon />
+              </div>
+            </Link>
+          </nav>
+        </BrowserView>
+
+        <LogInModal
+          showLogin={showLogin}
+          handleShowLogin={handleShowLogin}
+          handleCloseLogin={handleCloseLogin}
+        />
+        <SignUpModal
+          showSignUp={showSignUp}
+          handleShowSignUp={handleShowSignUp}
+          handleCloseSignUp={handleCloseSignUp}
+        />
+      </div>
+    );
+  }
 };

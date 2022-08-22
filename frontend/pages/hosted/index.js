@@ -12,63 +12,57 @@ import { BubbleBtn } from '../../objects/bubbleBtn'
 
 export default function HostedEvents(props) {
     return (
-        <Background>
-            <Navbar />
+      <Background>
+        <Navbar loggedIn={false} />
 
-            <Head>
-                <title>Hosted Events | Bubble</title>
-                <meta name='description' content='Watch upcoming Events' />
-                <link rel='icon' href='/logo.png' />
-            </Head>
+        <Head>
+          <title>Hosted Events | Bubble</title>
+          <meta name="description" content="Watch upcoming Events" />
+          <link rel="icon" href="/logo.png" />
+        </Head>
 
-            <div className={styles.container}>
-            
-                <HostedEventsContainer title={`Hosted Event by Phoebe Bridgers`}>
+        <div className={styles.container}>
+          <HostedEventsContainer title={`Hosted Event by Phoebe Bridgers`}>
+            <FullBubble
+              text="Phoebe Bridgers"
+              venue="Cardiff Motorpoint Arena"
+              date="26th July 2022"
+              time="19:00 - 21:00"
+              image="/phoebeBridges.png"
+            />
+          </HostedEventsContainer>
 
-                    <FullBubble
-                        text="Phoebe Bridgers"
-                        venue="Cardiff Motorpoint Arena"
-                        date="26th July 2022"
-                        time="19:00 - 21:00"
-                        image="/phoebeBridges.png"
-                    />
+          <HostedEventsContainer title={`Streams from the event`}>
+            <MiniWideBubble
+              eventName="testing"
+              userName="July 28th"
+              image="/phoebeStream.png"
+              url="categories/1"
+            />
 
-                </HostedEventsContainer>
+            <MiniWideBubble
+              text="testing 2"
+              date="July 28th"
+              image="/phoebeStream.png"
+              url="categories/2"
+            />
 
-                <HostedEventsContainer title={`Streams from the event`}>
+            <MiniWideBubble
+              text="testing 3"
+              date="July 28th"
+              image="/phoebeStream.png"
+              url="categories/3"
+            />
 
-                    <MiniWideBubble
-                        eventName="testing" 
-                        userName="July 28th"
-                        image="/phoebeStream.png"
-                        url="categories/1"
-                    />
-                    
-                    <MiniWideBubble
-                        text="testing 2" 
-                        date="July 28th"
-                        image="/phoebeStream.png"
-                        url="categories/2"
-                    />
-                    
-                    <MiniWideBubble
-                        text="testing 3" 
-                        date="July 28th"
-                        image="/phoebeStream.png"
-                        url="categories/3"
-                    />  
-
-                    <MiniWideBubble
-                        text="testing" 
-                        date="July 28th"
-                        image="/phoebeStream.png"
-                        url="categories/1"
-                    />
-
-                </HostedEventsContainer>
-            </div>
-            <Footer loggedIn={false}/>
-        </Background>
-            
-    )
+            <MiniWideBubble
+              text="testing"
+              date="July 28th"
+              image="/phoebeStream.png"
+              url="categories/1"
+            />
+          </HostedEventsContainer>
+        </div>
+        <Footer loggedInJoinBubble={true} />
+      </Background>
+    );
 }

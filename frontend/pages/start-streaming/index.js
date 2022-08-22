@@ -8,28 +8,26 @@ import {useRouter} from 'next/router'
 import { Shadow } from '../../objects/shadow';
 import { useEffect, useState } from 'react';
 import { Select } from '../../components/select';
+import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 
-const startStream= (props) => {
+const startStream = (props) => {
+  // handle going back
+  const router = useRouter();
 
-    // handle going back
-    const router = useRouter();
+  // state for available bubbles
+  const [bubbles, setBubbles] = useState([]);
+  const [currentBubble, setCurrentBubble] = useState();
 
-    // state for available bubbles
-    const [bubbles, setBubbles] = useState([]);
-    const [currentBubble, setCurrentBubble] = useState();
+  // function to get gelocation
+  const getLocation = () => {
+    let location = "0001";
+    return location;
+  };
 
-    // function to get gelocation
-    const getLocation = () => {
+  // handle getting available bubbles to join
 
-        let location = '0001';
-        return location;
-    }
-
-    // handle getting available bubbles to join
-    
-    useEffect(
-        () => {
-            /*
+  useEffect(() => {
+    /*
             fetch(`/apiroute/location?${geoLocation}`)
                 .then((res) => res.json())
                 .then((data) => {
@@ -39,71 +37,68 @@ const startStream= (props) => {
                     router.push('404');
                 })
             */
-        setBubbles(
-            [
-                    {
-                        id: 1,
-                        name: 'bubble1'
-                    },
-                    {
-                        id: 2,
-                        name: 'bubble2'
-                    },
-                    {
-                        id: 3,
-                        name: 'bubble3'
-                    },
-                ]
-            )
-        },
-        []
-    );
+    setBubbles([
+      {
+        id: 1,
+        name: "bubble1",
+      },
+      {
+        id: 2,
+        name: "bubble2",
+      },
+      {
+        id: 3,
+        name: "bubble3",
+      },
+    ]);
+  }, []);
 
+  return (
+    <Background>
+      {/*<Navbar />*/}
 
-    return (
-      <Background>
-        {/*<Navbar />*/}
+      <Head>
+        <title>Bubble - Start Streaming</title>
+        <meta name="description" content="Where live action meets livestream" />
+        <link rel="icon" href="/logo.png" />
+      </Head>
 
-        <Head>
-          <title>Bubble - Start Streaming</title>
-          <meta
-            name="description"
-            content="Where live action meets livestream"
+      <div className={styles.container}>
+        <div className={styles.startStreamingButton}>
+          <ButtonBootstrap
+            text="Create stream"
+            primaryWide={true}
+            onClick={() => router.push("/start-streaming/create-bubble")}
           />
-          <link rel="icon" href="/logo.png" />
-        </Head>
-
-        <div className={styles.container}>
-          <Shadow>
-            <ButtonCustom
-              text="Create stream"
-              wide={true}
-              onClick={() => router.push("/start-straming/create-bubble")}
-            />
-          </Shadow>
-
-          <Select
-            label="Available bubbles"
-            options={bubbles}
-            onChange={(e) => setCurrentBubble(e.target.value)}
-          />
-
-          <Shadow>
-            <a
-              target="_blank"
-              href={`/start-streaming/join-bubble/${currentBubble}`}
-              rel="noopener noreferrer"
-            >
-              <ButtonCustom text="Join Stream" wide={true} />
-            </a>
-          </Shadow>
-
-          <ButtonCustom onClick={() => router.back()} text="Go back" />
         </div>
-      </Background>
-    );
 
-}
+        <Select
+          label="Available bubbles"
+          options={bubbles}
+          onChange={(e) => setCurrentBubble(e.target.value)}
+        />
+
+        <div className={styles.startStreamingButton}>
+          <a
+            target="_blank"
+            href={`/start-streaming/join-bubble/${currentBubble}`}
+            rel="noopener noreferrer"
+          >
+            <ButtonBootstrap text="Join Stream" primaryWide={true} />
+          </a>
+        </div>
+
+        <div className={styles.startStreamingButton}>
+          <ButtonBootstrap
+            onClick={() => router.back()}
+            text="Go back"
+            primaryWide={true}
+          />
+        </div>
+      </div>
+    </Background>
+  );
+};
 
 export default startStream;
 

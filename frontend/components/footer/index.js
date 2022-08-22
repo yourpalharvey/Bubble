@@ -19,6 +19,8 @@ export const Footer = (props) => {
   const handleShowSignUp = () => setShowSignUp(true);
   const handleCloseSignUp = () => setShowSignUp(false);
 
+  const [currentBubble, setCurrentBubble] = useState();
+
   let footerImageInfo;
   let footerTitleText;
   let footerMessageText;
@@ -44,6 +46,30 @@ export const Footer = (props) => {
         text="Go Live"
         onClick={() => router.push("/start-streaming")}
       ></ButtonBootstrap>
+    );
+  } else if (props.loggedInJoinBubble) {
+    footerImageInfo = (
+      <Image src="/footerLoggedInPic.png" alt="" height="70px" width="88px" />
+    );
+    footerTitleText = (
+      <h2 className={styles.footerTitle}>Are you at this event?</h2>
+    );
+    footerMessageText = (
+      <p className={styles.footerMessage}>
+        Join this bubble and start streaming.
+      </p>
+    );
+    footerButtonInfo = (
+      <a
+        target="_blank"
+        href={`/start-streaming/join-bubble/${currentBubble}`}
+        rel="noopener noreferrer"
+      >
+        <ButtonBootstrap
+          secondaryLarge={true}
+          text="Join Bubble"
+        ></ButtonBootstrap>
+      </a>
     );
   } else {
     footerImageInfo = (
