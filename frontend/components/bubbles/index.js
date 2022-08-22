@@ -4,7 +4,7 @@ import styles from "./bubble.module.css";
 import { BubbleBtn  } from "../../objects/bubbleBtn";
 import { Background } from "../background";
 
-// square bubble
+// square bubble used for hosted events
 export const SquareBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
@@ -31,7 +31,7 @@ export const SquareBubble = (props) => {
   );
 };
 
-// Wide bubble
+// Wide bubble used for streams
 export const WideBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
@@ -61,7 +61,7 @@ export const WideBubble = (props) => {
   );
 };
 
-// tall bubble
+// tall bubble used for categories
 export const TallBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
@@ -87,6 +87,7 @@ export const TallBubble = (props) => {
   );
 };
 
+// Category - used for main categories in explore page 
 export const CategoryBubble = (props) => {
   return (
     <div
@@ -100,5 +101,34 @@ export const CategoryBubble = (props) => {
         <BubbleBtn openBtn />
       </div>
     </div>
+  );
+};
+
+// mid bubble - used for bubbles
+export const MidBubble = (props) => {
+  return (
+    <Link href={`/${props.url}`}>
+      <div
+        className={styles.midBubbleContainer}
+        style={{ backgroundColor: props.colour }}
+      >
+        <div className={styles.midBubbleImageContainer}>
+          <Image
+            src={props.image}
+            alt={`picture of ${props.text}`}
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
+
+        <div className={styles.midText}>
+          <h3 className={styles.squareHeading}>{props.text}</h3>
+        </div>
+
+        <div className={styles.openBubbleBtn}>
+          <BubbleBtn openBtn />
+        </div>
+      </div>
+    </Link>
   );
 };

@@ -53,3 +53,26 @@
     bottom: 10px;
     right: 10px;
 }
+.midBubbleContainer {
+    width: 14vw;
+    height: 20vw;
+    border-radius: 1vh;
+    position: relative;
+}
+
+.midBubbleImageContainer {
+    width: 10vw;
+    height: 10vw;
+    position: relative;
+    border-radius: 100vh;
+    border: 2px white solid;
+    justify-content: center;
+}
+
+.midText {
+    position: absolute;
+    color: var(--white);
+    z-index: 10;
+    bottom: 1vw;
+    left: 1vw;
+}
