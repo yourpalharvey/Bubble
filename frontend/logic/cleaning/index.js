@@ -15,4 +15,9 @@ const cleanPassword = (pass) => {
     const passwordPattern = /^(?=(.*[A-Z]){1,})(?=(.*[!@#$&*]){1,})(?=(.*[0-9]){1,})(?=(.*[a-z]){1,}).{8,}$/;
     return passwordPattern.test(password);
 }
-module.exports = {cleanEmail, cleanText, cleanPassword};
+
+const cleanDate = (date) => {
+    let formatDate = new Date(date);
+    return formatDate;
+}
+module.exports = {cleanEmail, cleanText, cleanPassword, cleanDate};
