@@ -17,20 +17,17 @@ public class Users {
     @Column(name = "username")
     private String username;
 
-    // @Column(name = "firstName")
-    // private String firstName;
+    @Column(name = "firstName")
+    private String firstName;
 
-    // @Column(name = "lastName")
-    // private String lastName;
+    @Column(name = "lastName")
+    private String lastName;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "dob")
-    private String dob;
 
 
 

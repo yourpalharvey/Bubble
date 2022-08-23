@@ -26,26 +26,22 @@ public class UsersServiceImplementation implements UsersService {
     }
 
     @Override
-    public boolean createUser(String username, String password, String email, String dob) {
-        
-        // check username is unique
-        Users usernameUnique = usersRepository.findByUserName(username);
+    public Users createUser(UsersModel usersModel) {
+        Users user = new Users();
 
-        // check email is unique
-        Users emailUnique = usersRepository.findByEmail(email);
+        List<Users> users = usersRepository.findAll();
+        if (users.stream().anyMatch(users1 -> Objects.equals(users1.getUsername(), usersModel.getUsername()))){
+            throw new UsernameException("Username already exists");
+        }
+        user.setUsername(usersModel.getUsername());
+        user.setFirstName(usersModel.getFirstName());
+        user.setLastName(usersModel.getLastName());
+        user.setEmail(usersModel.getEmail());
+        user.setPassword(usersModel.getPassword());
 
-        // check age
-        
-        if (usernameUnique == null && emailUnique == null)
-        {
-            // send data to database
-            return true;
-        }
-        else
-        {
-            // return error
-            return false;
-        }
+        usersRepository.save(user);
+
+        return user;
     }
 
     @Override
@@ -81,19 +77,6 @@ public class UsersServiceImplementation implements UsersService {
             return true;
         }
         
-        return false;
-    }
-
-    @Override
-    public boolean checkEmailIsAvailable(String email)
-    {
-        Users user = usersRepository.findByEmail(email);
-
-        if (user == null)
-        {
-            return true;
-        }
-
         return false;
     }
 }

@@ -18,7 +18,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     Users findByUserName(String username);
 
     @Query(value = "INSERT INTO users u WHERE u.username = :username AND u.password = :password AND u.email = :email AND u.dob = :dob ;", nativeQuery = true)
-    boolean insertUser(String username, String password, String email, String dob);
+    Users insertUser(String username, String password, String email, String dob);
 
 }
 

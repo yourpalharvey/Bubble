@@ -10,9 +10,8 @@ import java.util.List;
 public interface UsersService {
     List<Users> getAllRecords();
 
-    boolean createUser(String username, String password, String email, String dob);
+    Users createUser(UsersModel usersModel);
     Users signIn(SignInModel signInModel);
     Users forgetPassword(ForgetPasswordModel forgetPasswordModel);
     boolean checkUsernameIsAvailable(String username);
-    boolean checkEmailIsAvailable(String email);
 }

@@ -29,22 +29,8 @@ public class UsersController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public boolean signUpUser(@RequestBody String json){
-        try {
-            // get data from json
-            JSONObject object = new JSONObject(json);
-            String username = object.getString("username");
-            String password = object.getString("password");
-            String dob = object.getString("age");
-            String email = object.getString("email");
-
-            // handle data
-            
-            return usersService.createUser(username, password, email, dob);
-        } catch (Exception e) {
-            return false;
-        }
-    
+    public ResponseEntity<UsersModel> signUpUser(@RequestBody UsersModel usersModel){
+        return ResponseEntity.ok(new UsersModel(usersService.createUser(usersModel)));
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
