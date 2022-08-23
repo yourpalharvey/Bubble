@@ -12,18 +12,18 @@ public class UsersModel {
 
     private int id;
     private String username;
-    private String firstName;
-    private String lastName;
+    // private String firstName;
+    // private String lastName;
     private String email;
     private String password;
+    private String dob;
 
     public UsersModel(Users users) {
         this.id = users.getId();
         this.username = users.getUsername();
-        this.firstName = users.getFirstName();
-        this.lastName = users.getLastName();
         this.email = users.getEmail();
         this.password = users.getPassword();
+        this.dob = users.getDob();
     }
 }
 

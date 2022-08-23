@@ -22,18 +22,23 @@ const handleLogin = (username, password) => {
 
 // sign up user
 const handleSignup = (username, password, dateOfBirth, email) => {
-	// check age
-	
-	/*
-	axios.post('', {
-		username: username,
-		
+	let usernameValid = checkUsername(username);
+	let passwordValid = checkPasswordValidBool(password);
+	let ageValid = checkAge(dateOfBirth);
+	let emailValid = checkEmailValidBool(email);
 
-	})
-
-	return username;
-	*/
-	return username;
+	if (usernameValid && passwordValid && ageValid && emailValid)
+	{
+		let data = {
+			username: username,
+			password: password,
+			age: dateOfBirth,
+			email: email
+		}
+		let response = postRequest(`${URLBASE}users`, data);
+		return response;
+	}
+	return false;
 };
 
 // check if username exists
