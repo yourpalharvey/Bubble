@@ -1,0 +1,14 @@
+.streamPageContainer {
+    align-items: center;
+}
+
+.eventInfoBubble {
+    text-align: center;
+    /* position: relative;
+    left: 100px; */
+}
+
+.videoInfoBubble {
+    text-align: center;
+
+}

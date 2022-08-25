@@ -1,0 +1,15 @@
+.playerWrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.reactPlayer {
+  position: absolute;
+  top: 6rem;
+  /* left: 5rem; */
+}
