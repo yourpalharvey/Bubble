@@ -15,6 +15,7 @@ public class UsersModel {
     private String password;
     private String email;
     private String dob;
+    private String token;
     // private String firstName;
     // private String lastName;
 
@@ -24,6 +25,7 @@ public class UsersModel {
         this.password = users.getPassword();
         this.email = users.getEmail();
         this.dob = users.getDob();
+        this.token = users.getToken();
         // this.firstName = users.getFirstName();
         // this.lastName = users.getLastName();
     }

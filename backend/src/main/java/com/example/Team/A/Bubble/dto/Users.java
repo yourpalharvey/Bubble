@@ -32,6 +32,9 @@ public class Users {
     @Column(name = "dob")
     private String dob;
 
+    @Column(name = "token")
+    private String token;
+
 
 
 }

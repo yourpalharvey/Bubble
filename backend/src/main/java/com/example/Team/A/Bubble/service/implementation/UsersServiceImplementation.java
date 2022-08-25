@@ -10,6 +10,10 @@ import com.example.Team.A.Bubble.service.UsersService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+// JWT imports
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.exceptions.JWTCreationException;
 
 import java.util.List;
 import java.util.Objects;
@@ -50,6 +54,26 @@ public class UsersServiceImplementation implements UsersService {
         Users user = usersRepository.findByUserNameAndPassword(signInModel.getUsername(), signInModel.getPassword());
 
         if (null != user){
+            // if User is not null, find id
+            int userID = user.getId();
+
+            // use id to create JWT
+            try {
+                Algorithm algorithm = Algorithm.HMAC256("secret");
+                String token = JWT.create()
+                    .withIssuer("auth0")
+                    .withClaim("userID", userID)
+                    .sign(algorithm);
+
+                // return token
+                user.setToken(token);
+                return user;
+            } catch (JWTCreationException exception){
+                System.out.println(exception);
+                //Invalid Signing configuration / Couldn't convert Claims.
+            }
+
+            // return Token
             return user;
         }else
             throw new RuntimeException("User Not Found");

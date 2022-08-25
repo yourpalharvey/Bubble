@@ -34,8 +34,8 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
-    public ResponseEntity<UsersModel> signInUser(@RequestBody SignInModel signInModel){
-        return ResponseEntity.ok(new UsersModel(usersService.signIn(signInModel)));
+    public ResponseEntity<String> signInUser(@RequestBody SignInModel signInModel){
+        return ResponseEntity.ok(new UsersModel(usersService.signIn(signInModel)).getToken());
     }
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.PUT)
