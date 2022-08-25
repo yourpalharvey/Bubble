@@ -2,6 +2,7 @@ import styles from "./logInModal.module.css";
 import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
+import { getCookie, setCookie } from 'cookies-next';
 
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
@@ -22,6 +23,24 @@ export const LogInModal = (props) => {
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+
+  // handle signIn
+  const handleSignIn = async () => {
+    // handle logIn function
+    const res = await handleLogin(username, password);
+
+    // set expiry
+    const expDate = new Date();
+    expDate.setMonth(expDate.getMonth() + 1);
+
+    const OPTIONS = {
+      expires: expDate
+    }
+
+    // save res
+    setCookie("token", res, OPTIONS);
+
+  }
 
   return (
     <>
@@ -46,7 +65,7 @@ export const LogInModal = (props) => {
               primaryWide={true}
               text="Log In"
               onClick={() => {
-                handleLogin(username, password);
+                handleSignIn(username, password);
                 props.handleCloseLogin();
               }}
               type="submit"

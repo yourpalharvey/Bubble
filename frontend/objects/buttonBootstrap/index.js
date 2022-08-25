@@ -10,6 +10,7 @@ export const ButtonBootstrap = (props) => {
         className={styles.primarySmallBtn}
         onClick={props.onClick}
         type={props.type}
+        disabled={false || props.disabled}
       >
         <div className={styles.smallButtonText}>{props.text}</div>
       </Button>
@@ -22,6 +23,7 @@ export const ButtonBootstrap = (props) => {
         className={styles.secondarySmallBtn}
         onClick={props.onClick}
         type={props.type}
+        disabled={false || props.disabled}
       >
         <div className={styles.smallButtonText}>{props.text}</div>
       </Button>
@@ -34,6 +36,7 @@ export const ButtonBootstrap = (props) => {
         className={styles.primaryLargeBtn}
         onClick={props.onClick}
         type={props.type}
+        disabled={false || props.disabled}
       >
         <div className={styles.largeButtonText}>{props.text}</div>
       </Button>
@@ -46,6 +49,7 @@ export const ButtonBootstrap = (props) => {
         className={styles.secondaryLargeBtn}
         onClick={props.onClick}
         type={props.type}
+        disabled={false || props.disabled}
       >
         <div className={styles.largeButtonText}>{props.text}</div>
       </Button>
@@ -58,6 +62,7 @@ export const ButtonBootstrap = (props) => {
         className={styles.primaryWideBtn}
         onClick={props.onClick}
         type={props.type}
+        disabled={false || props.disabled}
       >
         <div className={styles.wideButtonText}>{props.text}</div>
       </Button>
@@ -70,6 +75,7 @@ export const ButtonBootstrap = (props) => {
         className={styles.secondaryWideBtn}
         onClick={props.onClick}
         type={props.type}
+        disabled={false || props.disabled}
       >
         <div className={styles.wideButtonText}>{props.text}</div>
       </Button>

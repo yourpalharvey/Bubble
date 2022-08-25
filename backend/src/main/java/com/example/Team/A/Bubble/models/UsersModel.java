@@ -12,18 +12,24 @@ public class UsersModel {
 
     private int id;
     private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
     private String password;
+    private String email;
+    private String dob;
+    private String token;
+    private Boolean auth;
+    // private String firstName;
+    // private String lastName;
 
     public UsersModel(Users users) {
         this.id = users.getId();
         this.username = users.getUsername();
-        this.firstName = users.getFirstName();
-        this.lastName = users.getLastName();
-        this.email = users.getEmail();
         this.password = users.getPassword();
+        this.email = users.getEmail();
+        this.dob = users.getDob();
+        this.token = users.getToken();
+        this.auth = users.getAuth();
+        // this.firstName = users.getFirstName();
+        // this.lastName = users.getLastName();
     }
 }
 
