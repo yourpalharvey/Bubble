@@ -35,6 +35,9 @@ public class Users {
     @Column(name = "token")
     private String token;
 
+    @Column(name = "auth")
+    private Boolean auth;
+
 
 
 }

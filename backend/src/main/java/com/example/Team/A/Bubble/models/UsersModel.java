@@ -16,6 +16,7 @@ public class UsersModel {
     private String email;
     private String dob;
     private String token;
+    private Boolean auth;
     // private String firstName;
     // private String lastName;
 
@@ -26,6 +27,7 @@ public class UsersModel {
         this.email = users.getEmail();
         this.dob = users.getDob();
         this.token = users.getToken();
+        this.auth = users.getAuth();
         // this.firstName = users.getFirstName();
         // this.lastName = users.getLastName();
     }

@@ -4,6 +4,7 @@ import com.example.Team.A.Bubble.dto.Users;
 import com.example.Team.A.Bubble.exceptions.UsernameException;
 import com.example.Team.A.Bubble.models.ForgetPasswordModel;
 import com.example.Team.A.Bubble.models.SignInModel;
+import com.example.Team.A.Bubble.models.TokenModel;
 import com.example.Team.A.Bubble.models.UsersModel;
 import com.example.Team.A.Bubble.repositories.UsersRepository;
 import com.example.Team.A.Bubble.service.UsersService;
@@ -13,7 +14,10 @@ import org.springframework.stereotype.Service;
 // JWT imports
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import java.util.List;
 import java.util.Objects;
@@ -103,5 +107,36 @@ public class UsersServiceImplementation implements UsersService {
         }
         
         return false;
+    }
+
+    @Override
+    public Users isAuth(TokenModel tokenModel) {
+        String token = tokenModel.getToken();
+        // decode JWT
+        try {
+            Algorithm algorithm = Algorithm.HMAC256("secret"); //use more secure key
+            JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer("auth0")
+                .build(); //Reusable verifier instance
+            DecodedJWT jwt = verifier.verify(token);
+
+            // user id
+            int userid = jwt.getClaim("userID").asInt();
+            System.out.println(userid);
+
+            // find user by id
+            Users user = usersRepository.findUserById(userid);
+            System.out.println(user);
+
+            // add getAuth = true;
+            user.setAuth(true);
+            System.out.println(user);
+
+            // if user != null, return true
+            return user;
+        } catch (JWTVerificationException exception){
+            //Invalid signature/claims
+            return new Users();
+        }
     }
 }
