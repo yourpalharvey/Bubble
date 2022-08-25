@@ -30,10 +30,22 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+<<<<<<< HEAD
     "/test-user-page": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/test-user-page.js"
+=======
+    "/hosted": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/hosted.js"
+    ],
+    "/watchStreams": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/watchStreams.js"
+>>>>>>> origin/29-as-a-streamer-i-want-to-be-able-to-view-live-streams-in-video-format
     ]
   },
   "ampFirstPages": []

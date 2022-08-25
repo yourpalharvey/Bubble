@@ -136,7 +136,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "422bb5b6f7668d5f"; }
+=======
+/******/ 		__webpack_require__.h = function() { return "7a7712b49609e89d"; }
+>>>>>>> origin/29-as-a-streamer-i-want-to-be-able-to-view-live-streams-in-video-format
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

@@ -30,6 +30,7 @@ export default function HostedEvents(props) {
               time="19:00 - 21:00"
               image="/phoebeBridges.png"
               colour="var(--accent-red)"
+              url="watchStreams"
             />
           </HostedEventsContainer>
 

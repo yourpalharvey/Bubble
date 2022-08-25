@@ -23,9 +23,11 @@ export const FullBubble = (props) => {
         <div className={styles.fullTime}>
           <p className={styles.fullEventTime}>{props.time}</p>
         </div>
-        <div className={styles.liveButton}>
-          <LiveNowPill />
-        </div>
+        <Link href="watchStreams">
+                    <div className={styles.liveButton}>
+                        <LiveNowPill/>
+                    </div>
+                    </Link>
       </div>
 
       <Image
