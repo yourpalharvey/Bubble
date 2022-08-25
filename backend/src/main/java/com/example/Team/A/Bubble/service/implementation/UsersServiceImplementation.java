@@ -122,15 +122,12 @@ public class UsersServiceImplementation implements UsersService {
 
             // user id
             int userid = jwt.getClaim("userID").asInt();
-            System.out.println(userid);
 
             // find user by id
             Users user = usersRepository.findUserById(userid);
-            System.out.println(user);
 
             // add getAuth = true;
             user.setAuth(true);
-            System.out.println(user);
 
             // if user != null, return true
             return user;

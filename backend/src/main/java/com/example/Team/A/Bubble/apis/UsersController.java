@@ -63,7 +63,9 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/isAuth", method = RequestMethod.POST)
-    public ResponseEntity<UsersModel> isAuthorised(@RequestBody TokenModel token) {
-        return ResponseEntity.ok(new UsersModel(usersService.isAuth(token)));
+    public ResponseEntity<String> isAuthorised(@RequestBody TokenModel token) {
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("authorised", new UsersModel(usersService.isAuth(token)).getAuth().toString());
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
     }
 }

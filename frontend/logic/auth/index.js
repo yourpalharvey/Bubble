@@ -37,6 +37,17 @@ const handleSignup = (username, password, dateOfBirth, email) => {
 	return false;
 };
 
+// check if user token is valid
+const isAuth = async (token) => {
+	// create json object
+	let data = {"token": token};
+	// post the token to the api, and get response
+	let response = await postRequest(`${URLBASE}users/isAuth`, data);
+	// return the value of the api request
+	return response.authorised[0];
+
+}
+
 // check if username exists
 const checkUsername = (username) => {
 	if (username === "")
@@ -115,5 +126,6 @@ module.exports= {
 	checkAge,
 	checkUsername,
 	checkPasswordValidBool,
-	checkEmailValidBool
+	checkEmailValidBool,
+	isAuth
 }
