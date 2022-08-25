@@ -2,5 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/explore": "pages/explore.js"
+=======
+  "/start-streaming": "pages/start-streaming.js",
+  "/start-streaming/create-bubble": "pages/start-streaming/create-bubble.js",
+  "/start-streaming/join-bubble/[bid]": "pages/start-streaming/join-bubble/[bid].js"
+>>>>>>> main
 }

@@ -30,10 +30,27 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+<<<<<<< HEAD
     "/explore": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/explore.js"
+=======
+    "/start-streaming": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/start-streaming.js"
+    ],
+    "/start-streaming/create-bubble": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/start-streaming/create-bubble.js"
+    ],
+    "/start-streaming/join-bubble/[bid]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/start-streaming/join-bubble/[bid].js"
+>>>>>>> main
     ]
   },
   "ampFirstPages": []

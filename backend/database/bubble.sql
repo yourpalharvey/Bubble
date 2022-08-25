@@ -48,10 +48,9 @@ CREATE TABLE `third_tag`(
 CREATE TABLE `users` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(25),
-  `firstName` varchar(25),
-  `lastName` varchar(25),
-  `email` varchar(25),
   `password` varchar(25)
+  `email` varchar(25),
+  `dob` DATE
   );
 
 CREATE TABLE `bubbles`(
@@ -64,5 +63,8 @@ CREATE TABLE `bubbles`(
     CONSTRAINT FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`),
     CONSTRAINT FOREIGN KEY (`first_tag_id`) REFERENCES `first_tag` (`first_tag_id`),
     CONSTRAINT FOREIGN KEY (`second_tag_id`) REFERENCES `second_tag` (`second_tag_id`),
-    CONSTRAINT FOREIGN KEY (`third_tag_id`) REFERENCES `third_tag` (`third_tag_id`),
+    CONSTRAINT FOREIGN KEY (`third_tag_id`) REFERENCES `third_tag` (`third_tag_id`)
 );
+
+Select * 
+from users

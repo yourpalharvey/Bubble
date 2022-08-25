@@ -68,7 +68,7 @@ const startStream = (props) => {
           <ButtonBootstrap
             text="Create stream"
             primaryWide={true}
-            onClick={() => router.push("/start-straming/create-bubble")}
+            onClick={() => router.push("/start-streaming/create-bubble")}
           />
         </div>
 

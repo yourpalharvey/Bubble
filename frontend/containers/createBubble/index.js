@@ -143,7 +143,7 @@ export const CreateBubble2 = ({ setProgress, progress }) => {
       />
       <div className={styles.createBubbleButton}>
         <ButtonBootstrap
-          PrimaryWide={true}
+          primaryWide={true}
           text="Create Bubble"
           onClick={handleData}
         />
