@@ -2,16 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "/explore": "pages/explore.js"
-=======
-  "/start-streaming": "pages/start-streaming.js",
-  "/start-streaming/create-bubble": "pages/start-streaming/create-bubble.js",
-  "/start-streaming/join-bubble/[bid]": "pages/start-streaming/join-bubble/[bid].js"
->>>>>>> main
-=======
   "/": "pages/index.js",
   "/test-user-page": "pages/test-user-page.js"
->>>>>>> origin/2-as-a-existing-user-i-want-to-be-able-to-login-to-the-application-so-that-i-can-use-the
 }

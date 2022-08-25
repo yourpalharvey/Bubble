@@ -30,34 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "/explore": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/explore.js"
-=======
-    "/start-streaming": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/start-streaming.js"
-    ],
-    "/start-streaming/create-bubble": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/start-streaming/create-bubble.js"
-    ],
-    "/start-streaming/join-bubble/[bid]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/start-streaming/join-bubble/[bid].js"
->>>>>>> main
-=======
     "/test-user-page": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/test-user-page.js"
->>>>>>> origin/2-as-a-existing-user-i-want-to-be-able-to-login-to-the-application-so-that-i-can-use-the
     ]
   },
   "ampFirstPages": []

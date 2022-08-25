@@ -10,8 +10,11 @@ const TestUserPage = ({token}) => {
         <Background>
             
             <Navbar />
-            
+            <h1>test user page</h1>
+            <div>
             <ButtonBootstrap primarySmall={true} text={token}/>
+            </div>
+            
             
         </Background>
     )

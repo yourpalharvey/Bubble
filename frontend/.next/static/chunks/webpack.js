@@ -136,15 +136,7 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-/******/ 		__webpack_require__.h = function() { return "4b859b7a9632f8d7"; }
-=======
-/******/ 		__webpack_require__.h = function() { return "1971fcee3c3de7c2"; }
->>>>>>> main
-=======
-/******/ 		__webpack_require__.h = function() { return "590132d7797b9e71"; }
->>>>>>> origin/2-as-a-existing-user-i-want-to-be-able-to-login-to-the-application-so-that-i-can-use-the
+/******/ 		__webpack_require__.h = function() { return "422bb5b6f7668d5f"; }
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

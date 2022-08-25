@@ -48,7 +48,7 @@ CREATE TABLE `third_tag`(
 CREATE TABLE `users` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(25),
-  `password` varchar(25)
+  `password` varchar(25),
   `email` varchar(25),
   `dob` DATE
   );
