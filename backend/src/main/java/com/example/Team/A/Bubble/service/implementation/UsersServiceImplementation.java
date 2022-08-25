@@ -34,10 +34,11 @@ public class UsersServiceImplementation implements UsersService {
             throw new UsernameException("Username already exists");
         }
         user.setUsername(usersModel.getUsername());
-        user.setFirstName(usersModel.getFirstName());
-        user.setLastName(usersModel.getLastName());
-        user.setEmail(usersModel.getEmail());
         user.setPassword(usersModel.getPassword());
+        user.setEmail(usersModel.getEmail());
+        user.setDob(usersModel.getDob());
+        // user.setFirstName(usersModel.getFirstName());
+        // user.setLastName(usersModel.getLastName());
 
         usersRepository.save(user);
 
