@@ -6,7 +6,7 @@ import { ButtonBootstrap } from "../objects/buttonBootstrap";
 import { isAuth } from "../logic/auth";
 
 
-const TestUserPage = ({token, loggedIn}) => {
+const TestUserPage = ({loggedIn}) => {
     return (
         <Background>
             
@@ -39,7 +39,6 @@ export const getServerSideProps = async (ctx) => {
         return {
             props: {
                 loggedIn: valid,
-                token: token
             }
         } 
 

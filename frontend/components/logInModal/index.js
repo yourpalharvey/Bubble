@@ -2,7 +2,7 @@ import styles from "./logInModal.module.css";
 import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
-import { getCookie, setCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next';
 
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
@@ -39,6 +39,9 @@ export const LogInModal = (props) => {
 
     // save res
     setCookie("token", res, OPTIONS);
+
+    // refresh
+
 
   }
 

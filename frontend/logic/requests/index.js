@@ -8,7 +8,14 @@ const postRequest = async (url, data) => {
         },
         body: JSON.stringify(data)
     })
-    .catch(err => console.error(err))
+    .catch(
+        err => {
+            console.error(err);
+            return {
+                "error": error
+            }
+        }
+    )
 
     return response.json();
 }

@@ -7,7 +7,7 @@ import {SquareBubble, TallBubble, WideBubble} from '../components/bubbles'
 import { Footer } from '../components/footer'
 
 
-export default function Home() {
+export default function Home({loggedIn}) {
   return (
     <Background>
       <Navbar loggedIn={true} />
@@ -121,3 +121,22 @@ export default function Home() {
   );
 }
 
+export const getServerSideProps = async (ctx) => {
+
+  // get the req and res objects from context
+  const {req, res} = ctx;
+
+  // get the token cookie
+  const token = getCookie("token", {req, res});
+
+  // if the token exists, return wheteher it is valid, otherwise set it as false
+  const valid = token != null ? await isAuth(token): false;
+
+  // return props
+  return {
+    props: {
+        loggedIn: valid,
+    }
+} 
+
+}
