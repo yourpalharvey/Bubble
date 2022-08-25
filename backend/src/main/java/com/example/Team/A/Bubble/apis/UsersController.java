@@ -7,6 +7,8 @@ import com.example.Team.A.Bubble.models.UsersModel;
 import com.example.Team.A.Bubble.service.UsersService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.json.*;
@@ -36,7 +38,9 @@ public class UsersController {
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public ResponseEntity<String> signInUser(@RequestBody SignInModel signInModel){
-        return ResponseEntity.ok(new UsersModel(usersService.signIn(signInModel)).getToken());
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("token", new UsersModel(usersService.signIn(signInModel)).getToken().toString());
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.PUT)
@@ -59,7 +63,7 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/isAuth", method = RequestMethod.POST)
-    public ResponseEntity<Boolean> isAuthorised(@RequestBody TokenModel token) {
-        return ResponseEntity.ok(new UsersModel(usersService.isAuth(token)).getAuth());
+    public ResponseEntity<UsersModel> isAuthorised(@RequestBody TokenModel token) {
+        return ResponseEntity.ok(new UsersModel(usersService.isAuth(token)));
     }
 }

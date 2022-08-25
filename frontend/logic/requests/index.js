@@ -8,11 +8,9 @@ const postRequest = async (url, data) => {
         },
         body: JSON.stringify(data)
     })
-    .then(result => result.json())
-    .then(data => {return data;})
     .catch(err => console.error(err))
 
-    return response;
+    return response.json();
 }
 
 module.exports = {postRequest};

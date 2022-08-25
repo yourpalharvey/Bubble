@@ -4,20 +4,16 @@ const { postRequest } = require("../requests");
 const URLBASE = "http://localhost:8080/";
 
 // log in user
-const handleLogin = (username, password) => {
-	/*
-	axios.post('', {
-		user: username,
-		password: password
-	})
-	.then(response => {
-		return response
-	})
-	.catch(error => {
-		return error
-	})
-	*/
-	return username;
+const handleLogin = async (username, password) => {
+	// take args into json
+	const data = {
+		"username": username,
+		"password": password
+	};
+	
+	// send post request
+	let response = await postRequest(`${URLBASE}users/signIn`, data);
+	return response.token[0];
 }
 
 // sign up user
