@@ -22,11 +22,15 @@ a {
   --white: #fff;
   --off-white: #f2f2f2;
   --yellow: #ffe202;
-  --orange: #fe8668;
+  --orange: #FDBC1F;
   --secondary-green: #eaf8ec;
   --secondary-blue: #ecf6ff;
   --accent-red: #FE8668;
   --text: #3A3A3A;
   --light-text: #808080;
   --red: #ff3401;
+  --blue: #5FA1D5;
+    --green: #51B960;
+    --teal: #30D6B0;
+    --indigo: #4269F2;
 }

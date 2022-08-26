@@ -2,8 +2,6 @@
     width: 28vw;
     height: 25vw;
 
-    background-color: var(--yellow);
-
     border-radius: 1vh;
     position: relative;
 }
@@ -18,9 +16,16 @@
 
 .tallBubbleContainer {
     width: 13.5vw;
-    height: 24vw;
-
-    background-color: var(--yellow);
+    height: 20vw;
+    border-radius: 1vh;
+    position: relative;
+    }
+    
+.categoryBubbleContainer {
+    width: 21vw;
+    height: 6vw;
+    
+    /* background-color: var(--accent-red); */
 
     border-radius: 1vh;
     position: relative;
@@ -28,10 +33,7 @@
 
 .wideBubbleContainer {
     height: 11vw;
-    width: 20vw;
-
-    background-color: var(--yellow);
-
+    width: 21.5vw;
     border-radius: 1vh;
     position: relative;
 }
@@ -50,4 +52,27 @@
     z-index: 10;
     bottom: 10px;
     right: 10px;
+}
+.midBubbleContainer {
+    width: 14vw;
+    height: 20vw;
+    border-radius: 1vh;
+    position: relative;
+}
+
+.midBubbleImageContainer {
+    width: 10vw;
+    height: 10vw;
+    position: relative;
+    border-radius: 100vh;
+    border: 2px white solid;
+    justify-content: center;
+}
+
+.midText {
+    position: absolute;
+    color: var(--white);
+    z-index: 10;
+    bottom: 1vw;
+    left: 1vw;
 }

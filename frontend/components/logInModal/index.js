@@ -2,6 +2,8 @@ import styles from "./logInModal.module.css";
 import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
+import { setCookie } from 'cookies-next';
+import { useRouter } from "next/router";
 
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
@@ -16,12 +18,51 @@ export const LogInModal = (props) => {
   // handling form functions
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   const [passwordShown, setPasswordShown] = useState(false);
+  
+  // router
+  const router = useRouter();
+
   // Password toggle handler, shows password as text.
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
+
+  // handle signIn
+  const handleSignIn = async () => {
+    // handle logIn function
+    const res = await handleLogin(username, password);
+
+    if (res === "error")
+    {
+      // say something went wrong
+      setInvalid(true);
+
+    }
+    else
+    {
+      // set expiry
+      const expDate = new Date();
+      expDate.setMonth(expDate.getMonth() + 1);
+  
+      const OPTIONS = {
+        expires: expDate
+      }
+  
+      // save res
+      setCookie("token", res, OPTIONS);
+
+      // close modal
+      props.handleCloseLogin();
+  
+      // refresh
+      router.reload(window.location.pathname);
+    }
+
+
+  }
 
   return (
     <>
@@ -36,6 +77,7 @@ export const LogInModal = (props) => {
             togglePassword={togglePassword}
             setUsername={setUsername}
             setPassword={setPassword}
+            invalid={invalid}
             logInForm={true}
           />
           <a href="/404" className={styles.formLink}>
@@ -46,8 +88,7 @@ export const LogInModal = (props) => {
               primaryWide={true}
               text="Log In"
               onClick={() => {
-                handleLogin(username, password);
-                props.handleCloseLogin();
+                handleSignIn(username, password);
               }}
               type="submit"
             ></ButtonBootstrap>

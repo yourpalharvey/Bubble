@@ -5,12 +5,16 @@ import { Navbar } from '../components/navbar'
 import {HomeTopContainer} from "../containers/bubbleContainer"
 import {SquareBubble, TallBubble, WideBubble} from '../components/bubbles'
 import { Footer } from '../components/footer'
+import { getCookie } from 'cookies-next';
+import { getUsername, isAuth } from '../logic/auth';
 
 
-export default function Home() {
+export default function Home({loggedIn, user}) {
+
+
   return (
     <Background>
-      <Navbar loggedIn={true} />
+      <Navbar loggedIn={loggedIn} />
 
       <Head>
         <title>Bubble</title>
@@ -19,19 +23,21 @@ export default function Home() {
       </Head>
 
       <div className={styles.container}>
-        <HomeTopContainer title="Upcoming events" seeMore="See more events">
+        <HomeTopContainer title="Upcoming Events" seeMore="See more events">
           <SquareBubble
-            text="testing"
+            text={user || "test"}
             date="July 28th"
             image="/phoebeBridges.png"
             url="joinbubble/1"
+            colour="var(--accent-red)"
           />
 
           <SquareBubble
             text="testing 2"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Rock_qbeh2v.png"
             url="joinbubble/2"
+            colour="var(--green)"
           />
 
           <SquareBubble
@@ -39,6 +45,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="joinbubble/3"
+            colour="var(--orange)"
           />
         </HomeTopContainer>
 
@@ -46,15 +53,17 @@ export default function Home() {
           <TallBubble
             text="testing"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660828077/Bubble/TaylorSwift_xoyk4t.png"
             url="categories/1"
+            colour="var(--accent-red)"
           />
 
           <TallBubble
             text="testing 2"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Paintball_fc4abo.png"
             url="categories/2"
+            colour="var(--teal)"
           />
 
           <TallBubble
@@ -62,6 +71,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/3"
+            colour="var(--indigo)"
           />
 
           <TallBubble
@@ -69,6 +79,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/1"
+            colour="var(--orange)"
           />
 
           <TallBubble
@@ -76,6 +87,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/2"
+            colour="var(--blue)"
           />
 
           <TallBubble
@@ -83,6 +95,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/3"
+            colour="var(--green)"
           />
         </HomeTopContainer>
 
@@ -90,8 +103,9 @@ export default function Home() {
           <WideBubble
             text="testing"
             date="July 28th"
-            image="/phoebeBridges.png"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png"
             url="categories/1"
+            colour="var(--blue)"
           />
 
           <WideBubble
@@ -99,6 +113,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/2"
+            colour="var(--green)"
           />
 
           <WideBubble
@@ -106,6 +121,7 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/3"
+            colour="var(--teal)"
           />
 
           <WideBubble
@@ -113,12 +129,35 @@ export default function Home() {
             date="July 28th"
             image="/phoebeBridges.png"
             url="categories/1"
+            colour="var(--indigo)"
           />
         </HomeTopContainer>
       </div>
-      <Footer loggedIn={false} />
+      <Footer loggedIn={loggedIn} />
     </Background>
   );
 }
 
+export const getServerSideProps = async (ctx) => {
 
+  // get the req and res objects from context
+  const {req, res} = ctx;
+
+  // get the token cookie
+  const token = getCookie("token", {req, res});
+
+  // if the token exists, return wheteher it is valid, otherwise set it as false
+  const valid = token != null ? await isAuth(token): false;
+  const username = token!= null ? await getUsername(token) : null;
+
+
+
+  // return props
+  return {
+    props: {
+        loggedIn: valid,
+        user: username,
+    }
+  } 
+
+}
