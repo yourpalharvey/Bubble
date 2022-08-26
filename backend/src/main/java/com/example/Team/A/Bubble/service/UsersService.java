@@ -11,7 +11,7 @@ import java.util.List;
 public interface UsersService {
     List<Users> getAllRecords();
 
-    Users createUser(UsersModel usersModel);
+    Users createAndUpdateUser(UsersModel usersModel,Integer id);
     Users signIn(SignInModel signInModel);
     Users forgetPassword(ForgetPasswordModel forgetPasswordModel);
     boolean checkUsernameIsAvailable(String username);

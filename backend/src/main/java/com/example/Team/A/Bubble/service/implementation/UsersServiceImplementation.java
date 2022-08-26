@@ -1,6 +1,7 @@
 package com.example.Team.A.Bubble.service.implementation;
 
 import com.example.Team.A.Bubble.dto.Users;
+import com.example.Team.A.Bubble.exceptions.ResourceNotFoundException;
 import com.example.Team.A.Bubble.exceptions.UsernameException;
 import com.example.Team.A.Bubble.models.ForgetPasswordModel;
 import com.example.Team.A.Bubble.models.SignInModel;
@@ -10,6 +11,7 @@ import com.example.Team.A.Bubble.repositories.UsersRepository;
 import com.example.Team.A.Bubble.service.UsersService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 // JWT imports
 import com.auth0.jwt.algorithms.Algorithm;
@@ -29,26 +31,31 @@ public class UsersServiceImplementation implements UsersService {
     @NonNull
     private final UsersRepository usersRepository;
 
-    public List<Users> getAllRecords(){
+    public List<Users> getAllRecords() {
         return usersRepository.findAll();
     }
 
     @Override
-    public Users createUser(UsersModel usersModel) {
-        Users user = new Users();
+    public Users createAndUpdateUser(UsersModel usersModel, Integer id) {
+        Users user;
 
         List<Users> users = usersRepository.findAll();
-        if (users.stream().anyMatch(users1 -> Objects.equals(users1.getUsername(), usersModel.getUsername()))){
-            throw new UsernameException("Username already exists");
+
+        if (id != null) {
+            user = usersRepository.findUserById(id);
+
+            if (user != null) {
+                user = processUser(usersModel, user, users);
+            } else {
+                throw new ResourceNotFoundException(HttpStatus.NOT_FOUND.getReasonPhrase());
+            }
+        } else {
+            user = new Users();
+            user = processUser(usersModel, user, users);
         }
-        user.setUsername(usersModel.getUsername());
-        user.setPassword(usersModel.getPassword());
-        user.setEmail(usersModel.getEmail());
-        user.setDob(usersModel.getDob());
         // user.setFirstName(usersModel.getFirstName());
         // user.setLastName(usersModel.getLastName());
 
-        usersRepository.save(user);
 
         return user;
     }
@@ -57,7 +64,7 @@ public class UsersServiceImplementation implements UsersService {
     public Users signIn(SignInModel signInModel) {
         Users user = usersRepository.findByUserNameAndPassword(signInModel.getUsername(), signInModel.getPassword());
 
-        if (null != user){
+        if (null != user) {
             // if User is not null, find id
             int userID = user.getId();
 
@@ -65,21 +72,21 @@ public class UsersServiceImplementation implements UsersService {
             try {
                 Algorithm algorithm = Algorithm.HMAC256("secret");
                 String token = JWT.create()
-                    .withIssuer("auth0")
-                    .withClaim("userID", userID)
-                    .sign(algorithm);
+                        .withIssuer("auth0")
+                        .withClaim("userID", userID)
+                        .sign(algorithm);
 
                 // return token
                 user.setToken(token);
                 return user;
-            } catch (JWTCreationException exception){
+            } catch (JWTCreationException exception) {
                 System.out.println(exception);
                 //Invalid Signing configuration / Couldn't convert Claims.
             }
 
             // return Token
             return user;
-        }else
+        } else
             throw new RuntimeException("User Not Found");
     }
 
@@ -87,7 +94,7 @@ public class UsersServiceImplementation implements UsersService {
     public Users forgetPassword(ForgetPasswordModel forgetPasswordModel) {
         Users user = usersRepository.findByEmail(forgetPasswordModel.getEmail());
 
-        if (null != user){
+        if (null != user) {
             user.setPassword(forgetPasswordModel.getPassword());
             usersRepository.save(user);
         }
@@ -97,7 +104,7 @@ public class UsersServiceImplementation implements UsersService {
 
     @Override
     public boolean checkUsernameIsAvailable(String username) {
-        
+
         // find user
         Users user = usersRepository.findByUserName(username);
 
@@ -105,7 +112,7 @@ public class UsersServiceImplementation implements UsersService {
         if (user == null) {
             return true;
         }
-        
+
         return false;
     }
 
@@ -116,8 +123,8 @@ public class UsersServiceImplementation implements UsersService {
         try {
             Algorithm algorithm = Algorithm.HMAC256("secret"); //use more secure key
             JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer("auth0")
-                .build(); //Reusable verifier instance
+                    .withIssuer("auth0")
+                    .build(); //Reusable verifier instance
             DecodedJWT jwt = verifier.verify(token);
 
             // user id
@@ -131,9 +138,27 @@ public class UsersServiceImplementation implements UsersService {
 
             // if user != null, return true
             return user;
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             //Invalid signature/claims
             return new Users();
         }
+    }
+
+    public boolean checkUserName(List<Users> list, String userName) {
+        return list.stream().anyMatch(users1 -> Objects.equals(users1.getUsername(), userName));
+    }
+
+    public Users processUser(UsersModel usersModel, Users user, List<Users> users) {
+        if (checkUserName(users, usersModel.getUsername())) {
+            throw new UsernameException("Username already exists");
+        }
+        user.setUsername(usersModel.getUsername());
+        user.setPassword(usersModel.getPassword());
+        user.setEmail(usersModel.getEmail());
+        user.setDob(usersModel.getDob());
+
+        usersRepository.save(user);
+
+        return user;
     }
 }
