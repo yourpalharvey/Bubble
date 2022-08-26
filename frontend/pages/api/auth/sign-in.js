@@ -8,7 +8,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "comscpassword123",
+    password: "comsc",
     database: 'bubble'
 });
 

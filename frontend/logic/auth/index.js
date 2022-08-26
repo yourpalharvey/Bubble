@@ -25,14 +25,15 @@ const handleLogin = async (username, password) => {
 }
 
 // sign up user
-const handleSignup = (username, password, dateOfBirth, email) => {
-	let usernameValid = checkUsername(username);
+const handleSignup = async (username, password, dateOfBirth, email) => {
+	let usernameValid = await checkUsername(username);
 	let passwordValid = checkPasswordValidBool(password);
-	let ageValid = checkAge(dateOfBirth);
+	let ageValid = checkAge(dateOfBirth, 18);
 	let emailValid = checkEmailValidBool(email);
 
 	if (usernameValid && passwordValid && ageValid && emailValid)
 	{
+
 		let data = {
 			username: username,
 			password: password,

@@ -2,10 +2,12 @@ import styles from "./signUpModal.module.css";
 import Modal from "react-bootstrap/Modal";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
-import { handleSignup, checkAge, checkUsername, checkPasswordValidBool, checkEmailValidBool } from "../../logic/auth";
+import { handleSignup, handleLogin, checkAge, checkUsername, checkPasswordValidBool, checkEmailValidBool } from "../../logic/auth";
+import { setCookie } from "cookies-next";
 
 // set minimum age
 const age = 18;
@@ -27,6 +29,46 @@ export const SignUpModal = (props) => {
     setPasswordShown(!passwordShown);
   };
   
+  const router = useRouter();
+  
+  
+  // handle SignUp
+  const signUp = async () => {
+    let response = await handleSignup(username, password, dateOfBirth, email);
+    console.log(response);
+    if (response.hasOwnProperty("id"))
+    {
+      // log user in
+      let token = await handleLogin(username, password);
+
+      // set Cookie
+      // set expiry
+      const expDate = new Date();
+      expDate.setMonth(expDate.getMonth() + 1);
+  
+      const OPTIONS = {
+        expires: expDate
+      }
+
+      // set the cookie
+      // save res
+      setCookie("token", token, OPTIONS);
+
+      // close modal
+      props.handleCloseSignUp();
+
+      // refresh
+      router.reload(window.location.pathname);
+    }
+    else
+    {
+      setOriginal(false);
+      setDisabled(false);
+      setValidPassword(false);
+      setValidEmail(false);
+    }
+
+  }
   // check if age added is above threshold
   useEffect(
     () => {
@@ -114,7 +156,7 @@ export const SignUpModal = (props) => {
               primaryWide={true}
               text="Sign Up"
               onClick={() => {
-                handleSignup(username, password, dateOfBirth, email),
+                signUp(),
                   props.handleCloseSignUp();
               }}
               type="submit"
