@@ -9,6 +9,8 @@ import { HomeTopContainer } from '../../containers/bubbleContainer'
 import { HostedEventsContainer } from '../../containers/eventsContainer'
 import Link from 'next/link'
 import { BubbleBtn } from '../../objects/bubbleBtn'
+import { getCookie } from "cookies-next";
+import { isAuth, getUsername } from "../../logic/auth";
 
 export default function HostedEvents(loggedIn, user) {
     return (

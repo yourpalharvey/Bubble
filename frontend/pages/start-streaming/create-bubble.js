@@ -4,6 +4,8 @@ import { Background } from "../../components/background";
 import { Navbar } from "../../components/navbar";
 import { CreateBubble1, CreateBubble2 } from "../../containers/createBubble";
 import styles from "../../styles/StartStreaming.module.css";
+import { getCookie } from "cookies-next";
+import { isAuth, getUsername } from "../../logic/auth";
 
 const createBubble = ({loggedIn, user}) => {
   const [progress, setProgress] = useState(5);

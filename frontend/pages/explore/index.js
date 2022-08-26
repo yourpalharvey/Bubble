@@ -8,6 +8,8 @@ import { CategoryContainer } from "../../containers/categoryContainer";
 import { ExploreCategories } from "../../components/exploreCategories";
 import { ExploreBubbles } from "../../components/exploreBubbles";
 import { ExploreStreams } from "../../components/exploreStreams";
+import { getCookie } from "cookies-next";
+import { isAuth, getUsername } from "../../logic/auth";
 
 import React, { useState } from "react";
 import { ExploreNav } from "../../objects/exploreNav";

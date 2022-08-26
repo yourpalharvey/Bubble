@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Background } from "../../../components/background";
 import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import styles from '../../../styles/StartStreaming.module.css'
+import { getCookie } from "cookies-next";
+import { isAuth, getUsername } from "../../../logic/auth";
 
 const bubbleStream = ({loggedIn, user}) => {
     const router = useRouter();

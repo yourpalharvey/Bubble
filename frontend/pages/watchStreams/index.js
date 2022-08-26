@@ -9,6 +9,8 @@ import { FullBubble, MiniWideBubble } from '../../components/HostedEventBubble'
 import { HostedEventsContainer } from '../../containers/eventsContainer'
 import { VideoStreamContainer } from '../../containers/streamsContainer';
 import { CurrentVideoBubble, SameEventVideoBubble } from '../../components/streamBubble';
+import { getCookie } from "cookies-next";
+import { isAuth, getUsername } from "../../logic/auth";
 
 export default function StreamWatch ({loggedIn, user}) {
 

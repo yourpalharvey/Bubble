@@ -177,13 +177,15 @@ function DropdownMenu(props) {
 
   function DropdownItem(props) {
     return (
-      <a href={`/${props.url}`} className={styles.menuItem}>
+      <Link href={`${props.url}`}>
+      <a className={styles.menuItem}>
         <span className={styles.iconButton}>{props.leftIcon}</span>
 
         {props.children}
 
         <span className={styles.iconRight}>{props.rightIcon}</span>
       </a>
+      </Link>
     );
   }
 

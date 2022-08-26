@@ -1,3 +1,6 @@
+import { getCookie } from "cookies-next";
+import { isAuth, getUsername } from "../logic/auth";
+
 export function Page({loggedIn, user}) {
     return (
         <></>
