@@ -4,7 +4,7 @@ import { Background } from "../../../components/background";
 import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import styles from '../../../styles/StartStreaming.module.css'
 
-const bubbleStream = ({}) => {
+const bubbleStream = ({loggedIn, user}) => {
     const router = useRouter();
     const {bid} = router.query;
 
@@ -43,7 +43,7 @@ const bubbleStream = ({}) => {
 
     return (
       <Background>
-        {/*<Navbar />*/}
+        <Navbar loggedIn={loggedIn}/>
         <video className={styles.videoContainer} ref={videoRef} />
         <div className={styles.videoButtonContainer}>
           <ButtonBootstrap
@@ -56,13 +56,30 @@ const bubbleStream = ({}) => {
     );
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (ctx) => {
 
-    // check geolocation and account
+    // get the req and res objects from context
+    const {req, res} = ctx;
+  
+    // get the token cookie
+    const token = getCookie("token", {req, res});
+  
+    // if the token exists, return wheteher it is valid, otherwise set it as false
+    const valid = token != null ? await isAuth(token): false;
+    const username = token!= null ? await getUsername(token) : null;
+  
+    // check location
+  
+    // return props
     return {
-        props: {}
-    }
-}
+      props: {
+          loggedIn: valid,
+          user: username,
+      }
+    } 
+  
+  }
+
 
 
 export default bubbleStream;

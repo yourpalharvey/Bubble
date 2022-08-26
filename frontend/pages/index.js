@@ -158,6 +158,6 @@ export const getServerSideProps = async (ctx) => {
         loggedIn: valid,
         user: username,
     }
-} 
+  } 
 
 }

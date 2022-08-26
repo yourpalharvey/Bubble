@@ -10,10 +10,10 @@ import { HostedEventsContainer } from '../../containers/eventsContainer'
 import Link from 'next/link'
 import { BubbleBtn } from '../../objects/bubbleBtn'
 
-export default function HostedEvents(props) {
+export default function HostedEvents(loggedIn, user) {
     return (
       <Background>
-        <Navbar loggedIn={false} />
+        <Navbar loggedIn={loggedIn} />
 
         <Head>
           <title>Hosted Events | Bubble</title>
@@ -67,4 +67,28 @@ export default function HostedEvents(props) {
         <Footer loggedInJoinBubble={true} />
       </Background>
     );
+}
+
+export const getServerSideProps = async (ctx) => {
+
+  // get the req and res objects from context
+  const {req, res} = ctx;
+
+  // get the token cookie
+  const token = getCookie("token", {req, res});
+
+  // if the token exists, return wheteher it is valid, otherwise set it as false
+  const valid = token != null ? await isAuth(token): false;
+  const username = token!= null ? await getUsername(token) : null;
+
+
+
+  // return props
+  return {
+    props: {
+        loggedIn: valid,
+        user: username,
+    }
+  } 
+
 }

@@ -12,7 +12,7 @@ import { ExploreStreams } from "../../components/exploreStreams";
 import React, { useState } from "react";
 import { ExploreNav } from "../../objects/exploreNav";
 
-export default function Explore(props) {
+export default function Explore({loggedIn, user}) {
   const [showCategories, setShowCategories] = useState(true);
   const handleShowCategories = () => setShowCategories(true);
   const handleCloseCategories = () => setShowCategories(false);
@@ -43,7 +43,7 @@ export default function Explore(props) {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <Navbar loggedIn={false} />
+      <Navbar loggedIn={loggedIn} />
 
       <div className={styles.container}>
         <CategoryContainer>
@@ -68,7 +68,31 @@ export default function Explore(props) {
 
       <div className={styles.contentContainer}>{contentRendered}</div>
 
-      <Footer loggedIn={false} />
+      <Footer loggedIn={loggedIn} />
     </Background>
   );
+}
+
+export const getServerSideProps = async (ctx) => {
+
+  // get the req and res objects from context
+  const {req, res} = ctx;
+
+  // get the token cookie
+  const token = getCookie("token", {req, res});
+
+  // if the token exists, return wheteher it is valid, otherwise set it as false
+  const valid = token != null ? await isAuth(token): false;
+  const username = token!= null ? await getUsername(token) : null;
+
+
+
+  // return props
+  return {
+    props: {
+        loggedIn: valid,
+        user: username,
+    }
+  } 
+
 }

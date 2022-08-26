@@ -5,12 +5,12 @@ import { Navbar } from "../../components/navbar";
 import { CreateBubble1, CreateBubble2 } from "../../containers/createBubble";
 import styles from "../../styles/StartStreaming.module.css";
 
-const createBubble = () => {
+const createBubble = ({loggedIn, user}) => {
   const [progress, setProgress] = useState(5);
 
   return (
     <Background>
-      <Navbar loggedIn={false} />
+      <Navbar loggedIn={loggedIn} />
 
       <Head>
         <title>Bubble - Create Bubble</title>
@@ -31,12 +31,30 @@ const createBubble = () => {
 
 export default createBubble;
 
-export const getServerSideProps = async () => {
+
+export const getServerSideProps = async (ctx) => {
+
+  // get the req and res objects from context
+  const {req, res} = ctx;
+
+  // get the token cookie
+  const token = getCookie("token", {req, res});
+
+  // if the token exists, return wheteher it is valid, otherwise set it as false
+  const valid = token != null ? await isAuth(token): false;
+  const username = token!= null ? await getUsername(token) : null;
+
   // get user info
 
   // get location
 
+
+  // return props
   return {
-    props: {},
-  };
-};
+    props: {
+        loggedIn: valid,
+        user: username,
+    }
+  } 
+
+}
