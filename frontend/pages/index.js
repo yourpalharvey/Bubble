@@ -5,12 +5,16 @@ import { Navbar } from '../components/navbar'
 import {HomeTopContainer} from "../containers/bubbleContainer"
 import {SquareBubble, TallBubble, WideBubble} from '../components/bubbles'
 import { Footer } from '../components/footer'
+import { getCookie } from 'cookies-next';
+import { getUsername, isAuth } from '../logic/auth';
 
 
-export default function Home({loggedIn}) {
+export default function Home({loggedIn, user}) {
+
+
   return (
     <Background>
-      <Navbar loggedIn={true} />
+      <Navbar loggedIn={loggedIn} />
 
       <Head>
         <title>Bubble</title>
@@ -19,9 +23,9 @@ export default function Home({loggedIn}) {
       </Head>
 
       <div className={styles.container}>
-        <HomeTopContainer title="Upcoming events" seeMore="See more events">
+        <HomeTopContainer title="Upcoming Events" seeMore="See more events">
           <SquareBubble
-            text="testing"
+            text={user || "test"}
             date="July 28th"
             image="/phoebeBridges.png"
             url="joinbubble/1"
@@ -116,7 +120,7 @@ export default function Home({loggedIn}) {
           />
         </HomeTopContainer>
       </div>
-      <Footer loggedIn={false} />
+      <Footer loggedIn={loggedIn} />
     </Background>
   );
 }
@@ -131,11 +135,15 @@ export const getServerSideProps = async (ctx) => {
 
   // if the token exists, return wheteher it is valid, otherwise set it as false
   const valid = token != null ? await isAuth(token): false;
+  const username = token!= null ? await getUsername(token) : null;
+
+
 
   // return props
   return {
     props: {
         loggedIn: valid,
+        user: username,
     }
 } 
 

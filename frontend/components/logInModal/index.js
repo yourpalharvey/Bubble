@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 
 import React, { useState } from "react";
 import { setCookie } from 'cookies-next';
+import { useRouter } from "next/router";
 
 import { InputForms } from "../../objects/inputForms";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
@@ -17,8 +18,13 @@ export const LogInModal = (props) => {
   // handling form functions
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   const [passwordShown, setPasswordShown] = useState(false);
+  
+  // router
+  const router = useRouter();
+
   // Password toggle handler, shows password as text.
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -29,18 +35,31 @@ export const LogInModal = (props) => {
     // handle logIn function
     const res = await handleLogin(username, password);
 
-    // set expiry
-    const expDate = new Date();
-    expDate.setMonth(expDate.getMonth() + 1);
+    if (res === "error")
+    {
+      // say something went wrong
+      setInvalid(true);
 
-    const OPTIONS = {
-      expires: expDate
     }
+    else
+    {
+      // set expiry
+      const expDate = new Date();
+      expDate.setMonth(expDate.getMonth() + 1);
+  
+      const OPTIONS = {
+        expires: expDate
+      }
+  
+      // save res
+      setCookie("token", res, OPTIONS);
 
-    // save res
-    setCookie("token", res, OPTIONS);
-
-    // refresh
+      // close modal
+      props.handleCloseLogin();
+  
+      // refresh
+      router.reload(window.location.pathname);
+    }
 
 
   }
@@ -58,6 +77,7 @@ export const LogInModal = (props) => {
             togglePassword={togglePassword}
             setUsername={setUsername}
             setPassword={setPassword}
+            invalid={invalid}
             logInForm={true}
           />
           <a href="/404" className={styles.formLink}>
@@ -69,7 +89,6 @@ export const LogInModal = (props) => {
               text="Log In"
               onClick={() => {
                 handleSignIn(username, password);
-                props.handleCloseLogin();
               }}
               type="submit"
             ></ButtonBootstrap>

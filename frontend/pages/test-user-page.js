@@ -13,7 +13,6 @@ const TestUserPage = ({loggedIn}) => {
             <Navbar />
             
             <p>{loggedIn}</p>
-            <p>{token}</p>
             
         </Background>
     )

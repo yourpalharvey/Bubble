@@ -68,4 +68,11 @@ public class UsersController {
         returnObj.append("authorised", new UsersModel(usersService.isAuth(token)).getAuth().toString());
         return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/getUsername", method = RequestMethod.POST)
+    public ResponseEntity<String> getUsernameFromId(@RequestBody TokenModel token) {
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("username", new UsersModel(usersService.isAuth(token)).getUsername().toString());
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+    }
 }

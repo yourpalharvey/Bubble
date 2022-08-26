@@ -13,7 +13,15 @@ const handleLogin = async (username, password) => {
 	
 	// send post request
 	let response = await postRequest(`${URLBASE}users/signIn`, data);
-	return response.token[0];
+
+	if (response.hasOwnProperty("token"))
+	{
+		return response.token[0];
+	}
+	else
+	{
+		return "error"
+	}
 }
 
 // sign up user
@@ -46,6 +54,18 @@ const isAuth = async (token) => {
 	// return the value of the api request
 	return response.authorised[0];
 
+}
+
+// get Username from token
+const getUsername = async (token) => {
+	// create json Object
+	let data = {"token": token};
+
+	// post data to api
+	let response = await postRequest(`${URLBASE}users/getUsername`, data);
+
+	// return value
+	return response.username[0];
 }
 
 // check if username exists
@@ -127,5 +147,6 @@ module.exports= {
 	checkUsername,
 	checkPasswordValidBool,
 	checkEmailValidBool,
-	isAuth
+	isAuth,
+	getUsername
 }
