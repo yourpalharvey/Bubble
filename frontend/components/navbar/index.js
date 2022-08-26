@@ -202,7 +202,7 @@ function DropdownMenu(props) {
           Privacy Policy
       </DropdownItem>
       <hr></hr>
-      <DropdownItem>Log Out</DropdownItem>
+      <DropdownItem url="logout">Log Out</DropdownItem>
     </div>
   );
 }
