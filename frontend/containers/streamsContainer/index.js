@@ -1,16 +1,16 @@
 import styles from "./videoStreamContainer.module.css"
 import {ContainerHeader} from "../../objects/containerHeader";
 
-export const VideoStreamContainer = (props) => {
+export const VideoStreamContainer = ({title, children}) => {
     
     return (
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           
-          <ContainerHeader title={props.title} />
+          <ContainerHeader title={title} />
 
           <div className={styles.cardContainer}>
-            {props.children}
+            {children}
           </div>
 
         </div>

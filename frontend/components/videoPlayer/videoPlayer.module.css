@@ -1,6 +1,6 @@
 .playerWrapper {
   position: relative;
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  padding-top: 56.2%; /* Player ratio: 100 / (1280 / 720) */
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -11,5 +11,6 @@
 .reactPlayer {
   position: absolute;
   top: 6rem;
+  background-color: black;
   /* left: 5rem; */
 }

@@ -29,18 +29,23 @@ export default function StreamWatch () {
         <div className={styles.streamPageContainer}>
           <div className={styles.videoPlayer}>
             <ResponsivePlayer />
+
+            <div className={styles.eventInfoBubble}>
+              <CurrentVideoBubble 
+                    text="Phoebe Bridgers Live"
+                    username="StreamerDreamer"
+                    image="/phoebeBridges.png"
+              />
+            </div>
           </div>
+
+          <div className={styles.line}></div>
 
           {/* </HostedEventsContainer>   */}
 
-          <div className={styles.eventInfoBubble}>
-            <CurrentVideoBubble 
-                  text="Phoebe Bridgers Live"
-                  username="StreamerDreamer"
-                  image="/phoebeBridges.png"
-            />
-          </div>
+          
           {/* <hr></hr> */}
+          
           <div className={styles.videoInfoBubble}>
             <SameEventVideoBubble 
               heading="Bubble Phoebe Bridgers"
@@ -48,6 +53,7 @@ export default function StreamWatch () {
               image="/phoebeBridges.png"
             />
           </div>
+          
           <br></br>
           <VideoStreamContainer title={`Other streams from the the user`}>
             <MiniWideBubble

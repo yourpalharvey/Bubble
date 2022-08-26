@@ -1,4 +1,7 @@
 .streamPageContainer {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -9,6 +12,19 @@
 }
 
 .videoInfoBubble {
-    text-align: center;
+    text-align: left;
+    width: 80vw;
 
+}
+
+.videoPlayer {
+    width: 100vw;
+    height: 100vh;
+}
+
+.line {
+    width: 80vw;
+    height: 1px;
+    background-color: #000;
+    margin-bottom: 4vh;
 }

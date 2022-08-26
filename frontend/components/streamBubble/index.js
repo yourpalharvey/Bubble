@@ -46,6 +46,16 @@ export const SameEventVideoBubble = (props) => {
     return (
         <Link href={`/${props.url}`}>
             <div className={styles.sameEventBubbleContainer}>
+                <div className={styles.sameEventImage}>    
+                    <Image
+                        src={props.image}
+                        alt={`picture of ${props.text}`}
+                        layout="fill"
+                        objectFit="contain"
+                        objectPosition="center"
+                    />
+                </div>
+                
                 <div className={styles.sameEventVideoText}>
                     <h3 className={styles.sameEventBubbleHeading}>
                         {props.heading}
@@ -56,13 +66,6 @@ export const SameEventVideoBubble = (props) => {
                 </div>
 
                 
-                <Image
-                    src={props.image}
-                    alt={`picture of ${props.text}`}
-                    layout="fill"
-                    objectFit="contain"
-                    objectPosition="left"
-                />
                 {/* <div className={styles.bubbleTags}>
                     <BubbleBtn openBtn/>
                 </div> */}
