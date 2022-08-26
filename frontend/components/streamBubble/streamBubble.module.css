@@ -1,0 +1,72 @@
+.currentVideoBubbleContainer {
+    height: 6vw;
+    width: 30vw;
+
+    background-color: rgb(51, 177, 103);
+
+    border-radius: 1vh;
+    position: relative;
+    top: -100px;
+    left: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.currentVideoText {
+    position: absolute;
+    left: 15vh;
+}
+
+.currentVideoHeading {
+    position: relative;
+    top: 1vh;
+}
+
+.currentVideoUserName {
+    /* position: relative;
+    top: -1vh; */
+}
+
+.viewsButton {
+    position: relative;
+    top: 4vh;
+}
+
+.sameEventBubbleContainer {
+    height: 4vw;
+    width: 20vw;
+
+    background-color: rgb(69, 146, 197);
+
+    border-radius: 1vh;
+    position: relative;
+    top: -50px;
+    left: 190px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.sameEventVideoText {
+    position: absolute;
+    left: 10vh;
+}
+
+.sameEventBubbleHeading {
+    position: relative;
+    top: 1.5vh;
+    font-size: 15px;
+}
+
+.sameEventInfo {
+    font-size: 12px;
+    /* position: relative;
+    top: 1vh; */
+}
+
+.bubbleTags {
+
+}

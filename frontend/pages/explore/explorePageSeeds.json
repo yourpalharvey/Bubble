@@ -1,0 +1,45 @@
+{
+  "Category": [
+    {
+      "Music": [
+        "Pop",
+        "Rock",
+        "Metal",
+        "Indie",
+        "Hip-Hop",
+        "R&B",
+        "Blues",
+        "Folk",
+        "Jazz",
+        "Electronic",
+        "Dance"
+      ]
+    },
+    {
+      "Sport": [
+        "Football",
+        "Rugby",
+        "Golf",
+        "Go-Kart",
+        "Skateboarding",
+        "Skiing",
+        "Tennis",
+        "Motor Sport",
+        "Duck Football"
+      ]
+    },
+    {
+      "Art": [
+        "Museums",
+        "Fine Art",
+        "Modern Art",
+        "Graphic Design",
+        "Experimental",
+        "Interactive"
+      ]
+    },
+    {
+      "Theatre": ["Musicals", "Comedy", "Tragedy", "Poety", "Spoken Word"]
+    }
+  ]
+}

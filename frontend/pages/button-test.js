@@ -1,6 +1,7 @@
 import styles from "../styles/Button-Test.module.css";
 import { Background } from "../components/background";
 import { ButtonBootstrap } from "../objects/buttonBootstrap";
+import { MidBubble } from "../components/bubbles";
 
 const ButtonTest = () => {
   return (

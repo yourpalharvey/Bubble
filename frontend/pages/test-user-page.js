@@ -12,8 +12,6 @@ const TestUserPage = ({loggedIn}) => {
             
             <Navbar />
             
-            <p>{loggedIn}</p>
-            
         </Background>
     )
 };

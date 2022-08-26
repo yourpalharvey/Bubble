@@ -1,0 +1,15 @@
+.navContainer {
+    margin-left: 4vw;
+}
+
+.navItems {
+    color: var(--text);
+    font-family: 'Lato';
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.navItems:hover,
+.navItems:global(.active) {
+    color: var(--accent-red);
+}

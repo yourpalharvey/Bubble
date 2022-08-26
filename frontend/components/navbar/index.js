@@ -3,14 +3,18 @@ import { BrowserView, MobileOnlyView, MobileView } from "react-device-detect";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { Shadow } from '../../objects/shadow'
+import { ButtonCustom } from '../../objects/buttonCustom'
 import { TextInput } from "../../objects/textInput";
 import SettingsIcon from "../../objects/settingsIcon";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
-
-import React, { useState } from "react";
 import { LogInModal } from "../logInModal";
 import { SignUpModal } from "../signUpModal";
+
+import Dropdown from 'react-bootstrap/Dropdown';
+
+import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 
 export const Navbar = (props) => {
   const router = useRouter();
@@ -62,11 +66,16 @@ export const Navbar = (props) => {
               ></ButtonBootstrap>
             </div>
 
-            <Link href="/settings">
-              <div className={styles.browserRHSContainer}>
-                <SettingsIcon />
-              </div>
-            </Link>
+            <div className={styles.browserRHSContainer}>
+            <NavItems>
+              <NavIcons icon={<SettingsIcon />}>
+                {/* Dropdown */}
+                <DropdownMenu>
+
+                </DropdownMenu>
+              </NavIcons>
+            </NavItems>
+          </div>
           </nav>
         </BrowserView>
       </div>
@@ -112,11 +121,16 @@ export const Navbar = (props) => {
               ></ButtonBootstrap>
             </div>
 
-            <Link href="/settings">
-              <div className={styles.browserRHSContainer}>
-                <SettingsIcon />
-              </div>
-            </Link>
+            <div className={styles.browserRHSContainer}>
+            <NavItems>
+              <NavIcons icon={<SettingsIcon />}>
+                {/* Dropdown */}
+                <DropdownMenu>
+
+                </DropdownMenu>
+              </NavIcons>
+            </NavItems>
+          </div>
           </nav>
         </BrowserView>
 
@@ -134,3 +148,61 @@ export const Navbar = (props) => {
     );
   }
 };
+
+
+function NavItems(props) {
+  return <ul className={styles.navbarItems}> {props.children} </ul>;
+}
+
+function NavIcons(props) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li className={"nav-icons"}>
+      <a href="#" className={styles.iconButton} onClick={() => setOpen(!open)}>
+        {props.icon}
+      </a>
+
+      {open && props.children}
+    </li>
+  );
+}
+
+function DropdownMenu(props) {
+  const [] = useState();
+
+  function DropDownHeader(props) {
+    return <h3 className={styles.dropdownSectionHead}>{props.header}</h3>;
+  }
+
+  function DropdownItem(props) {
+    return (
+      <a href={`/${props.url}`} className={styles.menuItem}>
+        <span className={styles.iconButton}>{props.leftIcon}</span>
+
+        {props.children}
+
+        <span className={styles.iconRight}>{props.rightIcon}</span>
+      </a>
+    );
+  }
+
+  return (
+    <div className={styles.dropdown}>
+      <DropdownItem url="explore">
+        {/* <Link href="/explore" className={"link"}> */}
+          My Profile
+        {/* </Link> */}
+      </DropdownItem>
+      <DropdownItem url="myaccount">
+          Settings
+      </DropdownItem>
+      <hr></hr>
+      <DropdownItem url="explore">
+          Privacy Policy
+      </DropdownItem>
+      <hr></hr>
+      <DropdownItem>Log Out</DropdownItem>
+    </div>
+  );
+}
