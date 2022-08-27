@@ -6,7 +6,7 @@
 DROP TABLE IF EXISTS first_tag;
 DROP TABLE IF EXISTS second_tag;
 DROP TABLE IF EXISTS third_tag;
-DROP TABLE IF EXISTS usersdata;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS bubbles;
 
 CREATE TABLE category(
@@ -74,15 +74,17 @@ CREATE TABLE third_tag(
 
 ALTER TABLE third_tag ADD COLUMN third_tag_id SERIAL PRIMARY KEY;
 
-CREATE TABLE usersdata (
+CREATE TABLE users (
 
-                           username varchar(25),
-                           password varchar(25),
-                           email varchar(25),
-                           dob DATE
+                       username varchar(25),
+                       password varchar(25),
+                       email varchar(25),
+                       dob DATE,
+                       token varchar(25),
+                       auth boolean
 );
 
-ALTER TABLE usersdata ADD COLUMN id SERIAL PRIMARY KEY;
+ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY;
 
 CREATE TABLE bubbles(
 
@@ -111,8 +113,10 @@ CREATE TABLE bubbles(
 
 ALTER TABLE bubbles ADD COLUMN bubble_id SERIAL PRIMARY KEY;
 
-INSERT into usersdata(username, password, email, dob)
-VALUES ('Mahad','hello','hello@gmail.com','1998-07-24');
+INSERT into users(username, password, email, dob)
+VALUES ('Mahad1','hello1','hello1@gmail.com','1998-07-24'),
+       ('Ahmed2','Hello2','hello2@gmail.com','1999-08-25'),
+       ('Hamza3','Hello3','hello3@gmail.com','1999-08-26');
 
 Select *
-from usersdata
+from users

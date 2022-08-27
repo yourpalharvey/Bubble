@@ -38,6 +38,4 @@ public class Users {
     @Column(name = "auth")
     private Boolean auth;
 
-
-
 }
