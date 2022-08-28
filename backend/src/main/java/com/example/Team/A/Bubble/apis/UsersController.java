@@ -33,7 +33,13 @@ public class UsersController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<UsersModel> signUpUser(@RequestBody UsersModel usersModel){
-        return ResponseEntity.ok(new UsersModel(usersService.createUser(usersModel)));
+        return ResponseEntity.ok(new UsersModel(usersService.createAndUpdateUser(usersModel, null)));
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public ResponseEntity<UsersModel> updateUser(@PathVariable(value = "id") Integer id,
+                                                 @RequestBody UsersModel usersModel){
+        return ResponseEntity.ok(new UsersModel(usersService.createAndUpdateUser(usersModel, id)));
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
