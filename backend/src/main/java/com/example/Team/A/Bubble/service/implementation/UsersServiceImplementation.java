@@ -59,6 +59,42 @@ public class UsersServiceImplementation implements UsersService {
         } else {
             user = new Users();
             user = processUser(usersModel, user, users, true);
+
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+
+            JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+            mailSender.setHost("smtp.gmail.com");
+            mailSender.setPort(587);
+            mailSender.setUsername("teambubble44@gmail.com");
+            mailSender.setPassword("tygpbkadibcbqrkq");
+
+            try {
+                MimeMessage message = mailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+                if (user.getEmail() != null){
+                    helper.setTo(user.getEmail());
+                    helper.setSubject("Welcome!");
+                    helper.setText("Your account has been verified\n" +
+                            "\n" +
+                            "Hi, " + " " + user.getUsername() + "\n" + "\n" +
+                            "Congratulations, your account has been created!\n" +
+                            "As always, if you have any questions please don’t hesitate to reach out to us via email at team44bubble@gmail.com\n" +
+                            "\n" +
+                            "Thanks\n" +
+                            "Team Bubble");
+
+                    mailSender.setJavaMailProperties(props);
+                    mailSender.send(message);
+                }
+
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         }
         // user.setFirstName(usersModel.getFirstName());
         // user.setLastName(usersModel.getLastName());
@@ -123,7 +159,13 @@ public class UsersServiceImplementation implements UsersService {
             if (user.getEmail() != null){
                 helper.setTo(user.getEmail());
                 helper.setSubject("Password Reset");
-                helper.setText("Your New Password is: " + user.getPassword());
+                helper.setText("Dear, " + " " + user.getUsername() + "\n" + "\n" +
+                        "We have received the request to reset the password for your account.\n \n" +
+                        "Your New Password is: " + " " + " " + user.getPassword() +
+                        "\n \n" +
+                        "If you did not request your password to be reset, Please contact us immediately via email at team44bubble@gmail.com" + "\n" + "\n" +
+                        "Thanks\n" +
+                        "Team Bubble");
 
                 mailSender.setJavaMailProperties(props);
                 mailSender.send(message);
