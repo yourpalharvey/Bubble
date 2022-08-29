@@ -6,7 +6,7 @@ import { pc } from '../../../logic/video';
 import { useEffect, useRef, useState } from 'react';
 import { servers, firebaseConfig, makeid } from '../../../logic/video';
 import firebase from 'firebase/app';
-import { getFirestore, doc, addDoc, setDoc, collection, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, addDoc, setDoc, collection, updateDoc, onSnapshot } from "firebase/firestore";
 import 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import { TextInput } from '../../../objects/textInput';
@@ -71,25 +71,23 @@ const video = () => {
         // const docRef = collection(firestore, 'calls');
         // const callDoc = await addDoc(doc(docRef, id), {});
         
-        const docRef = await addDoc(collection(firestore, "calls"), {});
-        console.log(docRef.id);
-        setCallId(docRef.id);
+        const callDoc = await addDoc(collection(firestore, "calls"), {});
+        console.log(callDoc.id);
+        setCallId(callDoc.id);
 
         
 
         // const callDoc = firestore.collection('calls').doc(id);
-        // const offerCandidates = await addDoc(collection(firestore, 'calls', callId, 'offerCandidates'));
-        // const answerCandidates = await setDoc(collection(firestore, 'calls', callId, 'answerCandidates'), {});
-        const offerCandidates = await addDoc(collection(docRef, `offerCandidate`), {});
-        const answerCandidates = await addDoc(collection(docRef, `answerCandidate`), {});
+        const offerCandidates = await addDoc(collection(callDoc, `offerCandidate`), {});
+        const answerCandidates = await addDoc(collection(callDoc, `answerCandidate`), {});
 
 
         // ice candidates
-        // pc.onicecandidate = async (event) => {
-        //     console.log("ice candidate")
-        //     console.log(event?.candidate)
-        //     event.candidate && await setDoc(doc(offerCandidates), event.candidate.toJSON())
-        // }
+        pc.onicecandidate = async (event) => {
+            console.log("ice candidate")
+            console.log(event?.candidate)
+            event.candidate && await setDoc(offerCandidates, event.candidate.toJSON())
+        }
 
         // create offer
         const offerDescription = await pc.createOffer();
@@ -102,35 +100,49 @@ const video = () => {
         };
 
         // send to DB
-        await updateDoc(doc(docRef), offer);
+        await updateDoc(callDoc, offer);
 
         // listen for changes to DB
-        callDoc.onSnapshot((snapshot) => {
-            const data = snapshot.data();
-
+        const callDocSnap = onSnapshot(callDoc, (doc) => {
+            const data = doc.data();
             if (!pc.currentRemoteDescription && data?.answer)
             {
                 const answerDescription = new RTCSessionDescription(data.answer);  
                 pc.setRemoteDescription(answerDescription);
             }
-        });
 
-        // when answered, add candidate to peer connection
-        answerCandidates.onSnapshot(snapshot => {
+        })
+        
+
+
+        const answerCandidatesSnap = onSnapshot(answerCandidates, (snapshot) => {
+            console.log("snapshot: ", snapshot);
             snapshot.docChanges().forEach((change) => {
                 if (change.type === 'added')
                 {
                     const candidate = new RTCIceCandidate(change.doc.data);
                     pc.addIceCandidate(candidate);
                 }
-            })
-        })
+
+            });
+        });
+
+        // when answered, add candidate to peer connection
+        // answerCandidates.onSnapshot(snapshot => {
+        //     snapshot.docChanges().forEach((change) => {
+        //         if (change.type === 'added')
+        //         {
+        //             const candidate = new RTCIceCandidate(change.doc.data);
+        //             pc.addIceCandidate(candidate);
+        //         }
+        //     })
+        // })
 
     }
 
     // joinCall
     const joinCall = async () => {
-        const callID = callInput.value;
+        // call id = callId
         const callDoc = firestore.collection('calls').doc('callId');
         const answerCandidates = callDoc.collection('answerCandidates');
 
