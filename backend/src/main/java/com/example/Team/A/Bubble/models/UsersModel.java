@@ -21,6 +21,7 @@ public class UsersModel {
     private String dob;
     private String token;
     private Boolean auth;
+    private boolean isChanged;
     // private String firstName;
     // private String lastName;
 

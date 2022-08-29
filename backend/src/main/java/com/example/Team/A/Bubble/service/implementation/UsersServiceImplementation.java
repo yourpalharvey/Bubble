@@ -9,11 +9,14 @@ import com.example.Team.A.Bubble.models.TokenModel;
 import com.example.Team.A.Bubble.models.UsersModel;
 import com.example.Team.A.Bubble.repositories.UsersRepository;
 import com.example.Team.A.Bubble.service.UsersService;
+import com.example.Team.A.Bubble.util.PasswordGenerator;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 // JWT imports
 import com.auth0.jwt.algorithms.Algorithm;
@@ -23,8 +26,10 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Objects;
+import java.util.Properties;
 
 @Service
 @RequiredArgsConstructor
@@ -47,13 +52,13 @@ public class UsersServiceImplementation implements UsersService {
             user = usersRepository.findUserById(id);
 
             if (user != null) {
-                user = processUser(usersModel, user, users);
+                user = processUser(usersModel, user, users, usersModel.isChanged());
             } else {
                 throw new ResourceNotFoundException(HttpStatus.NOT_FOUND.getReasonPhrase());
             }
         } else {
             user = new Users();
-            user = processUser(usersModel, user, users);
+            user = processUser(usersModel, user, users, true);
         }
         // user.setFirstName(usersModel.getFirstName());
         // user.setLastName(usersModel.getLastName());
@@ -95,10 +100,37 @@ public class UsersServiceImplementation implements UsersService {
     @Override
     public Users forgetPassword(ForgetPasswordModel forgetPasswordModel) {
         Users user = usersRepository.findByEmail(forgetPasswordModel.getEmail());
+        usersRepository.save(user);
 
-        if (null != user) {
-            user.setPassword(forgetPasswordModel.getPassword());
-            usersRepository.save(user);
+        user.setPassword(new PasswordGenerator().generateRandomPassword());
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("teambubble44@gmail.com");
+        mailSender.setPassword("tygpbkadibcbqrkq");
+
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            if (user.getEmail() != null){
+                helper.setTo(user.getEmail());
+                helper.setSubject("Password Reset");
+                helper.setText("Your New Password is: " + user.getPassword());
+
+                mailSender.setJavaMailProperties(props);
+                mailSender.send(message);
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
 
         return user;
@@ -150,9 +182,12 @@ public class UsersServiceImplementation implements UsersService {
         return list.stream().anyMatch(users1 -> Objects.equals(users1.getUsername(), userName));
     }
 
-    public Users processUser(UsersModel usersModel, Users user, List<Users> users) {
-        if (checkUserName(users, usersModel.getUsername())) {
-            throw new ResourceNotFoundException("UserName Already exists");
+    public Users processUser(UsersModel usersModel, Users user, List<Users> users, boolean isChanged) {
+
+        if (isChanged){
+            if (checkUserName(users, usersModel.getUsername())) {
+                throw new ResourceNotFoundException("UserName Already exists");
+            }
         }
         user.setUsername(usersModel.getUsername());
         user.setPassword(usersModel.getPassword());
