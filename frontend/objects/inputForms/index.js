@@ -54,7 +54,10 @@ export const InputForms = (props) => {
           />
         </Form.Group>
 
+        <div>
         <Form.Label>Password</Form.Label>
+        <lable className={styles.passwordDetails}>Your password must contain a capital letter, a number and a symbol.</lable>
+        </div>
         <InputGroup className="mb-3" controlId="signUpForm.Password">
           <Form.Control
             type={props.passwordShown ? "text" : "password"}
@@ -64,6 +67,7 @@ export const InputForms = (props) => {
             isValid={props.passwordValid}
             
           />
+          
           <InputGroup.Text>
             <Image
               src="/passwordView.png"
