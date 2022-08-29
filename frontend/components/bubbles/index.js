@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "./bubble.module.css";
 import { BubbleBtn  } from "../../objects/bubbleBtn";
 import { Background } from "../background";
+import Card from "react-bootstrap/Card";
+
 
 // square bubble used for hosted events
 export const SquareBubble = (props) => {
@@ -111,27 +113,36 @@ export const CategoryBubble = (props) => {
 export const MidBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
-      <div
+      <Card
+        style={{ width: "18rem", backgroundColor: props.colour }}
         className={styles.midBubbleContainer}
-        style={{ backgroundColor: props.colour }}
       >
-        <div className={styles.midBubbleImageContainer}>
-          <Image
-            src={props.image}
-            alt={`picture of ${props.text}`}
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-
-        <div className={styles.midText}>
-          <h4 className={styles.squareHeading}>{props.text}</h4>
-        </div>
-
-        <div className={styles.openBubbleBtn}>
-          <BubbleBtn openBtn />
-        </div>
-      </div>
+        <Card.Img variant="top" src={props.image} />
+        <Card.Body className={styles.midText}>
+          <Card.Title>{props.text}</Card.Title>
+          <Card.Text>{props.streamCount}</Card.Text>
+          <div>
+            <label
+              style={{ color: props.colour }}
+              className={styles.midBubbleTags}
+            >
+              {props.tag1}
+            </label>
+            <label
+              style={{ color: props.colour }}
+              className={styles.midBubbleTags}
+            >
+              {props.tag2}
+            </label>
+            <label
+              style={{ color: props.colour }}
+              className={styles.midBubbleTags}
+            >
+              {props.tag3}
+            </label>
+          </div>
+        </Card.Body>
+      </Card>
     </Link>
   );
 };

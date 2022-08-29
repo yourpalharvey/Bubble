@@ -61,26 +61,27 @@
     bottom: 10px;
     right: 10px;
 }
+
 .midBubbleContainer {
-    width: 14vw;
+    width: 28vw;
     height: 20vw;
     border-radius: 1vh;
-    position: relative;
-}
-
-.midBubbleImageContainer {
-    width: 10vw;
-    height: 10vw;
-    position: relative;
-    border-radius: 100vh;
-    border: 2px white solid;
-    justify-content: center;
+    border: 0;
+        margin: 8px 12px;
 }
 
 .midText {
-    position: absolute;
     color: var(--white);
-    z-index: 10;
-    bottom: 1vw;
-    left: 1vw;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+}
+
+.midBubbleTags {
+    background-color: var(--white);
+    border-radius: 12px;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    padding: 0 8px;
+    margin: 0px 2px;
+    font-size: 12px;
 }
