@@ -1,10 +1,14 @@
 package com.example.Team.A.Bubble.models;
 
 import com.example.Team.A.Bubble.dto.Users;
+import com.example.Team.A.Bubble.repositories.UsersRepository;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import javax.persistence.Column;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
