@@ -25,112 +25,112 @@ export default function Home({loggedIn, user}) {
       <div className={styles.container}>
         <HomeTopContainer title="Upcoming Events" seeMore="See more events">
           <SquareBubble
-            text={user || "test"}
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="joinbubble/1"
+            text="Phoebe Bridgers"
+            date="Live Now"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1661780741/Bubble/image_1_2_sbt0at.png"
+            url="/hosted"
             colour="var(--accent-red)"
           />
 
           <SquareBubble
-            text="testing 2"
-            date="July 28th"
-            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Rock_qbeh2v.png"
+            text="Arsnel vs Man City"
+            date="August 10th"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1661780796/Bubble/image_2_mqnyef.png"
             url="joinbubble/2"
             colour="var(--green)"
           />
 
           <SquareBubble
-            text="testing 3"
-            date="July 28th"
-            image="/phoebeBridges.png"
+            text="Matilda the Musical"
+            date="August 11th"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1661780802/Bubble/image_3_youyan.png"
             url="joinbubble/3"
             colour="var(--orange)"
           />
         </HomeTopContainer>
 
         <HomeTopContainer title="Top categories" seeMore="See more categories">
-          <TallBubble
-            text="testing"
-            date="July 28th"
-            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660828077/Bubble/TaylorSwift_xoyk4t.png"
-            url="categories/1"
-            colour="var(--accent-red)"
-          />
+        <TallBubble
+          text="Pop"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660828077/Bubble/TaylorSwift_xoyk4t.png"
+          url="categories/1"
+          colour="var(--accent-red)"
+        />
 
-          <TallBubble
-            text="testing 2"
-            date="July 28th"
-            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Paintball_fc4abo.png"
-            url="categories/2"
-            colour="var(--teal)"
-          />
+        <TallBubble
+          text="Football"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/ManU_poggqm.png"
+          url="categories/2"
+          colour="var(--teal)"
+        />
 
-          <TallBubble
-            text="testing 3"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/3"
-            colour="var(--indigo)"
-          />
+        <TallBubble
+          text="Hip-Hop"
+          date="July 28th"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Kendrick_rzjge0.png"
+          url="categories/3"
+          colour="var(--indigo)"
+        />
 
-          <TallBubble
-            text="testing"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/1"
-            colour="var(--orange)"
-          />
+        <TallBubble
+          text="Skateboard"
+          date="July 28th"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Skateboard_l6mtul.png"
+          url="categories/1"
+          colour="var(--orange)"
+        />
 
-          <TallBubble
-            text="testing 2"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/2"
-            colour="var(--blue)"
-          />
+        <TallBubble
+          text="Musicals"
+          date="July 28th"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/musical_eio2tb.png"
+          url="categories/2"
+          colour="var(--blue)"
+        />
 
-          <TallBubble
-            text="testing 3"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/3"
-            colour="var(--green)"
-          />
+        <TallBubble
+          text="Art Galleries"
+          date="July 28th"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Gallery_waibqd.png"
+          url="categories/3"
+          colour="var(--green)"
+        />
         </HomeTopContainer>
 
         <HomeTopContainer title="Top streams" seeMore="See more streams">
-          <WideBubble
-            text="testing"
-            date="July 28th"
-            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png"
-            url="categories/1"
-            colour="var(--blue)"
-          />
+        <WideBubble
+          text="Feet Foxes!"
+          subText="FoxesFan123"
+          date="July 28th"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/FleetFoxes_gbtgck.png"
+          url="categories/1"
+          colour="var(--blue)"
+        />
 
-          <WideBubble
-            text="testing 2"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/2"
-            colour="var(--green)"
-          />
+        <WideBubble
+          text="F1 - Grand Prix"
+          subText="MotorKid"
+          date="July 28th"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/F1_nkmcwj.png"
+          url="categories/2"
+          colour="var(--green)"
+        />
 
-          <WideBubble
-            text="testing 3"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/3"
-            colour="var(--teal)"
-          />
+        <WideBubble
+          text="Tate Modern"
+          subText="ArtyMarty"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Tate_fyowjr.png"
+          url="categories/3"
+          colour="var(--teal)"
+        />
 
-          <WideBubble
-            text="testing"
-            date="July 28th"
-            image="/phoebeBridges.png"
-            url="categories/1"
-            colour="var(--indigo)"
-          />
+        <WideBubble
+          text="Cardiff Circus"
+          subText="Jane2986"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Circus_gl01gt.png"
+          url="categories/1"
+          colour="var(--indigo)"
+        />
         </HomeTopContainer>
       </div>
       <Footer loggedIn={loggedIn} />
