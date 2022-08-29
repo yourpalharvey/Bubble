@@ -5,9 +5,7 @@ import { Navbar } from "../../../components/navbar";
 import { pc } from '../../../logic/video';
 import { useEffect, useRef, useState } from 'react';
 import { servers, firebaseConfig, makeid } from '../../../logic/video';
-import firebase from 'firebase/app';
-import { getFirestore, doc, getDoc, addDoc, setDoc, collection, updateDoc, onSnapshot } from "firebase/firestore";
-import 'firebase/firestore';
+import { getFirestore, query, addDoc, QuerySnapshot, setDoc, collection, updateDoc, onSnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { TextInput } from '../../../objects/textInput';
 
@@ -31,6 +29,7 @@ const video = () => {
     const [pc, setPc] = useState()
     const [firestore, setFirestore] = useState();
     const [callId, setCallId] = useState("");
+    const [answerId, setAnswerId] = useState("");
 
     // set refs for local and remote video
     const webcamVideo = useRef(null);
@@ -113,30 +112,16 @@ const video = () => {
 
         })
         
-
-
-        const answerCandidatesSnap = onSnapshot(answerCandidates, (snapshot) => {
-            console.log("snapshot: ", snapshot);
+        const q = query(collection(firestore, "answerCandidate"));
+        const answerCandidatesSnap = onSnapshot(q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
-                if (change.type === 'added')
+                if (change.type === "added") 
                 {
-                    const candidate = new RTCIceCandidate(change.doc.data);
+                    const candidate = new RTCIceCandidate(change.doc.data());
                     pc.addIceCandidate(candidate);
                 }
-
             });
         });
-
-        // when answered, add candidate to peer connection
-        // answerCandidates.onSnapshot(snapshot => {
-        //     snapshot.docChanges().forEach((change) => {
-        //         if (change.type === 'added')
-        //         {
-        //             const candidate = new RTCIceCandidate(change.doc.data);
-        //             pc.addIceCandidate(candidate);
-        //         }
-        //     })
-        // })
 
     }
 
