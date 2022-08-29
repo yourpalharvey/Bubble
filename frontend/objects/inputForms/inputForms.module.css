@@ -1,7 +1,5 @@
 .passwordDetails {
-    color: var(--text);
-    font-size: 10px;
-    margin-bottom: 0;
-    text-align: right;
-    margin-left: 67px;
+    color: var(--accent-red);
+    font-size: 12px;
+    margin-top: 8px;
 }

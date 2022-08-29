@@ -11,6 +11,9 @@ import { handleLogin } from "../../logic/auth/index";
 import { SignUpModal } from "../signUpModal";
 
 export const LogInModal = (props) => {
+
+  const [disabled, setDisabled] =  useState(null);
+
   const [showSignUp, setShowSignUp] = useState(false);
   const handleShowSignUp = () => setShowSignUp(true);
   const handleCloseSignUp = () => setShowSignUp(false);
@@ -61,6 +64,21 @@ export const LogInModal = (props) => {
       router.reload(window.location.pathname);
     }
 
+      // toggle disabled
+  useEffect(
+    () => {
+      if (original && validPassword)
+      {
+        setDisabled(false);
+      }
+      else
+      {
+        setDisabled(true);
+      };
+    },
+    [old, original, validPassword, validEmail]
+  )
+
 
   }
 
@@ -85,6 +103,7 @@ export const LogInModal = (props) => {
           </a>
           <div className="d-grid gap-2 mt-4 mb-2">
             <ButtonBootstrap
+            disabled={disabled}
               primaryWide={true}
               text="Log In"
               onClick={() => {
