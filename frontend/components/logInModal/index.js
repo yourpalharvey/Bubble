@@ -1,7 +1,7 @@
 import styles from "./logInModal.module.css";
 import Modal from "react-bootstrap/Modal";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { setCookie } from 'cookies-next';
 import { useRouter } from "next/router";
 
@@ -12,6 +12,8 @@ import { SignUpModal } from "../signUpModal";
 
 export const LogInModal = (props) => {
 
+  const [usernameFull, setUsernameFull] = useState(null);
+  const [passwordFull, setPasswordFull] = useState(null);
   const [disabled, setDisabled] =  useState(null);
 
   const [showSignUp, setShowSignUp] = useState(false);
@@ -63,11 +65,27 @@ export const LogInModal = (props) => {
       // refresh
       router.reload(window.location.pathname);
     }
+  }
 
-      // toggle disabled
+  //check if username if not empty
   useEffect(
     () => {
-      if (original && validPassword)
+      setUsernameFull(username);
+    },
+    [username]
+  )
+
+  useEffect(
+    () => {
+      setPasswordFull(password);
+    },
+    [password]
+  )
+
+    // toggle disabled
+  useEffect(
+    () => {
+      if (username && password)
       {
         setDisabled(false);
       }
@@ -76,11 +94,8 @@ export const LogInModal = (props) => {
         setDisabled(true);
       };
     },
-    [old, original, validPassword, validEmail]
+    [username, password]
   )
-
-
-  }
 
   return (
     <>
