@@ -5,6 +5,8 @@ import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import styles from '../../../styles/StartStreaming.module.css'
 import { getCookie } from "cookies-next";
 import { isAuth, getUsername } from "../../../logic/auth";
+import { Navbar } from "../../../components/navbar";
+import { pc } from "../../../logic/video";
 
 const bubbleStream = ({loggedIn, user}) => {
     const router = useRouter();
@@ -12,15 +14,29 @@ const bubbleStream = ({loggedIn, user}) => {
 
     // handle video
     const videoRef = useRef(null);
+    const remoteRef = useRef(null);
+    
     const [stream, setStream] = useState(null);
+	const [remoteStream, setRemoteStream] = useState(null);
+    const [buttonText, setButtonText] = useState("Start Streaming")
+
+    // handle swap buttonText
+    const toggleButtonText = () => {
+      setButtonText(buttonText === "Start Streaming" ? "Stop Streaming" : "Start Streaming");
+    };
+
     const getVideo = async () => {
         try
         {
-            const streamer = await navigator.mediaDevices.getUserMedia({ video: true })
-            let video = videoRef.current;
-            video.srcObject = streamer;
-            video.play();
-            setStream(streamer)
+            // set local stream
+			const streamer = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            setStream(streamer);
+
+			// set remote Stream
+			const remoteStreamer = new MediaStream();
+			setRemoteStream(remoteStreamer);
+
+			return true;
         }
         catch (err)
         {
@@ -29,28 +45,68 @@ const bubbleStream = ({loggedIn, user}) => {
     
     };
 
-    // end stream and turn off camera
-    const endStream = () => {
-        stream.getTracks()[0].stop()
-        window.close()
+    // handle Start Stream
+    const startStream = async () => {
+		// get the video feed form webcam
+		const setVideo = await getVideo();
+
+		// send to server, add to Stream database: bubbleId, StreamId, UserId
+
+	
+		// push tracks from localStream to peer connection
+		stream.getTracks().forEach((track) => {
+			pc.addTrack(track, stream);
+		});
+		
+		// pull tracks from remote stream, add to video Stream
+		pc.ontrack = event => {
+			event.streams[0].getTracks().forEach(track => {
+				remoteStream.addTrack(track);
+			});
+		}
+		
+		// show on screen
+		let video = videoRef.current;
+		video.srcObject = stream;
+        video.play();
+		let remoteVideo = remoteRef.current;
+		remoteVideo.srcObject = remoteStream;
+		remoteVideo.play();
+
+
+
+
     }
 
-    useEffect(
-        () => {
-            getVideo();
-            console.log(navigator)
-        },
-        []
-    );
+    // const end Stream
+    const endStream = () => {
+      stream.getTracks()[0].stop()
+      window.close()
+    }
+
+    const toggleStream = () => {
+      if (buttonText === "Start Stream")
+      {
+        startStream()
+      }
+      else
+      {
+        endStream()
+      }
+      toggleButtonText;
+    }
 
     return (
       <Background>
         <Navbar loggedIn={loggedIn}/>
-        <video className={styles.videoContainer} ref={videoRef} />
+        <div className={styles.videoContainerParent}>
+          <video className={styles.videoContainer} ref={videoRef} />
+          <video className={styles.videoContainer} ref={remoteRef} />
+        </div>
         <div className={styles.videoButtonContainer}>
           <ButtonBootstrap
-            text="Stop streaming"
-            onClick={endStream}
+            text={buttonText}
+            onClick={startStream}
             primaryWide={true}
           />
         </div>
@@ -85,3 +141,5 @@ export const getServerSideProps = async (ctx) => {
 
 
 export default bubbleStream;
+
+

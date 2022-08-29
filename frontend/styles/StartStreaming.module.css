@@ -9,9 +9,17 @@
     align-items: center;
 }
 
-.videoContainer {
+.videoContaienrParent {
     width: 100vw;
-    height: 90vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.videoContainer {
+    width: 50vw;
+    height: 45vh;
     object-fit: cover;
     z-index: 2;
     overflow: hidden;
