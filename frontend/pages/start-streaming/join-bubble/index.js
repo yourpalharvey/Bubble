@@ -9,6 +9,8 @@ import { getFirestore, query, addDoc, QuerySnapshot, setDoc, collection, updateD
 import { initializeApp } from "firebase/app";
 import { TextInput } from '../../../objects/textInput';
 
+// 26-as-a-developer-i-would-like-a-backend-that-allows-users-to-stream-video
+
 const video = () => {
 
     useEffect(
