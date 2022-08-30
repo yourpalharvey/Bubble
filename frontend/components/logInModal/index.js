@@ -1,7 +1,7 @@
 import styles from "./logInModal.module.css";
 import Modal from "react-bootstrap/Modal";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { setCookie } from 'cookies-next';
 import { useRouter } from "next/router";
 
@@ -11,6 +11,11 @@ import { handleLogin } from "../../logic/auth/index";
 import { SignUpModal } from "../signUpModal";
 
 export const LogInModal = (props) => {
+
+  const [usernameFull, setUsernameFull] = useState(null);
+  const [passwordFull, setPasswordFull] = useState(null);
+  const [disabled, setDisabled] =  useState(null);
+
   const [showSignUp, setShowSignUp] = useState(false);
   const handleShowSignUp = () => setShowSignUp(true);
   const handleCloseSignUp = () => setShowSignUp(false);
@@ -60,9 +65,37 @@ export const LogInModal = (props) => {
       // refresh
       router.reload(window.location.pathname);
     }
-
-
   }
+
+  //check if username if not empty
+  useEffect(
+    () => {
+      setUsernameFull(username);
+    },
+    [username]
+  )
+
+  useEffect(
+    () => {
+      setPasswordFull(password);
+    },
+    [password]
+  )
+
+    // toggle disabled
+  useEffect(
+    () => {
+      if (username && password)
+      {
+        setDisabled(false);
+      }
+      else
+      {
+        setDisabled(true);
+      };
+    },
+    [username, password]
+  )
 
   return (
     <>
@@ -85,6 +118,7 @@ export const LogInModal = (props) => {
           </a>
           <div className="d-grid gap-2 mt-4 mb-2">
             <ButtonBootstrap
+            disabled={disabled}
               primaryWide={true}
               text="Log In"
               onClick={() => {

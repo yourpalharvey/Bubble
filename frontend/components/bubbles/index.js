@@ -13,7 +13,7 @@ export const SquareBubble = (props) => {
         style={{ backgroundColor: props.colour }}
       >
         <div className={styles.squareText}>
-          <h3 className={styles.squareHeading}>{props.text}</h3>
+          <h4 className={styles.squareHeading}>{props.text}</h4>
           <p className={styles.squareDate}>{props.date}</p>
         </div>
 
@@ -40,7 +40,10 @@ export const WideBubble = (props) => {
         style={{ backgroundColor: props.colour }}
       >
         <div className={styles.wideText}>
-          <h3 className={styles.squareHeading}>{props.text}</h3>
+          <h4 className={styles.squareHeading}>{props.text}</h4>
+        </div>
+        <div className={styles.wideSubText}>
+          <p className={styles.squareText}>{props.subText}</p>
         </div>
 
         <Image
@@ -70,7 +73,7 @@ export const TallBubble = (props) => {
         style={{ backgroundColor: props.colour }}
       >
         <div className={styles.squareText}>
-          <h3 className={styles.squareHeading}>{props.text}</h3>
+          <h4 className={styles.squareHeading}>{props.text}</h4>
         </div>
 
         <Image
@@ -95,7 +98,7 @@ export const CategoryBubble = (props) => {
       style={{ backgroundColor: props.colour }}
     >
       <div className={styles.squareText}>
-        <h3 className={styles.squareHeading}>{props.text}</h3>
+        <h4 className={styles.squareHeading}>{props.text}</h4>
       </div>
       <div className={styles.openBubbleBtn}>
         <BubbleBtn openBtn />
@@ -122,7 +125,7 @@ export const MidBubble = (props) => {
         </div>
 
         <div className={styles.midText}>
-          <h3 className={styles.squareHeading}>{props.text}</h3>
+          <h4 className={styles.squareHeading}>{props.text}</h4>
         </div>
 
         <div className={styles.openBubbleBtn}>
