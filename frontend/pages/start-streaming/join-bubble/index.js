@@ -2,200 +2,220 @@ import styles from '../../../styles/StartStreaming.module.css'
 import { Background } from "../../../components/background";
 import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import { Navbar } from "../../../components/navbar";
-import { pc } from '../../../logic/video';
 import { useEffect, useRef, useState } from 'react';
-import { servers, firebaseConfig, makeid } from '../../../logic/video';
-import { getFirestore, query, addDoc, doc, getDoc, setDoc, collection, updateDoc, onSnapshot } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
+import { firestore} from '../../../logic/video';
 import { TextInput } from '../../../objects/textInput';
 
 // 26-as-a-developer-i-would-like-a-backend-that-allows-users-to-stream-video
 
-const video = () => {
+export default function Video() {
+
+    const webcamButtonRef = useRef();
+    const webcamVideoRef = useRef();
+    const callButtonRef = useRef();
+    const callInputRef = useRef();
+    const answerButtonRef = useRef();
+    const remoteVideoRef = useRef();
+    const hangupButtonRef = useRef();
+    const videoDownloadRef = useRef();
+    const[pc, setPC] = useState()
+
+    // let videoUrl = null;
+
+    // let recordedChunks = [];
+
+    const servers = {
+        iceServers: [
+        {
+            urls: [
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            ],
+        },
+        ],
+        iceCandidatePoolSize: 10,
+    };
+    // const pc = new RTCPeerConnection(servers);
+    let localStream = null;
+    let remoteStream = null;
+    var options = { mimeType: 'video/webm; codecs=vp9' };
+    let mediaRecorder = null;
 
     useEffect(
         () => {
-            const peerCon = new RTCPeerConnection(servers);
-            const app = initializeApp(firebaseConfig);
-            const fireStore = getFirestore(app);
-            setPc(peerCon);
-            setFirestore(fireStore);
+            setPC(new RTCPeerConnection(servers));
         },
         []
     )
-    
 
-    // state for lcoal and remote streams
-    const [localStream, setLocalStream] = useState(null);
-    const [remoteStream, setRemoteStream] = useState(null);
-    const [pc, setPc] = useState()
-    const [firestore, setFirestore] = useState();
-    const [callId, setCallId] = useState("");
-    const [offerId, setOfferId] = useState("")
-    const [answerId, setAnswerId] = useState("");
-
-    // set refs for local and remote video
-    const webcamVideo = useRef(null);
-    const remoteVideo = useRef(null);
-
-    // start Camera
-    const startWebcam = async () => {
-        // set up local stream
-        // let streamLocal = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
-        let streamLocal = await navigator.mediaDevices.getUserMedia({video: true});
-        // setLocalStream(streamLocal);
-
-        // set up remote stream
-        let streamRemote = new MediaStream();
-
-        // make them available for DOM
-        streamLocal.getTracks().forEach((track) => {
-            pc.addTrack(track, streamLocal);
+    // open webcam
+    const webCamHandler = async () => {
+        // get webcam stream
+        localStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
         });
-        pc.ontrack = event => {
-            event.streams[0].getTracks().forEach(track => {
-                streamRemote.addTrack(track);
-            });
+
+        // set remote Stream to a mediaStream object
+        remoteStream = new MediaStream();
+
+        // Push tracks from local stream to peer connection
+        localStream.getTracks().forEach((track) => {
+        pc.addTrack(track, localStream);
+        });
+
+        // Pull tracks from remote stream, add to video stream
+        pc.ontrack = (event) => {
+        event.streams[0].getTracks().forEach((track) => {
+            remoteStream.addTrack(track);
+        });
         };
 
-        // set video src's respectively
-        webcamVideo.current.srcObject = streamLocal;
-        remoteVideo.current.srcObject = streamRemote;
+        // set video sources
+        webcamVideoRef.current.srcObject = localStream;
+        remoteVideoRef.current.srcObject = remoteStream;
 
-    }
+        // recording of local video from stream
+        // mediaRecorder = new MediaRecorder(localStream, options);
+        // mediaRecorder.ondataavailable = (event) => {
+        // console.log('data-available');
+        // if (event.data.size > 0) {
+        //     recordedChunks.push(event.data);
+        //     console.log(recordedChunks);
+        // }
+        // };
+        // mediaRecorder.start();
+    };
 
-    // start call
-    const startCall = async () => {
-        // create id
+    const callHandler = async () => {
+        console.log('Starting callid generation .... ');
+        // Reference Firestore collections for signaling
+        const callDoc = firestore.collection('calls').doc();
+        const offerCandidates = callDoc.collection('offerCandidates');
+        const answerCandidates = callDoc.collection('answerCandidates');
 
-        // create new document
-        // const docRef = collection(firestore, 'calls');
-        // const callDoc = await addDoc(doc(docRef, id), {});
-        
-        const callDoc = await addDoc(collection(firestore, "calls"), {});
-        console.log(callDoc.id.toString());
-        setCallId(callDoc.id);
+        callInputRef.current.value = callDoc.id;
+        //setCallID(callDoc.id.toString());
 
-        
+        // Get candidates for caller, save to db
+        pc.onicecandidate = (event) => {
+            event.candidate && offerCandidates.add(event.candidate.toJSON());
+        };
 
-        // const callDoc = firestore.collection('calls').doc(id);
-        const offerCandidates = await addDoc(collection(callDoc, `offerCandidate`), {});
-        setOfferId(offerCandidates.id.toString());
-        const answerCandidates = await addDoc(collection(callDoc, `answerCandidate`), {});
-        setAnswerId(answerCandidates.id.toString());
-
-        // ice candidates
-        pc.onicecandidate = async (event) => {
-            event.candidate && await setDoc(offerCandidates, event.candidate.toJSON())
-        }
-
-        // create offer
+        // Create offer
         const offerDescription = await pc.createOffer();
         await pc.setLocalDescription(offerDescription);
 
-        // create offer as JS Object
         const offer = {
             sdp: offerDescription.sdp,
-            type: offerDescription.type
+            type: offerDescription.type,
         };
 
-        // send to DB
-        await updateDoc(callDoc, {offer});
+        await callDoc.set({ offer });
 
-        // listen for changes to DB
-        const callDocSnap = onSnapshot(callDoc, (doc) => {
-            const data = doc.data();
-            if (!pc.currentRemoteDescription && data?.answer)
-            {
-                console.log(`answer: ${data}`);
-                const answerDescription = new RTCSessionDescription(data.answer);  
-                pc.setRemoteDescription(answerDescription);
-            }
-
-        })
-        
-        // const q = query(collection(firestore, 'calls', callId.toString(), "answerCandidate"));
-        // const answerCandidatesSnap = onSnapshot(q, (snapshot) => {
-        //     snapshot.docChanges().forEach((change) => {
-        //         if (change.type === "added") 
-        //         {
-        //             const candidate = new RTCIceCandidate(change.doc.data());
-        //             pc.addIceCandidate(candidate);
-        //         }
-        //     });
-        // });
-
-    }
-
-    // joinCall
-    const joinCall = async (id) => {
-        // call id = callId
-        console.log(`get documents: ${id}`)
-
-        // define documents we need
-        let docRef = doc(firestore, "calls", id.toString());
-        const callDoc = await getDoc(docRef);
-
-        let answerRef = doc(firestore, "calls", id.toString(), "answerCandidate", offerId);
-        const answerCandidates = await getDoc(answerRef);
-        
-        let offerRef = doc(firestore, "calls", id.toString(), 'answerCandidate', answerId);
-        const offerCandidates  = await getDoc(offerRef);
-
-        // event handler
-        pc.onicecandidate = async (event) => {
-            event.candidate && await setDoc(answerCandidates, event.candidate.toJSON());
+        // Listen for remote answer
+        callDoc.onSnapshot((snapshot) => {
+        const data = snapshot.data();
+        if (!pc.currentRemoteDescription && data?.answer) {
+            const answerDescription = new RTCSessionDescription(data.answer);
+            pc.setRemoteDescription(answerDescription);
         }
+        });
 
-        // call offer
-        const callData = callDoc.data();
+        // When answered, add candidate to peer connection
+        answerCandidates.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added') {
+            const candidate = new RTCIceCandidate(change.doc.data());
+            pc.addIceCandidate(candidate);
+            }
+        });
+        });
+
+        // hangupButtonRef.current.disabled = false;
+    };
+
+    const answerHandler = async () => {
+        console.log('Joining the call ....');
+        // change this next line
+        const callId = callInputRef.current.value;
+        const callDoc = firestore.collection('calls').doc(callId);
+        const answerCandidates = callDoc.collection('answerCandidates');
+        const offerCandidates = callDoc.collection('offerCandidates');
+
+        pc.onicecandidate = (event) => {
+        event.candidate && answerCandidates.add(event.candidate.toJSON());
+        };
+        console.log('pc', pc);
+
+        const callData = (await callDoc.get()).data();
+
         const offerDescription = callData.offer;
         await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
 
-        // answer
         const answerDescription = await pc.createAnswer();
         await pc.setLocalDescription(answerDescription);
 
         const answer = {
+            type: answerDescription.type,
             sdp: answerDescription.sdp,
-            type: answerDescription.type
-        }
-        console.log({answer});
-        // await updateDoc(callDoc, {answer});
+        };
 
-        // const q = query(doc(firestore, "calls", id.toString(), "offerCandidate", offerId))
-        // const offerCandidatesSnap = onSnapshot(q, (snapshot) => {
-        //     snapshot.docChanges().forEach((change) => {
-        //         if (change.type === 'added')
-        //         {
-        //             let data = change.doc.data();
-        //             pc.addIceCandidate(new RTCIceCandidate(data));
-        //         }
-        //     })
-        // })
-    }
+        await callDoc.update({ answer });
+
+        offerCandidates.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change);
+            if (change.type === 'added') {
+            let data = change.doc.data();
+            pc.addIceCandidate(new RTCIceCandidate(data));
+            }
+        });
+        });
+    };
+
+    const hangupHandler = () => {
+        console.log('Hanging up the call ...');
+        localStream.getTracks().forEach((track) => track.stop());
+        remoteStream.getTracks().forEach((track) => track.stop());
+
+        // mediaRecorder.onstop = async (event) => {
+        // let blob = new Blob(recordedChunks, {
+        //     type: 'video/webm',
+        // });
+
+        // await readFile(blob).then((encoded_file) => {
+        //     uploadVideo(encoded_file);
+        // });
+
+        // videoDownloadRef.current.href = URL.createObjectURL(blob);
+        // videoDownloadRef.current.download =
+        //     new Date().getTime() + '-locastream.webm';
+        // };
+        // console.log(videoDownloadRef);
+    };
     
     return (
         <Background>
           <div className={styles.videoContainerParent}>
-            <video className={styles.videoContainer} ref={webcamVideo} autoPlay/>
-            <video className={styles.videoContainer} ref={remoteVideo} autoPlay/>
+            <video className={styles.videoContainer} ref={webcamVideoRef} autoPlay/>
+            <video className={styles.videoContainer} ref={remoteVideoRef} autoPlay/>
           </div>
           <div className={styles.videoButtonContainer}>
             <ButtonBootstrap
               text="Start Camera"
-              onClick={startWebcam}
+              onClick={webCamHandler}
               primaryWide={true}
             />
             <ButtonBootstrap
               text="Start Call"
-              onClick={startCall}
+              onClick={callHandler}
               primaryWide={true}
             />
-            <TextInput name="callId" value={callId} onChange={setCallId}/>
+            <input ref={callInputRef} />
             <ButtonBootstrap
               text="Answer Call"
-              onClick={() => joinCall(callId)}
+              onClick={answerHandler}
               primaryWide={true}
             />
           </div>
@@ -203,5 +223,3 @@ const video = () => {
       );
 
 }
-
-export default video;

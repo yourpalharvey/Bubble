@@ -1,8 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import firebase from 'firebase/app'; //updates the firebase object
+import 'firebase/firestore'; // runs firebase side effects
 
-
-export const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyAa_gVK4beOjjv3QjdHUDm2Gg6dowWUKFg",
   authDomain: "bubble-6be26.firebaseapp.com",
   projectId: "bubble-6be26",
@@ -12,23 +11,13 @@ export const firebaseConfig = {
   measurementId: "G-WJF99NBNWN"
 };
 
-// stun servers
-export const servers = {
-  iceServers:[
-    {
-      urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
-    }
-  ],
-  iceCandidatePoolSize: 10,
-};
-
-export function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
+//initialize firebase apps if there are no initialized apps
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
 }
+//since we will be interracting with firestore, we
+//grab a refference to the firestore database object and export it from this file
+const firestore = firebase.firestore();
+
+
+export { firestore};
