@@ -26,13 +26,15 @@ CREATE TABLE `users` (
 
 CREATE TABLE `master_category` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `title` varchar(25)
+  `title` varchar(25),
+  `image` varchar(50)
 );
 
 CREATE TABLE `category` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(25),
   `master_id` int,
+  `image` varchar(50),
   FOREIGN KEY (master_id) REFERENCES master_category(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -40,6 +42,7 @@ CREATE TABLE `bubbles` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(25),
   `category` int,
+  `image` varchar(50),
   FOREIGN KEY (category) REFERENCES category(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -48,6 +51,7 @@ CREATE TABLE `streams` (
   `signal_id` int NOT NULL,
   `bubble` int,
   `user` int,
+  `image` varchar(50),
   FOREIGN KEY (bubble) REFERENCES bubbles(id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (user) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -66,5 +70,31 @@ CREATE TABLE `bubble_tag` (
 );
 
 
-Select * 
-from users
+-- INSERT INTO `master_category`(`title`, `image`) VALUES ('Sport', '');
+-- INSERT INTO `master_category`(`title`, `image`) VALUES ('Music', '');
+-- INSERT INTO `master_category`(`title`, `image`) VALUES ('Theatre', '');
+-- INSERT INTO `master_category`(`title`, `image`) VALUES ('Art', '');
+
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Football', 1, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Rugby', 1, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Tennis', 1, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Pop', 2, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Rock', 2, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Rap', 2, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Musical', 3, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Pantomime', 3, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Opera', 3, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Modern', 4, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Contemporary', 4, '');
+-- INSERT INTO `category`(`title`, `master_id`, `image`) VALUES ('Abstract', 4, '');
+
+-- INSERT INTO `tags`(`title`) VALUES ('Fusion');
+-- INSERT INTO `tags`(`title`) VALUES ('Modern');
+-- INSERT INTO `tags`(`title`) VALUES ('Retro');
+-- INSERT INTO `tags`(`title`) VALUES ('Original');
+-- INSERT INTO `tags`(`title`) VALUES ('Up-and-coming');
+-- INSERT INTO `tags`(`title`) VALUES ('Solo');
+-- INSERT INTO `tags`(`title`) VALUES ('Group');
+
+
+
