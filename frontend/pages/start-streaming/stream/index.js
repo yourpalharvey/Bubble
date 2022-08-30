@@ -74,17 +74,6 @@ export default function Video() {
         // set video sources
         webcamVideoRef.current.srcObject = localStream;
         remoteVideoRef.current.srcObject = remoteStream;
-
-        // recording of local video from stream
-        // mediaRecorder = new MediaRecorder(localStream, options);
-        // mediaRecorder.ondataavailable = (event) => {
-        // console.log('data-available');
-        // if (event.data.size > 0) {
-        //     recordedChunks.push(event.data);
-        //     console.log(recordedChunks);
-        // }
-        // };
-        // mediaRecorder.start();
     };
 
     const callHandler = async () => {
@@ -124,15 +113,15 @@ export default function Video() {
 
         // When answered, add candidate to peer connection
         answerCandidates.onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            if (change.type === 'added') {
-            const candidate = new RTCIceCandidate(change.doc.data());
-            pc.addIceCandidate(candidate);
-            }
-        });
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === 'added') {
+                const candidate = new RTCIceCandidate(change.doc.data());
+                pc.addIceCandidate(candidate);
+                }
+            });
         });
 
-        // hangupButtonRef.current.disabled = false;
+        // if all is successful, add the stream to the database
     };
 
     const answerHandler = async () => {
