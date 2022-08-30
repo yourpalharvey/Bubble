@@ -31,6 +31,16 @@
     position: relative;
 }
 
+.categoryBubbleContainerSelected {
+    width: 21vw;
+    height: 6vw;
+
+    /* background-color: var(--accent-red); */
+
+    border-radius: 1vh;
+    position: relative;
+    box-shadow: 6px 6px var(--text);
+}
 .wideBubbleContainer {
     height: 11vw;
     width: 21.5vw;

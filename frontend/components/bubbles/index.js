@@ -95,17 +95,38 @@ export const TallBubble = (props) => {
 // Category - used for main categories in explore page 
 export const CategoryBubble = (props) => {
   return (
-    <div
-      className={styles.categoryBubbleContainer}
-      style={{ backgroundColor: props.colour }}
-    >
-      <div className={styles.squareText}>
-        <h4 className={styles.squareHeading}>{props.text}</h4>
+    <Link href={`/${props.url}`}>
+      <div
+        className={styles.categoryBubbleContainer}
+        style={{ backgroundColor: props.colour }}
+      >
+        <div className={styles.squareText}>
+          <h4 className={styles.squareHeading}>{props.text}</h4>
+        </div>
+        <div className={styles.openBubbleBtn}>
+          <BubbleBtn openBtn />
+        </div>
       </div>
-      <div className={styles.openBubbleBtn}>
-        <BubbleBtn openBtn />
+    </Link>
+  );
+};
+
+// Category - used for main categories in explore page
+export const CategoryBubbleSelected = (props) => {
+  return (
+    <Link href={`/${props.url}`}>
+      <div
+        className={styles.categoryBubbleContainerSelected}
+        style={{ backgroundColor: props.colour }}
+      >
+        <div className={styles.squareText}>
+          <h4 className={styles.squareHeading}>{props.text}</h4>
+        </div>
+        <div className={styles.openBubbleBtn}>
+          <BubbleBtn closeBtn />
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

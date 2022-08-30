@@ -49,10 +49,26 @@ export default function Explore({loggedIn, user}) {
 
       <div className={styles.container}>
         <CategoryContainer>
-          <CategoryBubble text="Music" colour="var(--accent-red)" />
-          <CategoryBubble text="Sport" colour="var(--blue)" />
-          <CategoryBubble text="Art" colour="var(--orange)" />
-          <CategoryBubble text="Theatre" colour="var(--teal)" />
+          <CategoryBubble
+            text="Music"
+            colour="var(--accent-red)"
+            url="/explore/music"
+          />
+          <CategoryBubble
+            text="Sport"
+            colour="var(--blue)"
+            url="/explore/sports"
+          />
+          <CategoryBubble
+            text="Art"
+            colour="var(--orange)"
+            url="/explore/art"
+          />
+          <CategoryBubble
+            text="Theatre"
+            colour="var(--teal)"
+            url="/explore/theatre"
+          />
         </CategoryContainer>
       </div>
 

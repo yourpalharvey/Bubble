@@ -30,10 +30,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/explore.js"
     ],
-    "/hosted": [
+    "/explore/art": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/hosted.js"
+      "static/chunks/pages/explore/art.js"
+    ],
+    "/explore/music": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/explore/music.js"
+    ],
+    "/explore/sports": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/explore/sports.js"
+    ],
+    "/explore/theatre": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/explore/theatre.js"
     ]
   },
   "ampFirstPages": []
