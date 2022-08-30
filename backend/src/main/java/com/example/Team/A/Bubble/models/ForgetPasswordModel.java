@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class ForgetPasswordModel {
     private String email;
-    private String password;
 }

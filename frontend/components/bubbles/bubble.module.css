@@ -47,6 +47,14 @@
     left: 1vw;
 }
 
+.wideSubText {
+    position: absolute;
+    color: var(--white);
+    z-index: 10;
+    bottom: 3vw;
+    
+}
+
 .openBubbleBtn{
     position: absolute;
     z-index: 10;

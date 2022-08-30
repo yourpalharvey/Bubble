@@ -7,7 +7,8 @@ export const ExploreStreams = () => {
     <>
       <ExploreContentContainer topRow={true} title="All streams">
         <WideBubble
-          text="testing"
+          text="Feet Foxes!"
+          subText="FoxesFan123"
           date="July 28th"
           image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/FleetFoxes_gbtgck.png"
           url="categories/1"
@@ -15,7 +16,8 @@ export const ExploreStreams = () => {
         />
 
         <WideBubble
-          text="testing 2"
+          text="F1 - Grand Prix"
+          subText="MotorKid"
           date="July 28th"
           image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/F1_nkmcwj.png"
           url="categories/2"
@@ -23,51 +25,17 @@ export const ExploreStreams = () => {
         />
 
         <WideBubble
-          text="testing 3"
-          date="July 28th"
-          image="/phoebeBridges.png"
+          text="Tate Modern"
+          subText="ArtyMarty"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Tate_fyowjr.png"
           url="categories/3"
           colour="var(--teal)"
         />
 
         <WideBubble
-          text="testing"
-          date="July 28th"
-          image="/phoebeBridges.png"
-          url="categories/1"
-          colour="var(--indigo)"
-        />
-      </ExploreContentContainer>
-
-      <ExploreContentContainer middleRow={true}>
-        <WideBubble
-          text="testing"
-          date="July 28th"
-          image="/phoebeBridges.png"
-          url="categories/1"
-          colour="var(--blue)"
-        />
-
-        <WideBubble
-          text="testing 2"
-          date="July 28th"
-          image="/phoebeBridges.png"
-          url="categories/2"
-          colour="var(--green)"
-        />
-
-        <WideBubble
-          text="testing 3"
-          date="July 28th"
-          image="/phoebeBridges.png"
-          url="categories/3"
-          colour="var(--teal)"
-        />
-
-        <WideBubble
-          text="testing"
-          date="July 28th"
-          image="/phoebeBridges.png"
+          text="Cardiff Circus"
+          subText="Jane2986"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Circus_gl01gt.png"
           url="categories/1"
           colour="var(--indigo)"
         />
@@ -75,33 +43,36 @@ export const ExploreStreams = () => {
 
       <ExploreContentContainer bottomRow={true} seeMore="See more streams">
         <WideBubble
-          text="testing"
+          text="Lion King"
+          subText="lols23"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Lion_m1mrkp.png"
           url="categories/1"
           colour="var(--blue)"
         />
 
         <WideBubble
-          text="testing 2"
+          text="Trying to play golf"
+          subText="golfnoob"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Golf_q3bha8.png"
           url="categories/2"
           colour="var(--green)"
         />
 
         <WideBubble
-          text="testing 3"
+          text="Sunny Festival"
+          subText="EvenStevens"
           date="July 28th"
-          image="/phoebeBridges.png"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Festival_vn7zdc.png"
           url="categories/3"
           colour="var(--teal)"
         />
 
         <WideBubble
-          text="testing"
-          date="July 28th"
-          image="/phoebeBridges.png"
+          text="Taylor Swift Live"
+          subText="Suzzie101"
+          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png"
           url="categories/1"
           colour="var(--indigo)"
         />

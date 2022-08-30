@@ -6,6 +6,7 @@ import styles from "./createbubble.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
+import { createBubble } from "../../logic/bubble";
 
 export const CreateBubble1 = ({ setProgress, progress }) => {
   const [bubble, setBubble] = useState("");
@@ -34,10 +35,14 @@ export const CreateBubble1 = ({ setProgress, progress }) => {
   };
 
   const handleData = () => {
-    console.log(`title:\t\t\t\t${bubble}\ncategory:\t${category}`);
 
     // send data to api
-    const id = 213;
+    let data = {
+      "title": bubble,
+      "category": 1 // fake category ID for now
+    }
+
+    let id = createBubble(data);
 
     // router.push to next page
     setProgress(65);

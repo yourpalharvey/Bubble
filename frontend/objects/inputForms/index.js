@@ -54,7 +54,9 @@ export const InputForms = (props) => {
           />
         </Form.Group>
 
+        <div>
         <Form.Label>Password</Form.Label>
+        </div>
         <InputGroup className="mb-3" controlId="signUpForm.Password">
           <Form.Control
             type={props.passwordShown ? "text" : "password"}
@@ -64,6 +66,7 @@ export const InputForms = (props) => {
             isValid={props.passwordValid}
             
           />
+          
           <InputGroup.Text>
             <Image
               src="/passwordView.png"
@@ -73,6 +76,7 @@ export const InputForms = (props) => {
               onClick={props.togglePassword}
             />
           </InputGroup.Text>
+          {<p className={styles.passwordDetails}>{ (props.passwordValid || (props.passwordValid === null)) ? "" : "The password must contain an uppercase letter, a lowercase letter, a number, a symbol and be at least 8 characters long"}</p>}
         </InputGroup>
 
         <Form.Group className="mb-3" controlId="signUpForm.DateOfBirth">
