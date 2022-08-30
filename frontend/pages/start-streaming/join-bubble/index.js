@@ -5,7 +5,7 @@ import { Navbar } from "../../../components/navbar";
 import { pc } from '../../../logic/video';
 import { useEffect, useRef, useState } from 'react';
 import { servers, firebaseConfig, makeid } from '../../../logic/video';
-import { getFirestore, query, addDoc, QuerySnapshot, setDoc, collection, updateDoc, onSnapshot } from "firebase/firestore";
+import { getFirestore, query, addDoc, doc, getDoc, setDoc, collection, updateDoc, onSnapshot } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { TextInput } from '../../../objects/textInput';
 
@@ -31,6 +31,7 @@ const video = () => {
     const [pc, setPc] = useState()
     const [firestore, setFirestore] = useState();
     const [callId, setCallId] = useState("");
+    const [offerId, setOfferId] = useState("")
     const [answerId, setAnswerId] = useState("");
 
     // set refs for local and remote video
@@ -66,27 +67,25 @@ const video = () => {
     // start call
     const startCall = async () => {
         // create id
-        const id = makeid(12);
 
         // create new document
         // const docRef = collection(firestore, 'calls');
         // const callDoc = await addDoc(doc(docRef, id), {});
         
         const callDoc = await addDoc(collection(firestore, "calls"), {});
-        console.log(callDoc.id);
+        console.log(callDoc.id.toString());
         setCallId(callDoc.id);
 
         
 
         // const callDoc = firestore.collection('calls').doc(id);
         const offerCandidates = await addDoc(collection(callDoc, `offerCandidate`), {});
+        setOfferId(offerCandidates.id.toString());
         const answerCandidates = await addDoc(collection(callDoc, `answerCandidate`), {});
-
+        setAnswerId(answerCandidates.id.toString());
 
         // ice candidates
         pc.onicecandidate = async (event) => {
-            console.log("ice candidate")
-            console.log(event?.candidate)
             event.candidate && await setDoc(offerCandidates, event.candidate.toJSON())
         }
 
@@ -101,48 +100,56 @@ const video = () => {
         };
 
         // send to DB
-        await updateDoc(callDoc, offer);
+        await updateDoc(callDoc, {offer});
 
         // listen for changes to DB
         const callDocSnap = onSnapshot(callDoc, (doc) => {
             const data = doc.data();
             if (!pc.currentRemoteDescription && data?.answer)
             {
+                console.log(`answer: ${data}`);
                 const answerDescription = new RTCSessionDescription(data.answer);  
                 pc.setRemoteDescription(answerDescription);
             }
 
         })
         
-        const q = query(collection(firestore, "answerCandidate"));
-        const answerCandidatesSnap = onSnapshot(q, (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                if (change.type === "added") 
-                {
-                    const candidate = new RTCIceCandidate(change.doc.data());
-                    pc.addIceCandidate(candidate);
-                }
-            });
-        });
+        // const q = query(collection(firestore, 'calls', callId.toString(), "answerCandidate"));
+        // const answerCandidatesSnap = onSnapshot(q, (snapshot) => {
+        //     snapshot.docChanges().forEach((change) => {
+        //         if (change.type === "added") 
+        //         {
+        //             const candidate = new RTCIceCandidate(change.doc.data());
+        //             pc.addIceCandidate(candidate);
+        //         }
+        //     });
+        // });
 
     }
 
     // joinCall
-    const joinCall = async () => {
+    const joinCall = async (id) => {
         // call id = callId
-        const callDoc = firestore.collection('calls').doc('callId');
-        const answerCandidates = callDoc.collection('answerCandidates');
+        console.log(`get documents: ${id}`)
+
+        // define documents we need
+        let docRef = doc(firestore, "calls", id.toString());
+        const callDoc = await getDoc(docRef);
+
+        let answerRef = doc(firestore, "calls", id.toString(), "answerCandidate", offerId);
+        const answerCandidates = await getDoc(answerRef);
+        
+        let offerRef = doc(firestore, "calls", id.toString(), 'answerCandidate', answerId);
+        const offerCandidates  = await getDoc(offerRef);
 
         // event handler
-        pc.onicecandidate = event => {
-            event.candidate && answerCandidates.add(event.candidate.toJSON());
+        pc.onicecandidate = async (event) => {
+            event.candidate && await setDoc(answerCandidates, event.candidate.toJSON());
         }
 
-        // call data
-        const callData = (await callDoc.get()).data();
-
-        // offer
-        const offerDescription = callData.offer();
+        // call offer
+        const callData = callDoc.data();
+        const offerDescription = callData.offer;
         await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
 
         // answer
@@ -150,23 +157,22 @@ const video = () => {
         await pc.setLocalDescription(answerDescription);
 
         const answer = {
-            type: answerDescription.type,
             sdp: answerDescription.sdp,
+            type: answerDescription.type
         }
+        console.log({answer});
+        // await updateDoc(callDoc, {answer});
 
-        await callDoc.update({answer});
-
-        offerCandidates.onSnapshot((snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                console.log(change);
-                if (change.type === 'added')
-                {
-                    let data = change.doc.data();
-                    pc.addIceCandidate(new RTCIceCandidate(data));
-
-                }
-            })
-        })
+        // const q = query(doc(firestore, "calls", id.toString(), "offerCandidate", offerId))
+        // const offerCandidatesSnap = onSnapshot(q, (snapshot) => {
+        //     snapshot.docChanges().forEach((change) => {
+        //         if (change.type === 'added')
+        //         {
+        //             let data = change.doc.data();
+        //             pc.addIceCandidate(new RTCIceCandidate(data));
+        //         }
+        //     })
+        // })
     }
     
     return (
@@ -189,7 +195,7 @@ const video = () => {
             <TextInput name="callId" value={callId} onChange={setCallId}/>
             <ButtonBootstrap
               text="Answer Call"
-              onClick={joinCall}
+              onClick={() => joinCall(callId)}
               primaryWide={true}
             />
           </div>
