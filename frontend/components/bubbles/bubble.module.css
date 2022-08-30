@@ -1,9 +1,16 @@
+.squareBubbleContainer,
+.tallBubbleContainer,
+.wideBubbleContainer {
+    border: 0;
+    margin: 0 8px;
+}
 .squareBubbleContainer {
     width: 28vw;
     height: 25vw;
 
     border-radius: 1vh;
     position: relative;
+    
 }
 
 .squareText {

@@ -10,7 +10,7 @@ import Card from "react-bootstrap/Card";
 export const SquareBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
-      <div
+      <Card
         className={styles.squareBubbleContainer}
         style={{ backgroundColor: props.colour }}
       >
@@ -28,7 +28,7 @@ export const SquareBubble = (props) => {
         <div className={styles.openBubbleBtn}>
           <BubbleBtn openBtn />
         </div>
-      </div>
+      </Card>
     </Link>
   );
 };
@@ -37,7 +37,7 @@ export const SquareBubble = (props) => {
 export const WideBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
-      <div
+      <Card
         className={styles.wideBubbleContainer}
         style={{ backgroundColor: props.colour }}
       >
@@ -61,7 +61,7 @@ export const WideBubble = (props) => {
         <div className={styles.openBubbleBtn}>
           <BubbleBtn openBtn />
         </div>
-      </div>
+      </Card>
     </Link>
   );
 };
@@ -70,7 +70,7 @@ export const WideBubble = (props) => {
 export const TallBubble = (props) => {
   return (
     <Link href={`/${props.url}`}>
-      <div
+      <Card
         className={styles.tallBubbleContainer}
         style={{ backgroundColor: props.colour }}
       >
@@ -87,10 +87,12 @@ export const TallBubble = (props) => {
         <div className={styles.openBubbleBtn}>
           <BubbleBtn openBtn />
         </div>
-      </div>
+      </Card>
     </Link>
   );
 };
+
+
 
 // Category - used for main categories in explore page 
 export const CategoryBubble = (props) => {
