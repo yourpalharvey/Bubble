@@ -9,8 +9,10 @@ import com.example.Team.A.Bubble.models.TokenModel;
 import com.example.Team.A.Bubble.models.UsersModel;
 import com.example.Team.A.Bubble.repositories.UsersRepository;
 import com.example.Team.A.Bubble.service.UsersService;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 // JWT imports
@@ -150,7 +152,7 @@ public class UsersServiceImplementation implements UsersService {
 
     public Users processUser(UsersModel usersModel, Users user, List<Users> users) {
         if (checkUserName(users, usersModel.getUsername())) {
-            throw new UsernameException("Username already exists");
+            throw new ResourceNotFoundException("UserName Already exists");
         }
         user.setUsername(usersModel.getUsername());
         user.setPassword(usersModel.getPassword());
