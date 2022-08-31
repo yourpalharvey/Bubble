@@ -30,10 +30,17 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+<<<<<<< HEAD
     "/explore": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/explore.js"
+=======
+    "/hosted": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/hosted.js"
+>>>>>>> main
     ]
   },
   "ampFirstPages": []
