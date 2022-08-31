@@ -12,7 +12,7 @@ const postRequest = async (url, data) => {
         err => {
             console.error(err);
             return {
-                "error": error
+                "error": err
             }
         }
     )
@@ -20,4 +20,25 @@ const postRequest = async (url, data) => {
     return response.json();
 }
 
-module.exports = {postRequest};
+const getRequest = async (url) => {
+
+    // prepare request
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+
+    })
+    .catch(
+        err => {
+            console.error(err);
+            return {
+                "error": err
+            }
+        }
+    )
+    return response.json()
+}
+
+module.exports = {postRequest, getRequest};

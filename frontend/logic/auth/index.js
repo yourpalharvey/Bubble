@@ -1,7 +1,6 @@
 const { cleanText, cleanPassword, cleanEmail } = require("../cleaning");
 const { postRequest } = require("../requests");
-
-const URLBASE = "http://localhost:8080/";
+const {URLBASE} = require("../index");
 
 // log in user
 const handleLogin = async (username, password) => {
