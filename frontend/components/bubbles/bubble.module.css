@@ -2,7 +2,19 @@
 .tallBubbleContainer,
 .wideBubbleContainer {
     border: 0;
-    margin: 8px;
+}
+
+.squareBubbleContainer,
+.tallBubbleContainer {
+    margin: 8px 10px;
+}
+
+.midBubbleContainer {
+    margin: 8px 5px;
+}
+
+.wideBubbleContainer {
+    margin: 8px 6px;
 }
 .squareBubbleContainer {
     width: 28vw;
@@ -84,7 +96,6 @@
     height: 20vw;
     border-radius: 1vh;
     border: 0;
-        margin: 8px 12px;
 }
 
 .midText {

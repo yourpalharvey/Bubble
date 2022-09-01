@@ -60,9 +60,6 @@ export const ExploreBubbles = () => {
           url="categories/1"
           colour="var(--green)"
         />
-      </ExploreContentContainer>
-
-      <ExploreContentContainer bottomRow={true} seeMore="See more bubbles">
         <MidBubble
           text="Pheobe Bridgers Live"
           streamCount="8 streams"
@@ -118,6 +115,11 @@ export const ExploreBubbles = () => {
           colour="var(--teal)"
         />
       </ExploreContentContainer>
+
+      <ExploreContentContainer
+        bottomRow={true}
+        seeMore="See more bubbles"
+      ></ExploreContentContainer>
     </>
   );
 };

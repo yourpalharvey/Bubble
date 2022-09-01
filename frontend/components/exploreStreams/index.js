@@ -39,9 +39,7 @@ export const ExploreStreams = () => {
           url="categories/1"
           colour="var(--indigo)"
         />
-      </ExploreContentContainer>
 
-      <ExploreContentContainer bottomRow={true} seeMore="See more streams">
         <WideBubble
           text="Lion King"
           subText="lols23"
@@ -77,6 +75,11 @@ export const ExploreStreams = () => {
           colour="var(--indigo)"
         />
       </ExploreContentContainer>
+
+      <ExploreContentContainer
+        bottomRow={true}
+        seeMore="See more streams"
+      ></ExploreContentContainer>
     </>
   );
 };
