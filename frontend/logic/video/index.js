@@ -1,5 +1,7 @@
 import firebase from 'firebase/app'; //updates the firebase object
 import 'firebase/firestore'; // runs firebase side effects
+import { URLBASE } from '..';
+import { postRequest } from '../requests';
 
 const config = {
   apiKey: "AIzaSyAa_gVK4beOjjv3QjdHUDm2Gg6dowWUKFg",
@@ -20,4 +22,29 @@ if (!firebase.apps.length) {
 const firestore = firebase.firestore();
 
 
-export { firestore};
+export { firestore, addStreamToDatabase};
+
+const addStreamToDatabase = async (data) => {
+  const postData = {
+    "signalId": data.signalId,
+    "bubbleId": data.bubbleId,
+    "userId": data.userId,
+    "image": data.image
+  }
+
+  let response = await postRequest(`${URLBASE}/streams`, postData);
+
+  if (response.hasOwnProperty("id"))
+  {
+    return response;
+  }
+  else
+  {
+    return "error";
+  }
+
+}
+
+// TODO: get stream from database
+
+// TODO: get all streams from a bubble

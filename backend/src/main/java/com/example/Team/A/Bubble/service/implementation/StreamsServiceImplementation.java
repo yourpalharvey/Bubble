@@ -31,7 +31,7 @@ public class StreamsServiceImplementation implements StreamsService{
         
         Streams stream = new Streams();
         stream.setId(newId);
-        stream.setSignalId(streamsModel.getSignal());
+        stream.setSignalId(streamsModel.getSignalId());
         stream.setBubbleId(streamsModel.getBubbleId());
         stream.setUserId(streamsModel.getUserId());
         stream.setImage(streamsModel.getImage());

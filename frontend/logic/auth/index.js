@@ -53,7 +53,14 @@ const isAuth = async (token) => {
 	let response = await postRequest(`${URLBASE}/users/isAuth`, data);
 	
 	// return the value of the api request
-	return response.authorised[0];
+	if (response.hasOwnProperty("authorised"))
+	{
+		return response.authorised[0];
+	}
+	else
+	{
+		return false;
+	}
 
 }
 
@@ -66,7 +73,32 @@ const getUsername = async (token) => {
 	let response = await postRequest(`${URLBASE}/users/getUsername`, data);
 
 	// return value
-	return response.username[0];
+	if (response.hasOwnProperty("username"))
+	{
+		return response.username[0];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+const getId = async (token) => {
+	// create json Object
+	let data = {"token": token};
+
+	// post data to api
+	let response = await postRequest(`${URLBASE}/users/getId`, data);
+
+	// return value
+	if (response.hasOwnProperty("id"))
+	{
+		return response.id[0];
+	}
+	else
+	{
+		return null;
+	}
 }
 
 // check if username exists
@@ -149,5 +181,6 @@ module.exports= {
 	checkPasswordValidBool,
 	checkEmailValidBool,
 	isAuth,
-	getUsername
+	getUsername,
+	getId
 }

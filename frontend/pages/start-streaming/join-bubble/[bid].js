@@ -1,118 +1,248 @@
-import { useRouter } from "next/router"
-import { useEffect, useRef, useState } from "react";
+import styles from '../../../styles/StartStreaming.module.css'
 import { Background } from "../../../components/background";
 import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
-import styles from '../../../styles/StartStreaming.module.css'
-import { getCookie } from "cookies-next";
-import { isAuth, getUsername } from "../../../logic/auth";
 import { Navbar } from "../../../components/navbar";
-import { pc } from "../../../logic/video";
+import { useEffect, useRef, useState } from 'react';
+import { addStreamToDatabase, firestore} from '../../../logic/video';
+import { TextInput } from '../../../objects/textInput';
+import { postRequest } from '../../../logic/requests';
+import { useRouter } from "next/router";
+import { getCookie } from 'cookies-next';
+import { isAuth, getUsername, getId } from "../../../logic/auth";
 
-const bubbleStream = ({loggedIn, user}) => {
+// 26-as-a-developer-i-would-like-a-backend-that-allows-users-to-stream-video
+
+const Video = ({loggedIn, user, id}) => {
+
     const router = useRouter();
     const {bid} = router.query;
 
-    // handle video
-    const videoRef = useRef(null);
-    const remoteRef = useRef(null);
-    
-    const [stream, setStream] = useState(null);
-	const [remoteStream, setRemoteStream] = useState(null);
-    const [buttonText, setButtonText] = useState("Start Streaming")
+    const webcamButtonRef = useRef();
+    const webcamVideoRef = useRef();
+    const callButtonRef = useRef();
+    const callInputRef = useRef();
+    const answerButtonRef = useRef();
+    const remoteVideoRef = useRef();
+    const hangupButtonRef = useRef();
+    const videoDownloadRef = useRef();
+    const[pc, setPC] = useState()
 
-    // handle swap buttonText
-    const toggleButtonText = () => {
-      setButtonText(buttonText === "Start Streaming" ? "Stop Streaming" : "Start Streaming");
+    // let videoUrl = null;
+
+    // let recordedChunks = [];
+
+    const servers = {
+        iceServers: [
+        {
+            urls: [
+            'stun:stun1.l.google.com:19302',
+            'stun:stun2.l.google.com:19302',
+            ],
+        },
+        ],
+        iceCandidatePoolSize: 10,
+    };
+    // const pc = new RTCPeerConnection(servers);
+    let localStream = null;
+    let remoteStream = null;
+    var options = { mimeType: 'video/webm; codecs=vp9' };
+    let mediaRecorder = null;
+
+    useEffect(
+        () => {
+            setPC(new RTCPeerConnection(servers));
+        },
+        []
+    )
+
+    // open webcam
+    const webCamHandler = async () => {
+        // get webcam stream
+        localStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+        });
+
+        // set remote Stream to a mediaStream object
+        remoteStream = new MediaStream();
+
+        // Push tracks from local stream to peer connection
+        localStream.getTracks().forEach((track) => {
+        pc.addTrack(track, localStream);
+        });
+
+        // Pull tracks from remote stream, add to video stream
+        pc.ontrack = (event) => {
+        event.streams[0].getTracks().forEach((track) => {
+            remoteStream.addTrack(track);
+        });
+        };
+
+        // set video sources
+        webcamVideoRef.current.srcObject = localStream;
+        remoteVideoRef.current.srcObject = remoteStream;
+
+        // recording of local video from stream
+        // mediaRecorder = new MediaRecorder(localStream, options);
+        // mediaRecorder.ondataavailable = (event) => {
+        // console.log('data-available');
+        // if (event.data.size > 0) {
+        //     recordedChunks.push(event.data);
+        //     console.log(recordedChunks);
+        // }
+        // };
+        // mediaRecorder.start();
     };
 
-    const getVideo = async () => {
-        try
-        {
-            // set local stream
-			const streamer = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            setStream(streamer);
+    const callHandler = async () => {
+        console.log('Starting callid generation .... ');
+        // Reference Firestore collections for signaling
+        const callDoc = firestore.collection('calls').doc();
+        const offerCandidates = callDoc.collection('offerCandidates');
+        const answerCandidates = callDoc.collection('answerCandidates');
 
-			// set remote Stream
-			const remoteStreamer = new MediaStream();
-			setRemoteStream(remoteStreamer);
+        callInputRef.current.value = callDoc.id;
+        //setCallID(callDoc.id.toString());
 
-			return true;
+        // Get candidates for caller, save to db
+        pc.onicecandidate = (event) => {
+            event.candidate && offerCandidates.add(event.candidate.toJSON());
+        };
+
+        // Create offer
+        const offerDescription = await pc.createOffer();
+        await pc.setLocalDescription(offerDescription);
+
+        const offer = {
+            sdp: offerDescription.sdp,
+            type: offerDescription.type,
+        };
+
+        await callDoc.set({ offer });
+
+        // Listen for remote answer
+        callDoc.onSnapshot((snapshot) => {
+        const data = snapshot.data();
+        if (!pc.currentRemoteDescription && data?.answer) {
+            const answerDescription = new RTCSessionDescription(data.answer);
+            pc.setRemoteDescription(answerDescription);
         }
-        catch (err)
-        {
-            console.error(err)
+        });
+
+        // When answered, add candidate to peer connection
+        answerCandidates.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added') {
+            const candidate = new RTCIceCandidate(change.doc.data());
+            pc.addIceCandidate(candidate);
+            }
+        });
+        });
+
+        // hangupButtonRef.current.disabled = false;
+
+        // add signal to database
+        let data = {
+            "signalId": callDoc.id.toString(),
+            "bubbleId": bid,
+            "userId": id,
+            "image": "",
         }
-    
+        console.log(data);
+        const response = await addStreamToDatabase(data);
+        console.log(response);
     };
 
-    // handle Start Stream
-    const startStream = async () => {
-		// get the video feed form webcam
-		const setVideo = await getVideo();
+    const answerHandler = async () => {
+        console.log('Joining the call ....');
+        // change this next line
+        const callId = callInputRef.current.value;
+        const callDoc = firestore.collection('calls').doc(callId);
+        const answerCandidates = callDoc.collection('answerCandidates');
+        const offerCandidates = callDoc.collection('offerCandidates');
 
-		// send to server, add to Stream database: bubbleId, StreamId, UserId
+        pc.onicecandidate = (event) => {
+        event.candidate && answerCandidates.add(event.candidate.toJSON());
+        };
+        console.log('pc', pc);
 
-	
-		// push tracks from localStream to peer connection
-		stream.getTracks().forEach((track) => {
-			pc.addTrack(track, stream);
-		});
-		
-		// pull tracks from remote stream, add to video Stream
-		pc.ontrack = event => {
-			event.streams[0].getTracks().forEach(track => {
-				remoteStream.addTrack(track);
-			});
-		}
-		
-		// show on screen
-		let video = videoRef.current;
-		video.srcObject = stream;
-        video.play();
-		let remoteVideo = remoteRef.current;
-		remoteVideo.srcObject = remoteStream;
-		remoteVideo.play();
+        const callData = (await callDoc.get()).data();
 
+        const offerDescription = callData.offer;
+        await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
 
+        const answerDescription = await pc.createAnswer();
+        await pc.setLocalDescription(answerDescription);
 
+        const answer = {
+            type: answerDescription.type,
+            sdp: answerDescription.sdp,
+        };
 
-    }
+        await callDoc.update({ answer });
 
-    // const end Stream
-    const endStream = () => {
-      stream.getTracks()[0].stop()
-      window.close()
-    }
+        offerCandidates.onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            console.log(change);
+            if (change.type === 'added') {
+            let data = change.doc.data();
+            pc.addIceCandidate(new RTCIceCandidate(data));
+            }
+        });
+        });
+    };
 
-    const toggleStream = () => {
-      if (buttonText === "Start Stream")
-      {
-        startStream()
-      }
-      else
-      {
-        endStream()
-      }
-      toggleButtonText;
-    }
+    const hangupHandler = () => {
+        console.log('Hanging up the call ...');
+        localStream.getTracks().forEach((track) => track.stop());
+        remoteStream.getTracks().forEach((track) => track.stop());
 
+        // mediaRecorder.onstop = async (event) => {
+        // let blob = new Blob(recordedChunks, {
+        //     type: 'video/webm',
+        // });
+
+        // await readFile(blob).then((encoded_file) => {
+        //     uploadVideo(encoded_file);
+        // });
+
+        // videoDownloadRef.current.href = URL.createObjectURL(blob);
+        // videoDownloadRef.current.download =
+        //     new Date().getTime() + '-locastream.webm';
+        // };
+        // console.log(videoDownloadRef);
+    };
+    
     return (
-      <Background>
-        <Navbar loggedIn={loggedIn}/>
-        <div className={styles.videoContainerParent}>
-          <video className={styles.videoContainer} ref={videoRef} />
-          <video className={styles.videoContainer} ref={remoteRef} />
-        </div>
-        <div className={styles.videoButtonContainer}>
-          <ButtonBootstrap
-            text={buttonText}
-            onClick={startStream}
-            primaryWide={true}
-          />
-        </div>
-      </Background>
-    );
+        <Background>
+          <div className={styles.videoContainerParent}>
+            <video className={styles.videoContainer} ref={webcamVideoRef} autoPlay/>
+            <video className={styles.videoContainer} ref={remoteVideoRef} autoPlay/>
+          </div>
+          <div className={styles.videoButtonContainer}>
+            <ButtonBootstrap
+              text="Start Camera"
+              onClick={webCamHandler}
+              primaryWide={true}
+            />
+            <ButtonBootstrap
+              text="Start Call"
+              onClick={callHandler}
+              primaryWide={true}
+            />
+            <input ref={callInputRef} />
+            <ButtonBootstrap
+              text="Answer Call"
+              onClick={answerHandler}
+              primaryWide={true}
+            />
+          </div>
+        </Background>
+      );
+
 }
+
+export default Video;
 
 export const getServerSideProps = async (ctx) => {
 
@@ -125,6 +255,7 @@ export const getServerSideProps = async (ctx) => {
     // if the token exists, return wheteher it is valid, otherwise set it as false
     const valid = token != null ? await isAuth(token): false;
     const username = token!= null ? await getUsername(token) : null;
+    const id_ = token!= null ? await getId(token) : null;
   
     // check location
   
@@ -133,13 +264,8 @@ export const getServerSideProps = async (ctx) => {
       props: {
           loggedIn: valid,
           user: username,
+          id: id_
       }
     } 
   
-  }
-
-
-
-export default bubbleStream;
-
-
+}
