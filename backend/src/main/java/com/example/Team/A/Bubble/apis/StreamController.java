@@ -36,8 +36,17 @@ public class StreamController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<StreamsModel> addStreamController(@RequestBody StreamsModel stream) {
-        System.out.println("\n\n\n\nSent\n\n\n\n");
-        return ResponseEntity.ok(new StreamsModel(streamsService.addStream(stream)));
+        System.out.println("\n\n\n\nSent");
+        System.out.println(stream.getSignal());
+        System.out.println(stream.getBubbleId());
+        System.out.println(stream.getUserId());
+        System.out.println(stream.getImage());
+        System.out.println("\n\n\n\n");
+        StreamsModel newStream = new StreamsModel(streamsService.addStream(stream));
+        System.out.println("\n\n\n\nSent");
+        System.out.println(newStream);
+        System.out.println("\n\n\n\n");
+        return ResponseEntity.ok(newStream);
     }
 
 

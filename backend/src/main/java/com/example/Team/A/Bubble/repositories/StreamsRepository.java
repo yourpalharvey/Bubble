@@ -15,8 +15,8 @@ public interface StreamsRepository extends JpaRepository<Streams, Integer> {
     List<Streams> getBubbleStreams(Integer bubbleId);
 
     // add stream
-    @Query(value = "INSERT INTO streams ( signal, bubble_id, user_id, image) VALUES (:signal , :bubbleId , :userId , :image );", nativeQuery = true)
-    Streams addStream(String signal, int bubbleId, int userId, String image);
+    // @Query(value = "INSERT INTO streams WHERE signal = :signal AND bubble_id = :bubbleId AND user_id = :userId AND image =:image ;", nativeQuery = true)
+    // Streams addStream(String signal, int bubbleId, int userId, String image);
 
     // get individual stream
     @Query(value = "SELECT * FROM streams s WHERE s.id = :id ;", nativeQuery = true)

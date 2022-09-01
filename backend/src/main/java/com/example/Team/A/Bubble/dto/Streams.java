@@ -8,12 +8,12 @@ import javax.persistence.*;
 public class Streams {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "signal")
-    private String signal;
+    @Column(name = "signalId")
+    private String signalId;
 
     @Column(name = "bubbleId")
     private int bubbleId;

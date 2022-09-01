@@ -23,8 +23,23 @@ public class StreamsServiceImplementation implements StreamsService{
     }
 
     @Override
-    public Streams addStream(StreamsModel stream) {
-        return streamsRepository.addStream(stream.getSignal(), stream.getBubbleId(), stream.getUserId(), stream.getImage());
+    public Streams addStream(StreamsModel streamsModel) {
+
+        List<Streams> existing = streamsRepository.findAll();
+        int newId = existing.get(existing.size() -1).getId() + 1;
+        
+        
+        Streams stream = new Streams();
+        stream.setId(newId);
+        stream.setSignalId(streamsModel.getSignal());
+        stream.setBubbleId(streamsModel.getBubbleId());
+        stream.setUserId(streamsModel.getUserId());
+        stream.setImage(streamsModel.getImage());
+
+        System.out.println(stream);
+        
+        streamsRepository.save(stream);
+        return stream;
     }
 
     @Override

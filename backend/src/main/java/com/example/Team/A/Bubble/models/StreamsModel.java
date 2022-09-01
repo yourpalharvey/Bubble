@@ -17,7 +17,7 @@ public class StreamsModel {
     public StreamsModel(Streams stream)
     {
         this.id = stream.getId();
-        this.signal = stream.getSignal();
+        this.signal = stream.getSignalId();
         this.bubbleId = stream.getBubbleId();
         this.userId = stream.getUserId();
         this.image = stream.getImage();

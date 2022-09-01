@@ -62,7 +62,7 @@ CREATE TABLE `bubble_tag` (
 
 CREATE TABLE `streams` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `signal` varchar(40),
+  `signal_id` varchar(40),
   `bubble_id` int,
   `user_id` int,
   `image` varchar(100),
@@ -161,12 +161,12 @@ INSERT INTO `users`(`username`, `password`, `email`, `dob`) VALUES ('golfnoob', 
 INSERT INTO `users`(`username`, `password`, `email`, `dob`) VALUES ('EvenStevens', 'password123', 'no@no.com', '1990-12-25');
 INSERT INTO `users`(`username`, `password`, `email`, `dob`) VALUES ('Suzzie102', 'password123', 'no@no.com', '1990-12-25');
 
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhsdbf', 4, 1, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/FleetFoxes_gbtgck.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddf', 2, 2, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/F1_nkmcwj.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddg', 9, 3, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Tate_fyowjr.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddh', 7, 4, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Circus_gl01gt.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddj', 5, 5, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Lion_m1mrkp.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddk', 8, 6, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Golf_q3bha8.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddl', 3, 7, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Festival_vn7zdc.png');
-INSERT INTO `streams`(`signal`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddq', 1, 8, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhsdbf', 4, 1, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/FleetFoxes_gbtgck.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddf', 2, 2, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/F1_nkmcwj.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddg', 9, 3, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Tate_fyowjr.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddh', 7, 4, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Circus_gl01gt.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddj', 5, 5, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Lion_m1mrkp.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddk', 8, 6, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Golf_q3bha8.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddl', 3, 7, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Festival_vn7zdc.png');
+INSERT INTO `streams`(`signal_id`, `bubble_id`, `user_id`, `image`) VALUES ('ljsdhfjklhaddq', 1, 8, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png');
 
