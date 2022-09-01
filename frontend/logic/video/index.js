@@ -21,8 +21,20 @@ if (!firebase.apps.length) {
 //grab a refference to the firestore database object and export it from this file
 const firestore = firebase.firestore();
 
+const servers = {
+  iceServers: [
+  {
+      urls: [
+      'stun:stun1.l.google.com:19302',
+      'stun:stun2.l.google.com:19302',
+      ],
+  },
+  ],
+  iceCandidatePoolSize: 10,
+};
 
-export { firestore, addStreamToDatabase};
+
+export { firestore, addStreamToDatabase, servers};
 
 const addStreamToDatabase = async (data) => {
   const postData = {

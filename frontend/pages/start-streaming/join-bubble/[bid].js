@@ -3,7 +3,7 @@ import { Background } from "../../../components/background";
 import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import { Navbar } from "../../../components/navbar";
 import { useEffect, useRef, useState } from 'react';
-import { addStreamToDatabase, firestore} from '../../../logic/video';
+import { addStreamToDatabase, firestore, servers} from '../../../logic/video';
 import { TextInput } from '../../../objects/textInput';
 import { postRequest } from '../../../logic/requests';
 import { useRouter } from "next/router";
@@ -30,17 +30,7 @@ const Video = ({loggedIn, user, id}) => {
     const[pc, setPC] = useState()
 
 
-    const servers = {
-        iceServers: [
-        {
-            urls: [
-            'stun:stun1.l.google.com:19302',
-            'stun:stun2.l.google.com:19302',
-            ],
-        },
-        ],
-        iceCandidatePoolSize: 10,
-    };
+    
     //let localStream = null;
     let remoteStream = null;
     var options = { mimeType: 'video/webm; codecs=vp9' };
@@ -190,21 +180,6 @@ const Video = ({loggedIn, user, id}) => {
         localStream.getTracks().forEach((track) => track.stop());
         // remoteStream.getTracks().forEach((track) => track.stop());
         window.close();
-
-        // mediaRecorder.onstop = async (event) => {
-        // let blob = new Blob(recordedChunks, {
-        //     type: 'video/webm',
-        // });
-
-        // await readFile(blob).then((encoded_file) => {
-        //     uploadVideo(encoded_file);
-        // });
-
-        // videoDownloadRef.current.href = URL.createObjectURL(blob);
-        // videoDownloadRef.current.download =
-        //     new Date().getTime() + '-locastream.webm';
-        // };
-        // console.log(videoDownloadRef);
     };
     
     return (
