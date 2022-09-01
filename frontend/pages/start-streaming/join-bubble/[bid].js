@@ -17,19 +17,18 @@ const Video = ({loggedIn, user, id}) => {
     const router = useRouter();
     const {bid} = router.query;
 
-    const webcamButtonRef = useRef();
+    // const webcamButtonRef = useRef();
     const webcamVideoRef = useRef();
-    const callButtonRef = useRef();
+    // const callButtonRef = useRef();
     const callInputRef = useRef();
-    const answerButtonRef = useRef();
+    // const answerButtonRef = useRef();
     const remoteVideoRef = useRef();
-    const hangupButtonRef = useRef();
-    const videoDownloadRef = useRef();
+    // const hangupButtonRef = useRef();
+    // const videoDownloadRef = useRef();
+    const [button, setButton] = useState(true);
+    const [localStream, setLocalStream] = useState(null);
     const[pc, setPC] = useState()
 
-    // let videoUrl = null;
-
-    // let recordedChunks = [];
 
     const servers = {
         iceServers: [
@@ -42,8 +41,7 @@ const Video = ({loggedIn, user, id}) => {
         ],
         iceCandidatePoolSize: 10,
     };
-    // const pc = new RTCPeerConnection(servers);
-    let localStream = null;
+    //let localStream = null;
     let remoteStream = null;
     var options = { mimeType: 'video/webm; codecs=vp9' };
     let mediaRecorder = null;
@@ -58,17 +56,18 @@ const Video = ({loggedIn, user, id}) => {
     // open webcam
     const webCamHandler = async () => {
         // get webcam stream
-        localStream = await navigator.mediaDevices.getUserMedia({
+        let localStream_ = await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true,
         });
+        
 
         // set remote Stream to a mediaStream object
         remoteStream = new MediaStream();
 
         // Push tracks from local stream to peer connection
-        localStream.getTracks().forEach((track) => {
-        pc.addTrack(track, localStream);
+        localStream_.getTracks().forEach((track) => {
+        pc.addTrack(track, localStream_);
         });
 
         // Pull tracks from remote stream, add to video stream
@@ -79,30 +78,22 @@ const Video = ({loggedIn, user, id}) => {
         };
 
         // set video sources
-        webcamVideoRef.current.srcObject = localStream;
-        remoteVideoRef.current.srcObject = remoteStream;
+        webcamVideoRef.current.srcObject = localStream_;
+        // remoteVideoRef.current.srcObject = remoteStream;
+        setLocalStream(localStream_);
 
-        // recording of local video from stream
-        // mediaRecorder = new MediaRecorder(localStream, options);
-        // mediaRecorder.ondataavailable = (event) => {
-        // console.log('data-available');
-        // if (event.data.size > 0) {
-        //     recordedChunks.push(event.data);
-        //     console.log(recordedChunks);
-        // }
-        // };
-        // mediaRecorder.start();
     };
 
     const callHandler = async () => {
+        await webCamHandler();
+        setButton(false);
         console.log('Starting callid generation .... ');
         // Reference Firestore collections for signaling
         const callDoc = firestore.collection('calls').doc();
         const offerCandidates = callDoc.collection('offerCandidates');
         const answerCandidates = callDoc.collection('answerCandidates');
 
-        callInputRef.current.value = callDoc.id;
-        //setCallID(callDoc.id.toString());
+        // callInputRef.current.value = callDoc.id;
 
         // Get candidates for caller, save to db
         pc.onicecandidate = (event) => {
@@ -151,51 +142,54 @@ const Video = ({loggedIn, user, id}) => {
         console.log(data);
         const response = await addStreamToDatabase(data);
         console.log(response);
+        
     };
 
-    const answerHandler = async () => {
-        console.log('Joining the call ....');
-        // change this next line
-        const callId = callInputRef.current.value;
-        const callDoc = firestore.collection('calls').doc(callId);
-        const answerCandidates = callDoc.collection('answerCandidates');
-        const offerCandidates = callDoc.collection('offerCandidates');
 
-        pc.onicecandidate = (event) => {
-        event.candidate && answerCandidates.add(event.candidate.toJSON());
-        };
-        console.log('pc', pc);
+    // const answerHandler = async () => {
+    //     console.log('Joining the call ....');
+    //     // change this next line
+    //     const callId = callInputRef.current.value;
+    //     const callDoc = firestore.collection('calls').doc(callId);
+    //     const answerCandidates = callDoc.collection('answerCandidates');
+    //     const offerCandidates = callDoc.collection('offerCandidates');
 
-        const callData = (await callDoc.get()).data();
+    //     pc.onicecandidate = (event) => {
+    //     event.candidate && answerCandidates.add(event.candidate.toJSON());
+    //     };
+    //     console.log('pc', pc);
 
-        const offerDescription = callData.offer;
-        await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
+    //     const callData = (await callDoc.get()).data();
 
-        const answerDescription = await pc.createAnswer();
-        await pc.setLocalDescription(answerDescription);
+    //     const offerDescription = callData.offer;
+    //     await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
 
-        const answer = {
-            type: answerDescription.type,
-            sdp: answerDescription.sdp,
-        };
+    //     const answerDescription = await pc.createAnswer();
+    //     await pc.setLocalDescription(answerDescription);
 
-        await callDoc.update({ answer });
+    //     const answer = {
+    //         type: answerDescription.type,
+    //         sdp: answerDescription.sdp,
+    //     };
 
-        offerCandidates.onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            console.log(change);
-            if (change.type === 'added') {
-            let data = change.doc.data();
-            pc.addIceCandidate(new RTCIceCandidate(data));
-            }
-        });
-        });
-    };
+    //     await callDoc.update({ answer });
+
+    //     offerCandidates.onSnapshot((snapshot) => {
+    //     snapshot.docChanges().forEach((change) => {
+    //         console.log(change);
+    //         if (change.type === 'added') {
+    //         let data = change.doc.data();
+    //         pc.addIceCandidate(new RTCIceCandidate(data));
+    //         }
+    //     });
+    //     });
+    // };
 
     const hangupHandler = () => {
         console.log('Hanging up the call ...');
         localStream.getTracks().forEach((track) => track.stop());
-        remoteStream.getTracks().forEach((track) => track.stop());
+        // remoteStream.getTracks().forEach((track) => track.stop());
+        window.close();
 
         // mediaRecorder.onstop = async (event) => {
         // let blob = new Blob(recordedChunks, {
@@ -215,28 +209,28 @@ const Video = ({loggedIn, user, id}) => {
     
     return (
         <Background>
-          <div className={styles.videoContainerParent}>
-            <video className={styles.videoContainer} ref={webcamVideoRef} autoPlay/>
-            <video className={styles.videoContainer} ref={remoteVideoRef} autoPlay/>
-          </div>
-          <div className={styles.videoButtonContainer}>
-            <ButtonBootstrap
-              text="Start Camera"
-              onClick={webCamHandler}
-              primaryWide={true}
-            />
-            <ButtonBootstrap
-              text="Start Call"
-              onClick={callHandler}
-              primaryWide={true}
-            />
-            <input ref={callInputRef} />
-            <ButtonBootstrap
-              text="Answer Call"
-              onClick={answerHandler}
-              primaryWide={true}
-            />
-          </div>
+            <div className={styles.videoContainerParent}>
+                <video className={styles.videoContainer} ref={webcamVideoRef} autoPlay/>
+                {/*<video className={styles.videoContainer} ref={remoteVideoRef} autoPlay/>*/}
+            </div>
+            {button === true &&
+                <div className={styles.videoButtonContainer}>
+                    <ButtonBootstrap
+                    text="Start Stream"
+                    onClick={callHandler}
+                    primaryWide={true}
+                    />
+                </div>
+            }
+            {button === false &&
+                <div className={styles.videoButtonContainer}>
+                    <ButtonBootstrap
+                    text="End Stream"
+                    onClick={hangupHandler}
+                    primaryWide={true}
+                    />
+                </div>
+            }
         </Background>
       );
 
