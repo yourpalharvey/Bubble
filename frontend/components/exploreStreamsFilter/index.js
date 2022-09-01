@@ -104,5 +104,19 @@ export const ExploreStreamsFilter = (props) => {
         </ExploreContentContainer>
       </>
     );
+  } else if (props.pop) {
+    return (
+      <>
+        <ExploreContentContainer topRow={true} title="Pop streams">
+          <WideBubble
+            text="Taylor Swift Live"
+            subText="Suzzie101"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png"
+            url="categories/1"
+            colour="var(--indigo)"
+          />
+        </ExploreContentContainer>
+      </>
+    );
   }
 };

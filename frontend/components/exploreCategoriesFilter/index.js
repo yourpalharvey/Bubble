@@ -15,50 +15,50 @@ export const ExploreCategoriesFilter = (props) => {
     if (props.music && (tag.category_id === 2))
     {
       return (
-        <TallBubble 
+        <TallBubble
           key={tag.id}
           text={tag.title}
           image={tag.image}
-          url={`categories/${tag.category_id}`}
+          url={`categories/${tag.title}`}
           colour={`var(${colours[randomise(colours.length)]})`}
         />
-      )
+      );
     }
     else if (props.sports && tag.category_id === 1)
     {
       return (
-        <TallBubble 
+        <TallBubble
           key={tag.id}
           text={tag.title}
           image={tag.image}
-          url={`categories/${tag.category_id}`}
+          url={`categories/${tag.title}`}
           colour={`var(${colours[randomise(colours.length)]})`}
         />
-      )
+      );
     }
     else if (props.art && tag.category_id === 4)
     {
       return (
-        <TallBubble 
+        <TallBubble
           key={tag.id}
           text={tag.title}
           image={tag.image}
-          url={`categories/${tag.category_id}`}
+          url={`categories/${tag.title}`}
           colour={`var(${colours[randomise(colours.length)]})`}
         />
-      )
+      );
     }
     else if (props.theatre && tag.category_id === 3)
     {
       return (
-        <TallBubble 
+        <TallBubble
           key={tag.id}
           text={tag.title}
           image={tag.image}
-          url={`categories/${tag.category_id}`}
+          url={`categories/${tag.title}`}
           colour={`var(${colours[randomise(colours.length)]})`}
         />
-      )
+      );
     }
   })
 

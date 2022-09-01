@@ -137,5 +137,22 @@ export const ExploreBubblesFilter = (props) => {
         </ExploreContentContainer>
       </>
     );
+  } else if (props.pop) {
+    return (
+      <>
+        <ExploreContentContainer topRow={true} title="Pop bubbles">
+          <MidBubble
+            text="Taylor Swift Live"
+            streamCount="22 streams"
+            tag1="Pop"
+            tag2="Country"
+            tag3="Acoustic"
+            image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Taylor_fykweg.png"
+            url="categories/1"
+            colour="var(--accent-red)"
+          />
+        </ExploreContentContainer>
+      </>
+    );
   }
 };
