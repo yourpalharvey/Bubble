@@ -13,8 +13,10 @@ import { isAuth, getUsername } from "../../logic/auth";
 
 import React, { useState } from "react";
 import { ExploreNav } from "../../objects/exploreNav";
+import { getRequest, postRequest } from "../../logic/requests";
+import { URLBASE } from "../../logic";
 
-export default function Explore({loggedIn, user}) {
+export default function Explore({loggedIn, user, data}) {
   const [showCategories, setShowCategories] = useState(true);
   const handleShowCategories = () => setShowCategories(true);
   const handleCloseCategories = () => setShowCategories(false);
@@ -30,7 +32,7 @@ export default function Explore({loggedIn, user}) {
   let contentRendered;
 
   if (showCategories == true) {
-    contentRendered = <ExploreCategories />;
+    contentRendered = <ExploreCategories data={data}/>;
   } else if (showBubbles == true) {
     contentRendered = <ExploreBubbles />;
   } else {
@@ -49,10 +51,26 @@ export default function Explore({loggedIn, user}) {
 
       <div className={styles.container}>
         <CategoryContainer>
-          <CategoryBubble text="Music" colour="var(--accent-red)" />
-          <CategoryBubble text="Sport" colour="var(--blue)" />
-          <CategoryBubble text="Art" colour="var(--orange)" />
-          <CategoryBubble text="Theatre" colour="var(--teal)" />
+          <CategoryBubble
+            text="Music"
+            colour="var(--accent-red)"
+            url="explore/music"
+          />
+          <CategoryBubble
+            text="Sport"
+            colour="var(--blue)"
+            url="explore/sports"
+          />
+          <CategoryBubble
+            text="Art"
+            colour="var(--orange)"
+            url="explore/art"
+          />
+          <CategoryBubble
+            text="Theatre"
+            colour="var(--teal)"
+            url="explore/theatre"
+          />
         </CategoryContainer>
       </div>
 
@@ -87,6 +105,10 @@ export const getServerSideProps = async (ctx) => {
   const valid = token != null ? await isAuth(token): false;
   const username = token!= null ? await getUsername(token) : null;
 
+  // return tags
+  const tags = await getRequest(`${URLBASE}/tags`);
+  
+
 
 
   // return props
@@ -94,6 +116,7 @@ export const getServerSideProps = async (ctx) => {
     props: {
         loggedIn: valid,
         user: username,
+        data: tags,
     }
   } 
 
