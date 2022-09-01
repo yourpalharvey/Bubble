@@ -11,7 +11,7 @@ const handleLogin = async (username, password) => {
 	};
 	
 	// send post request
-	let response = await postRequest(`${URLBASE}users/signIn`, data);
+	let response = await postRequest(`${URLBASE}/users/signIn`, data);
 
 	if (response.hasOwnProperty("token"))
 	{
@@ -39,7 +39,7 @@ const handleSignup = async (username, password, dateOfBirth, email) => {
 			age: dateOfBirth,
 			email: email
 		}
-		let response = postRequest(`${URLBASE}users`, data);
+		let response = postRequest(`${URLBASE}/users`, data);
 		return response;
 	}
 	return false;
@@ -50,7 +50,8 @@ const isAuth = async (token) => {
 	// create json object
 	let data = {"token": token};
 	// post the token to the api, and get response
-	let response = await postRequest(`${URLBASE}users/isAuth`, data);
+	let response = await postRequest(`${URLBASE}/users/isAuth`, data);
+	
 	// return the value of the api request
 	return response.authorised[0];
 
@@ -62,7 +63,7 @@ const getUsername = async (token) => {
 	let data = {"token": token};
 
 	// post data to api
-	let response = await postRequest(`${URLBASE}users/getUsername`, data);
+	let response = await postRequest(`${URLBASE}/users/getUsername`, data);
 
 	// return value
 	return response.username[0];
@@ -77,7 +78,7 @@ const checkUsername = (username) => {
 	else if (cleanText(username) != false)
 	{
 		let requestJson = {"username": username};
-		return postRequest(`${URLBASE}users/check-username`, requestJson);
+		return postRequest(`${URLBASE}/users/check-username`, requestJson);
 	}
 	else
 	{

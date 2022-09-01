@@ -17,7 +17,7 @@ const postRequest = async (url, data) => {
         }
     )
 
-    return response.json();
+    return await response.json();
 }
 
 const getRequest = async (url) => {
@@ -38,7 +38,7 @@ const getRequest = async (url) => {
             }
         }
     )
-    return response.json()
+    return response.json();
 }
 
 module.exports = {postRequest, getRequest};
