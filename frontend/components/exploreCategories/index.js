@@ -10,14 +10,15 @@ export const ExploreCategories = ({data}) => {
     return Math.floor(Math.random() * max)
   }
 
-  const categoryData = data.slice(0,12).map((tag) => <TallBubble 
+  const categoryData = data.map((tag) => (
+    <TallBubble
       key={tag.id}
       text={tag.title}
       image={tag.image}
       url={`categories/${tag.category_id}`}
       colour={`var(${colours[randomise(colours.length)]})`}
     />
-  )
+  ));
   return (
     <>
       <ExploreContentContainer topRow={true} title="All categories">
