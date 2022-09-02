@@ -12,4 +12,8 @@ public interface BubbleTagsRepository extends JpaRepository<BubbleTags, Integer>
     // get all BubbleTags
     @Query(value = "SELECT * FROM bubble_tag;", nativeQuery = true)
     List<BubbleTags> getAllBubbleTags();
+
+    // get bubble tags by bubble id
+    @Query(value = "SELECT * FROM bubble_tag WHERE bubble_id = :id ;", nativeQuery = true)
+    List<BubbleTags> getBubbleTagsByBubbleId(int id);
 }

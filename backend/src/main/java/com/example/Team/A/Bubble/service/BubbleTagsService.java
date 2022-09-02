@@ -8,4 +8,7 @@ public interface BubbleTagsService {
     
     // get all bubbleTags
     List<BubbleTags> getAllBubbleTags();
+
+    // get bubble tags by bubbleId
+    List<BubbleTags> getBubbleTagsByBubbleId(int id);
 }

@@ -21,5 +21,11 @@ public class BubbleTagsServiceImplementation  implements BubbleTagsService{
     public List<BubbleTags> getAllBubbleTags() {
         return bubbleTags.getAllBubbleTags();
     }
+
+    @Override
+    public List<BubbleTags> getBubbleTagsByBubbleId(int id)
+    {
+        return bubbleTags.getBubbleTagsByBubbleId(id);
+    }
     
 }
