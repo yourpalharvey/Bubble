@@ -16,6 +16,7 @@ import com.example.Team.A.Bubble.models.BubbleTagsModel;
 import com.example.Team.A.Bubble.service.BubbleService;
 import com.example.Team.A.Bubble.service.BubbleTagsService;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +47,14 @@ public class BubbleTagController {
     }
 
     // add a new tag for a bubble id
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<BubbleTagsModel> addBubbleTag(@RequestBody BubbleTagsModel bubbleTag)
+    {
+        System.out.println("\n\n\n\n\n\n");
+        System.out.println("Add BubbleTag");
+        System.out.println("\n\n\n\n\n\n");
+        BubbleTagsModel newBubbleTag = new BubbleTagsModel(bubbleTagsService.addBubbleTag(bubbleTag));
+        return ResponseEntity.ok(newBubbleTag);
+    }
 
 }
