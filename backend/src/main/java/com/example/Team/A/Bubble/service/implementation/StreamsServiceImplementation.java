@@ -47,5 +47,20 @@ public class StreamsServiceImplementation implements StreamsService{
         return streamsRepository.getStream(id);
     }
 
+    @Override
+    public Boolean deleteStream(String signal) {
+        try {
+            streamsRepository.deleteStream(signal);
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("\n\n\n\n");
+            System.out.println(e);
+            System.out.println("\n\n\n\n");
+            return false;
+
+        }
+    }
+
     
 }

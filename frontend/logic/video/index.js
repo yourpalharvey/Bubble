@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'; //updates the firebase object
 import 'firebase/firestore'; // runs firebase side effects
 import { URLBASE } from '..';
-import { postRequest } from '../requests';
+import { deleteRequest, postRequest } from '../requests';
 
 const config = {
   apiKey: "AIzaSyAa_gVK4beOjjv3QjdHUDm2Gg6dowWUKFg",
@@ -34,7 +34,6 @@ const servers = {
 };
 
 
-export { firestore, addStreamToDatabase, servers};
 
 const addStreamToDatabase = async (data) => {
   const postData = {
@@ -43,9 +42,9 @@ const addStreamToDatabase = async (data) => {
     "userId": data.userId,
     "image": data.image
   }
-
+  
   let response = await postRequest(`${URLBASE}/streams`, postData);
-
+  
   if (response.hasOwnProperty("id"))
   {
     return response;
@@ -54,9 +53,28 @@ const addStreamToDatabase = async (data) => {
   {
     return "error";
   }
+  
+}
 
+// delete stream
+const deleteStream = async (data) => {
+  const streamId = data;
+  
+  let url = `${URLBASE}/streams/delete/${streamId}`;
+  // console.log(url);
+  
+  let response = await deleteRequest(url);
+  // console.log(response);
+  
+  return response;
 }
 
 // TODO: get stream from database
 
 // TODO: get all streams from a bubble
+
+
+
+
+
+export { firestore, addStreamToDatabase, servers, deleteStream};

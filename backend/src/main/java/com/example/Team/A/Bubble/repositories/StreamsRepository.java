@@ -2,8 +2,11 @@ package com.example.Team.A.Bubble.repositories;
 
 import com.example.Team.A.Bubble.dto.Streams;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,5 +24,10 @@ public interface StreamsRepository extends JpaRepository<Streams, Integer> {
     // get individual stream
     @Query(value = "SELECT * FROM streams s WHERE s.id = :id ;", nativeQuery = true)
     Streams getStream(Integer id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM streams WHERE signal_id = :signalName ", nativeQuery = true)
+    void deleteStream(String signalName);
     
 }

@@ -11,5 +11,7 @@ public interface StreamsService {
 
     Streams addStream(StreamsModel stream);
     Streams getStream(Integer id);
+
+    Boolean deleteStream(String signal);
     
 }

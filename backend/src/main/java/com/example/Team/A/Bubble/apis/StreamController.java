@@ -1,6 +1,6 @@
 package com.example.Team.A.Bubble.apis;
 
-import org.json.JSONObject;
+// import org.json.JSONObject;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Team.A.Bubble.models.StreamsModel;
 import com.example.Team.A.Bubble.service.StreamsService;
-import org.springframework.http.HttpStatus;
+// import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import lombok.NonNull;
@@ -54,6 +54,10 @@ public class StreamController {
         return streamsService.getBubbleStreams(id).stream().map(StreamsModel::new).collect(Collectors.toList());
     }
 
+    @RequestMapping(value = "/delete/{signalId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> deleteStreamBySignalId(@PathVariable(value = "signalId") String signal) {
+        return ResponseEntity.ok(streamsService.deleteStream(signal));
+    }
 
     
 }

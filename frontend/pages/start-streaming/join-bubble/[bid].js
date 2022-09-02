@@ -3,7 +3,7 @@ import { Background } from "../../../components/background";
 import { ButtonBootstrap } from "../../../objects/buttonBootstrap";
 import { Navbar } from "../../../components/navbar";
 import { useEffect, useRef, useState } from 'react';
-import { addStreamToDatabase, firestore, servers} from '../../../logic/video';
+import { addStreamToDatabase, deleteStream, firestore, servers} from '../../../logic/video';
 import { TextInput } from '../../../objects/textInput';
 import { postRequest } from '../../../logic/requests';
 import { useRouter } from "next/router";
@@ -28,6 +28,7 @@ const Video = ({loggedIn, user, id}) => {
     const [button, setButton] = useState(true);
     const [localStream, setLocalStream] = useState(null);
     const[pc, setPC] = useState()
+    const [callId_, setCallId] = useState();
 
 
     
@@ -132,6 +133,7 @@ const Video = ({loggedIn, user, id}) => {
         console.log(data);
         const response = await addStreamToDatabase(data);
         console.log(response);
+        setCallId(callDoc.id);
         
     };
 
@@ -175,10 +177,14 @@ const Video = ({loggedIn, user, id}) => {
     //     });
     // };
 
-    const hangupHandler = () => {
+    const hangupHandler = async () => {
         console.log('Hanging up the call ...');
         localStream.getTracks().forEach((track) => track.stop());
         // remoteStream.getTracks().forEach((track) => track.stop());
+
+        // delete stream
+        const deleted = await deleteStream(callId_);
+
         window.close();
     };
     
