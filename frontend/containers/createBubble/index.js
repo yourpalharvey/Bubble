@@ -8,13 +8,11 @@ import { useRouter } from "next/router";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 import { createBubble } from "../../logic/bubble";
 import { Select } from "../../components/select";
-import { getRequest } from "../../logic/requests";
-import { URLBASE } from "../../logic";
 
-export const CreateBubble1 = ({ setProgress, progress, setBubble }) => {
+export const CreateBubble1 = ({ setProgress, progress, setBubbleId, data }) => {
   const [bubble, setBubble] = useState("");
   const [currentCategory, setCurrentCategory] = useState("");
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   const [deactivate, setDeactivate] = useState(true);
 
   const clearBubble = () => {
@@ -25,7 +23,7 @@ export const CreateBubble1 = ({ setProgress, progress, setBubble }) => {
   // handle submit
   // active button if data in
   const handleActiveButton = () => {
-    if ((bubble != "") & (category != "")) {
+    if ((bubble != "") & (currentCategory != "")) {
       setDeactivate(false);
       setProgress(45);
     } else if (bubble != "") {
@@ -36,46 +34,43 @@ export const CreateBubble1 = ({ setProgress, progress, setBubble }) => {
     }
   };
 
-  const handleData = () => {
+  const handleData = async () => {
 
     // send data to api
     let data = {
       "title": bubble,
-      "category": currentCategory // fake category ID for now
+      "category_id": currentCategory, // fake category ID for now
+      "image": ""
     }
 
     // send to backend, return id
 
-    // let id = createBubble(data);
+    let id = await createBubble(data);
 
     // router.push to next page
     setProgress(65);
-    // setBubble(id);
+    setBubble(id);
   };
 
   // run handleActivateButton
   useEffect(() => {
     handleActiveButton();
-  }, [bubble, category]);
+  }, [bubble, currentCategory]);
+
+  // map category data to a form that the select component can read
+  const mapDataToOptions = () => {
+    let output = [];
+    data.map(
+      d => {
+        output.push({"id": d.id, "name": d.title});
+      }
+    )
+    return output;
+  }
 
   // get categories from database
   useEffect(() => {
-    const getData = async () => {
-      response = await getRequest(`${URLBASE}/categories`);
-      return resposne.json();
-    }
-
-    const mapDataToOptions = async () => {
-      let data = await getData();
-      let output = [];
-      data.map(
-        d => {
-          output.push({"id": d.id, "name": d.title})
-        }
-      )
-      return output;
-    }
-
+    // set category data
     setCategories(mapDataToOptions);
   }, [])
 
@@ -99,7 +94,7 @@ export const CreateBubble1 = ({ setProgress, progress, setBubble }) => {
         options={categories}
         onChange={e => setCurrentCategory(e.target.value)}
       />
-      <TextInput
+      {/* <TextInput
         value={category}
         onChange={setCategory}
         clear={clearCategory}
@@ -107,7 +102,7 @@ export const CreateBubble1 = ({ setProgress, progress, setBubble }) => {
         wide={true}
         name="Category"
         placeholder="Category"
-      />
+      /> */}
       <div className={styles.createBubbleButton}>
         <ButtonBootstrap primaryWide={true} text="Next" onClick={handleData} />
       </div>
