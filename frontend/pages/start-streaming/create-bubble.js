@@ -9,6 +9,7 @@ import { isAuth, getUsername } from "../../logic/auth";
 
 const createBubble = ({loggedIn, user}) => {
   const [progress, setProgress] = useState(5);
+  const [bubbleId, setBubbleId] = useState();
 
   return (
     <Background>
@@ -22,9 +23,9 @@ const createBubble = ({loggedIn, user}) => {
 
       <div className={styles.container}>
         {progress <= 50 ? (
-          <CreateBubble1 progress={progress} setProgress={setProgress} />
+          <CreateBubble1 progress={progress} setProgress={setProgress} setBubble={setBubbleId} />
         ) : (
-          <CreateBubble2 progress={progress} setProgress={setProgress} />
+          <CreateBubble2 progress={progress} setProgress={setProgress} bubble={bubbleId}/>
         )}
       </div>
     </Background>

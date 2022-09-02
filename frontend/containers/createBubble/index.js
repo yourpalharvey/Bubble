@@ -7,18 +7,20 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
 import { createBubble } from "../../logic/bubble";
+import { Select } from "../../components/select";
+import { getRequest } from "../../logic/requests";
+import { URLBASE } from "../../logic";
 
-export const CreateBubble1 = ({ setProgress, progress }) => {
+export const CreateBubble1 = ({ setProgress, progress, setBubble }) => {
   const [bubble, setBubble] = useState("");
-  const [category, setCategory] = useState("");
+  const [currentCategory, setCurrentCategory] = useState("");
+  const [categories, setCategories] = useState();
   const [deactivate, setDeactivate] = useState(true);
 
   const clearBubble = () => {
     setBubble("");
   };
-  const clearCategory = () => {
-    setCategory("");
-  };
+  
 
   // handle submit
   // active button if data in
@@ -39,19 +41,43 @@ export const CreateBubble1 = ({ setProgress, progress }) => {
     // send data to api
     let data = {
       "title": bubble,
-      "category": 1 // fake category ID for now
+      "category": currentCategory // fake category ID for now
     }
 
-    let id = createBubble(data);
+    // send to backend, return id
+
+    // let id = createBubble(data);
 
     // router.push to next page
     setProgress(65);
+    // setBubble(id);
   };
 
   // run handleActivateButton
   useEffect(() => {
     handleActiveButton();
   }, [bubble, category]);
+
+  // get categories from database
+  useEffect(() => {
+    const getData = async () => {
+      response = await getRequest(`${URLBASE}/categories`);
+      return resposne.json();
+    }
+
+    const mapDataToOptions = async () => {
+      let data = await getData();
+      let output = [];
+      data.map(
+        d => {
+          output.push({"id": d.id, "name": d.title})
+        }
+      )
+      return output;
+    }
+
+    setCategories(mapDataToOptions);
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -67,6 +93,11 @@ export const CreateBubble1 = ({ setProgress, progress }) => {
         wide={true}
         name="Bubble Name"
         placeholder="Bubble Name"
+      />
+      <Select 
+        label="Category"
+        options={categories}
+        onChange={e => setCurrentCategory(e.target.value)}
       />
       <TextInput
         value={category}

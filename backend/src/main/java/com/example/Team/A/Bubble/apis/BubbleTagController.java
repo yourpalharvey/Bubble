@@ -2,7 +2,6 @@ package com.example.Team.A.Bubble.apis;
 
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Team.A.Bubble.models.BubbleTagsModel;
-import com.example.Team.A.Bubble.service.BubbleService;
 import com.example.Team.A.Bubble.service.BubbleTagsService;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
