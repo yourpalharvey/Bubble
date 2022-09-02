@@ -6,7 +6,7 @@ import styles from "./createbubble.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
-import { createBubble } from "../../logic/bubble";
+import { addBubbleTag, createBubble } from "../../logic/bubble";
 import { Select } from "../../components/select";
 
 export const CreateBubble1 = ({ setProgress, progress, setBubbleId, data }) => {
@@ -49,7 +49,7 @@ export const CreateBubble1 = ({ setProgress, progress, setBubbleId, data }) => {
 
     // router.push to next page
     setProgress(65);
-    setBubble(id);
+    setBubbleId(id);
   };
 
   // run handleActivateButton
@@ -94,15 +94,6 @@ export const CreateBubble1 = ({ setProgress, progress, setBubbleId, data }) => {
         options={categories}
         onChange={e => setCurrentCategory(e.target.value)}
       />
-      {/* <TextInput
-        value={category}
-        onChange={setCategory}
-        clear={clearCategory}
-        label={true}
-        wide={true}
-        name="Category"
-        placeholder="Category"
-      /> */}
       <div className={styles.createBubbleButton}>
         <ButtonBootstrap primaryWide={true} text="Next" onClick={handleData} />
       </div>
@@ -110,34 +101,85 @@ export const CreateBubble1 = ({ setProgress, progress, setBubbleId, data }) => {
   );
 };
 
-export const CreateBubble2 = ({ setProgress, progress }) => {
+
+
+
+
+
+
+export const CreateBubble2 = ({ setProgress, progress, data, bubbleId }) => {
   const router = useRouter();
 
-  const [tag1, setTag1] = useState("");
-  const [tag2, setTag2] = useState("");
-  const [tag3, setTag3] = useState("");
+  const [tag1, setTag1] = useState();
+  const [tag2, setTag2] = useState();
+  const [tag3, setTag3] = useState();
+  const [options, setOptions] = useState([]);
+  const [bubble, setBubble] = useState(bubbleId);
 
-  const clearTag1 = () => {
-    setTag1("");
-  };
-  const clearTag2 = () => {
-    setTag2("");
-  };
-  const clearTag3 = () => {
-    setTag3("");
-  };
 
-  const handleData = () => {
-    console.log(tag1 + tag2 + tag3);
+  const handleData = async () => {
 
-    // get location at this point
-
-    // send data to api
-    const id = 213;
+    // make sure there arent repeats
+    if (tag1 != tag2 && tag1 != tag3)
+    {
+      // if tag1 is unique, add it
+      const data1 = {
+        "bubble_id": bubbleId,
+        "tag_id": tag1
+      }
+      console.log(data1);
+      const res1 = await addBubbleTag(data1);
+      console.log(res1)
+    }
+    if (tag2 != tag3)
+    {
+      // if tag2 is unique from tag 3, add them
+      const data2 = {
+        "bubble_id": bubbleId,
+        "tag_id": tag2
+      }
+      const res2 = await addBubbleTag(data2);
+      console.log(res2)
+      
+      const data3 = {
+        "bubble_id": bubbleId,
+        "tag_id": tag3
+      }
+      const res3 = await addBubbleTag(data3);
+      console.log(res3)
+    }
+    else
+    {
+      // if there are duplicates then add tag 3
+      const data3 = {
+        "bubble_id": bubbleId,
+        "tag_id": tag3
+      }
+      const res3 = await addBubbleTag(data3);
+      console.log(res3)
+    }
 
     // router.push to next page
-    router.push("/");
+    router.push(`/start-streaming/stream/${bubbleId}`);
   };
+
+  // map tag data to select readable options
+  const mapDataToOptions = () => {
+    let output = [];
+    data.map(
+      d => {
+        output.push({"id": d.id, "name": d.title});
+      }
+    )
+    return output;
+  }
+
+  useEffect(
+    () => {
+      setOptions(mapDataToOptions);
+    },
+    []
+  )
 
   return (
     <div className={styles.container}>
@@ -145,32 +187,21 @@ export const CreateBubble2 = ({ setProgress, progress }) => {
 
       <Text text="Choose tags to make your bubble easy to find" />
 
-      <TextInput
-        value={tag1}
-        onChange={setTag1}
-        clear={clearTag1}
-        label={true}
-        wide={true}
-        name="Tag 1"
-        placeholder="Tag 1"
+      
+      <Select 
+        label="Tag 1"
+        options={options}
+        onChange={e => {setTag1(e.target.value)}}
       />
-      <TextInput
-        value={tag2}
-        onChange={setTag2}
-        clear={clearTag2}
-        label={true}
-        wide={true}
-        name="Tag 2"
-        placeholder="Tag 2"
+      <Select 
+        label="Tag 2"
+        options={options}
+        onChange={e => {setTag2(e.target.value)}}
       />
-      <TextInput
-        value={tag3}
-        onChange={setTag3}
-        clear={clearTag3}
-        label={true}
-        wide={true}
-        name="Tag 3"
-        placeholder="Tag 3"
+      <Select 
+        label="Tag 3"
+        options={options}
+        onChange={e => {setTag3(e.target.value)}}
       />
       <div className={styles.createBubbleButton}>
         <ButtonBootstrap

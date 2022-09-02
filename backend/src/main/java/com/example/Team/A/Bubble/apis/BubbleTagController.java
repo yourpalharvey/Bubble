@@ -47,9 +47,6 @@ public class BubbleTagController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<BubbleTagsModel> addBubbleTag(@RequestBody BubbleTagsModel bubbleTag)
     {
-        System.out.println("\n\n\n\n\n\n");
-        System.out.println("Add BubbleTag");
-        System.out.println("\n\n\n\n\n\n");
         BubbleTagsModel newBubbleTag = new BubbleTagsModel(bubbleTagsService.addBubbleTag(bubbleTag));
         return ResponseEntity.ok(newBubbleTag);
     }

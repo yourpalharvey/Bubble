@@ -9,7 +9,7 @@ import { isAuth, getUsername } from "../../logic/auth";
 import { URLBASE } from "../../logic";
 import { getRequest } from "../../logic/requests";
 
-const createBubble = ({loggedIn, user, catData}) => {
+const createBubble = ({loggedIn, user, catData, tagData}) => {
   const [progress, setProgress] = useState(5);
   const [bubbleId, setBubbleId] = useState();
 
@@ -27,7 +27,7 @@ const createBubble = ({loggedIn, user, catData}) => {
         {progress <= 50 ? (
           <CreateBubble1 progress={progress} setProgress={setProgress} setBubbleId={setBubbleId} data={catData}/>
         ) : (
-          <CreateBubble2 progress={progress} setProgress={setProgress} bubble={bubbleId}/>
+          <CreateBubble2 progress={progress} setProgress={setProgress} data={tagData} bubbleId={bubbleId}/>
         )}
       </div>
     </Background>
@@ -50,7 +50,10 @@ export const getServerSideProps = async (ctx) => {
   const username = token!= null ? await getUsername(token) : null;
 
   // get category data from database
-  let response = await getRequest(`${URLBASE}/category`);
+  const response = await getRequest(`${URLBASE}/category`);
+
+  // get tags
+  const tags = await getRequest(`${URLBASE}/tags`);
   
 
   // get location
@@ -61,7 +64,8 @@ export const getServerSideProps = async (ctx) => {
     props: {
         loggedIn: valid,
         user: username,
-        catData: response
+        catData: response,
+        tagData: tags
     }
   } 
 
