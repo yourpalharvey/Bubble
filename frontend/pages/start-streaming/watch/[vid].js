@@ -27,6 +27,7 @@ export default function StreamWatch ({loggedIn, user, bubble, streams, streamDat
     // display streams
     const streamDataDisplay = streams.map(
       (stream) => <MiniWideBubble 
+        key={stream.id}
         url={`start-streaming/watch/${stream.signalId}`}
         text={bubble.title}
         image={stream.image}
