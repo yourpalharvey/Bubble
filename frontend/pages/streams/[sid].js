@@ -6,12 +6,28 @@ import { isAuth } from "../../logic/auth";
 import Head from "next/head";
 import { getStreams } from "../../logic/video";
 import styles from "../../styles/Streams.module.css";
+import { HomeTopContainer } from "../../containers/bubbleContainer";
+import { getBubbleTitle } from "../../logic/bubble";
+import { WideBubble } from "../../components/bubbles";
 
-const streams = ({loggedIn, streams}) => {
+const streams = ({loggedIn, streams, title}) => {
 
-    // display streams
 
-    
+    // randomise colours
+    let colours = ['--accent-red', '--teal', '--indigo', '--orange', '--blue', '--green'];
+    const randomise = max => {
+        return Math.floor(Math.random() * max);
+    }
+    const streamData = streams.map(
+        tag => <WideBubble 
+            key={tag.id}
+            image={tag.image}
+            url={`start-streaming/watch/${tag.signalId}`}
+            colour={`var(${colours[randomise(colours.length)]})`}
+        />
+    )
+
+
     return (
     <Background>
         <Navbar loggedIn={loggedIn} />
@@ -23,6 +39,9 @@ const streams = ({loggedIn, streams}) => {
         </Head>
 
         <div className={styles.container}>
+            <HomeTopContainer title ={title}>
+                {streamData}
+            </HomeTopContainer>
 
         </div>
 
@@ -46,7 +65,12 @@ export const getServerSideProps = async (ctx) => {
   
     // if the token exists, return wheteher it is valid, otherwise set it as false
     const valid = token != null ? await isAuth(token): false;
+    
+    // get streams of the bubble
     const streams = await getStreams(sid);
+    
+    // get title of bubble
+    const title = await getBubbleTitle(sid);
   
   
   
@@ -54,7 +78,8 @@ export const getServerSideProps = async (ctx) => {
     return {
       props: {
           loggedIn: valid,
-          streams: streams
+          streams: streams,
+          title: title
       }
     } 
   

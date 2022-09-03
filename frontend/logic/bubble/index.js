@@ -32,7 +32,6 @@ const addBubbleTag = async (data) => {
     }
 }
 
-export {createBubble, addBubbleTag, getBubblebyTagId, getTagTitle};
 
 // get all bubble where the tag is x
 const getBubblebyTagId = async (id) => {
@@ -56,3 +55,18 @@ const getTagTitle = async (id) => {
     const title = await getRequest(`${URLBASE}/tags/${id}`);
     return title.title[0];
 }
+
+// get Bubble
+const getBubbleTitle = async (id) => {
+    const title = await getRequest(`${URLBASE}/bubble/${id}`)
+    if (title.hasOwnProperty("title"))
+    {
+        return title.title;
+    }
+    else
+    {
+        return "Title error";
+    };
+}
+
+export {createBubble, addBubbleTag, getBubblebyTagId, getTagTitle, getBubbleTitle};
