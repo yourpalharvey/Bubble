@@ -69,4 +69,17 @@ const getBubbleTitle = async (id) => {
     };
 }
 
-export {createBubble, addBubbleTag, getBubblebyTagId, getTagTitle, getBubbleTitle};
+// get bubble data
+const getBubble = async (id) => {
+    const res = await getRequest(`${URLBASE}/bubble/${id}`)
+    if (res.hasOwnProperty("title"))
+    {
+        return res;
+    }
+    else
+    {
+        return "Title error";
+    };
+}
+
+export {createBubble, addBubbleTag, getBubblebyTagId, getTagTitle, getBubbleTitle, getBubble};

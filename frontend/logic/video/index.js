@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'; //updates the firebase object
 import 'firebase/firestore'; // runs firebase side effects
 import { URLBASE } from '..';
+import { getBubble } from '../bubble';
 import { deleteRequest, getRequest, postRequest } from '../requests';
 
 const config = {
@@ -78,6 +79,23 @@ const getStreams = async (id) => {
 }
 
 
+// get bubbleID from stream
+const getBubbleIdFromSignal = async (id) => {
+  const bubble = await getRequest(`${URLBASE}/streams/get/bubble-from-stream/${id}`);
+  return bubble;
+}
 
+const getBubbleFromSignal = async(id) => {
+  let bid = await getBubbleIdFromSignal(id);
+  let bubble = await getBubble(bid);
+  return bubble;
 
-export { firestore, addStreamToDatabase, servers, deleteStream, getStreams};
+}
+
+const getUserNameFromStream = async (id) => {
+  const userId = await getRequest(`${URLBASE}/streams/get/user/${id}`);
+  const name = await getRequest(`${URLBASE}/users/getUserFromId/${JSON.stringify(userId.username[0])}`);
+  return JSON.stringify(name.username[0]);
+}
+
+export { firestore, addStreamToDatabase, servers, deleteStream, getStreams, getBubbleIdFromSignal, getBubbleFromSignal, getUserNameFromStream};

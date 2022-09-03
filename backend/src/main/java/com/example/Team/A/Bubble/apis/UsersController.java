@@ -88,4 +88,12 @@ public class UsersController {
         returnObj.append("id", new UsersModel(usersService.isAuth(token)).getId());
         return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/getUserFromId/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> getUserFromId (@PathVariable( value = "id") int id)
+    {
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("username", usersService.getUsernameFromId(id));
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+    }
 }
