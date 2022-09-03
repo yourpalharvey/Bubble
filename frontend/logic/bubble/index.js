@@ -1,14 +1,14 @@
+import { URLBASE } from "..";
 import { postRequest } from "../requests";
-
-const URLBASE = "http://localhost:8080";
 
 const createBubble = async (data) => {
 
     // send postRequest
-    let response = await postRequest(`${URLBASE}/bubble/create`, data);
+    let response = await postRequest(`${URLBASE}/bubble`, data);
 
     if (response.hasOwnProperty("id"))
     {
+        console.log(response);
         return response.id;
     }
     else
@@ -17,4 +17,19 @@ const createBubble = async (data) => {
     }
 }
 
-export {createBubble};
+const addBubbleTag = async (data) => {
+    // send postRequest
+    let response = await postRequest(`${URLBASE}/bubble-tag`, data);
+
+    if (response.hasOwnProperty("id"))
+    {
+        console.log(response);
+        return response.id;
+    }
+    else
+    {
+        return "error";
+    }
+}
+
+export {createBubble, addBubbleTag};

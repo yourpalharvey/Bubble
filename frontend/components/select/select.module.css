@@ -1,0 +1,14 @@
+.selectContainer {
+    width: 25vw;
+    height: 5vh;
+
+    border-style: solid;
+    border-radius: 2.5vh;
+    border-color: var(--off-white);
+    border-width: 2px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
