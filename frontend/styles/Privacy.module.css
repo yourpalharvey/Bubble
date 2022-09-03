@@ -1,0 +1,22 @@
+.container {
+    width: 80vw;
+    margin: 5vh 10vw;
+    margin-top: 10vh;;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: #ffffff80;
+}
+
+.head {
+    color: var(--text);
+    size: 3vw;
+    margin: 2vh 0;
+}
+
+.body {
+    color: var(--text);
+    size: 1vw;
+}
