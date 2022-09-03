@@ -34,4 +34,11 @@ public class TagController {
         // return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
     }
 
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> getTitleById(@PathVariable(value = "id") int id)
+    {
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("title", tagsService.getTitleById(id));
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+    }
 }

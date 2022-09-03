@@ -28,7 +28,7 @@ export default function Home({loggedIn, user}) {
       key={tag.id}
       text={tag.title}
       image={tag.image}
-      url={`categories/${tag.category_id}`}
+      url={`categories/${tag.id}`}
       colour={`var(${colours[randomise(colours.length)]})`}
     />
   )
