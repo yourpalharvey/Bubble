@@ -14,4 +14,11 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findSearchItems(String search);
 
 
+
+@Repository
+public interface CategoryRepository extends JpaRepository<Category, Integer>
+{
+    // get all categories
+    @Query(value = "SELCT * FROM category;", nativeQuery = true)
+    List<Category> getAllCategories();
 }

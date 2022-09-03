@@ -76,9 +76,24 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/getUsername", method = RequestMethod.POST)
-    public ResponseEntity<String> getUsernameFromId(@RequestBody TokenModel token) {
+    public ResponseEntity<String> getUsernameFromToken(@RequestBody TokenModel token) {
         JSONObject returnObj = new JSONObject();
         returnObj.append("username", new UsersModel(usersService.isAuth(token)).getUsername().toString());
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getId", method = RequestMethod.POST)
+    public ResponseEntity<String> getIdFromToken(@RequestBody TokenModel token) {
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("id", new UsersModel(usersService.isAuth(token)).getId());
+        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getUserFromId/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> getUserFromId (@PathVariable( value = "id") int id)
+    {
+        JSONObject returnObj = new JSONObject();
+        returnObj.append("username", usersService.getUsernameFromId(id));
         return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
     }
 }
