@@ -7,9 +7,47 @@ import {SquareBubble, TallBubble, WideBubble} from '../components/bubbles'
 import { Footer } from '../components/footer'
 import { getCookie } from 'cookies-next';
 import { getUsername, isAuth } from '../logic/auth';
+import { useEffect, useState } from 'react'
+import { getRequest } from '../logic/requests'
+import { URLBASE } from '../logic'
 
 
 export default function Home({loggedIn, user}) {
+
+  const [tags, setTags] = useState([]);
+
+  // randomise colours
+  let colours = ['--accent-red', '--teal', '--indigo', '--orange', '--blue', '--green'];
+  const randomise = max => {
+    return Math.floor(Math.random() * max);
+  }
+
+  // get and set first 6 tags
+  const categoryData = tags.slice(0,6).map(
+    (tag) => <TallBubble
+      key={tag.id}
+      text={tag.title}
+      image={tag.image}
+      url={`categories/${tag.category_id}`}
+      colour={`var(${colours[randomise(colours.length)]})`}
+    />
+  )
+
+  // on page load, get tag data
+  useEffect(
+    () => {
+      const getTags = async () => {
+        let tagData = await getRequest(`${URLBASE}/tags`);
+        return tagData;
+      }
+
+      getTags()
+      .then(res => setTags(res));
+      // setTags(getTags)
+    },
+    []
+  )
+
 
 
   return (
@@ -50,7 +88,8 @@ export default function Home({loggedIn, user}) {
         </HomeTopContainer>
 
         <HomeTopContainer title="Top categories" seeMore="See more categories">
-        <TallBubble
+        {categoryData}
+        {/* <TallBubble
           text="Pop"
           image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660828077/Bubble/TaylorSwift_xoyk4t.png"
           url="categories/1"
@@ -94,7 +133,7 @@ export default function Home({loggedIn, user}) {
           image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Gallery_waibqd.png"
           url="categories/3"
           colour="var(--green)"
-        />
+        /> */}
         </HomeTopContainer>
 
         <HomeTopContainer title="Top streams" seeMore="See more streams">
