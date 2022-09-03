@@ -66,5 +66,46 @@ CREATE TABLE `bubbles`(
     CONSTRAINT FOREIGN KEY (`third_tag_id`) REFERENCES `third_tag` (`third_tag_id`)
 );
 
+insert into category(category_title)
+Values('music');
+insert into category(category_title)
+Values('sport');
+insert into category(category_title)
+Values('art');
+insert into category(category_title)
+Values('theatre');
+
+insert into sub_category(sub_category_title, category_id)
+Values('Rock', 1);
+insert into sub_category(sub_category_title, category_id)
+Values('pop', 1);
+insert into sub_category(sub_category_title, category_id)
+Values('jazz', 1);
+insert into sub_category(sub_category_title, category_id)
+Values('hip hop', 1);
+
+insert into sub_category(sub_category_title, category_id)
+Values('rugby', 2);
+insert into sub_category(sub_category_title, category_id)
+Values('football', 2);
+insert into sub_category(sub_category_title, category_id)
+Values('surfing', 2);
+insert into sub_category(sub_category_title, category_id)
+Values('go karting', 2);
+
+insert into sub_category(sub_category_title, category_id)
+Values('fine art', 3);
+insert into sub_category(sub_category_title, category_id)
+Values('experimental', 3);
+insert into sub_category(sub_category_title, category_id)
+Values('modern art', 3);
+
+insert into sub_category(sub_category_title, category_id)
+Values('musical', 4);
+insert into sub_category(sub_category_title, category_id)
+Values('spoken word', 4);
+insert into sub_category(sub_category_title, category_id)
+Values('outdoor theatre', 4);
+
 Select * 
 from users
