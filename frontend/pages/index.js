@@ -66,7 +66,7 @@ export default function Home({loggedIn, user}) {
             text="Phoebe Bridgers"
             date="Live Now"
             image="https://res.cloudinary.com/ddrwijehn/image/upload/v1661780741/Bubble/image_1_2_sbt0at.png"
-            url="/hosted"
+            url="hosted"
             colour="var(--accent-red)"
           />
 

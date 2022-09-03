@@ -15,11 +15,6 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -30,15 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/categories/[tid]": [
+    "/start-streaming/watch/[vid]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/categories/[tid].js"
+      "static/chunks/pages/start-streaming/watch/[vid].js"
     ],
-    "/streams/[sid]": [
+    "/watchStreams": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/streams/[sid].js"
+      "static/chunks/pages/watchStreams.js"
     ]
   },
   "ampFirstPages": []

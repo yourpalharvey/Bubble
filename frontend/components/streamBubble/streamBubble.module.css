@@ -6,8 +6,6 @@
 
     border-radius: 1vh;
     position: relative;
-    top: -100px;
-    left: 190px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,8 +40,6 @@
 
     border-radius: 1vh;
     position: relative;
-    top: -50px;
-    left: 190px;
     display: flex;
     flex-direction: row;
     justify-content: center;
