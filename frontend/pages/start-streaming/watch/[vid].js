@@ -12,20 +12,29 @@ import { CurrentVideoBubble, SameEventVideoBubble } from '../../../components/st
 import { getCookie } from "cookies-next";
 import { isAuth, getUsername } from "../../../logic/auth";
 import { useEffect, useRef, useState } from 'react'
-import { servers, firestore } from '../../../logic/video'
+import { servers, firestore, getBubbleFromSignal, getStreams, getUserNameFromUserId, getUserNameFromStream } from '../../../logic/video'
 import { useRouter } from "next/router";
 import { ButtonBootstrap } from '../../../objects/buttonBootstrap'
 
-export default function StreamWatch ({loggedIn, user}) {
+export default function StreamWatch ({loggedIn, user, bubble, streams, streamData}) {
 
-    const [pc, setPC] = useState();
+    // const [pc, setPC] = useState();
     const remoteVideoRef = useRef();
 
     const router = useRouter();
     const {vid} = router.query;
 
+    // display streams
+    const streamDataDisplay = streams.map(
+      (stream) => <MiniWideBubble 
+        url={`start-streaming/watch/${stream.signalId}`}
+        text={bubble.title}
+        image={stream.image}
+      />
+    )
 
-    const answerHandler = async () => {
+
+    const answerHandler = async (pc) => {
         console.log('Joining the call ....');
         // change this next line
         const callId = vid;
@@ -76,7 +85,9 @@ export default function StreamWatch ({loggedIn, user}) {
 
     useEffect(
         () => {
-            setPC(new RTCPeerConnection(servers));
+            // let pc = new RTCPeerConnection(servers);
+            answerHandler(new RTCPeerConnection(servers))
+            .catch(console.error);
         },
         []
     )
@@ -94,72 +105,57 @@ export default function StreamWatch ({loggedIn, user}) {
           />
           <link rel="icon" href="/logo.png" />
         </Head>
-        <div className={styles.videoContainerParent}>
+
+        <div className={styles.container}>
+          
+          <div className={styles.videoContainer}>
+            <div className={styles.videoComponent}>
+              <video className={styles.videoPlayer} ref={remoteVideoRef} controls autoPlay/>
+            </div>
+            <div className={styles.infoContainer}>
+              <CurrentVideoBubble 
+                text={bubble.title}
+                username={streamData}
+                image={bubble.image}
+                url={`streams/${bubble.id}`}
+              />
+              {/* <br />
+              <SameEventVideoBubble 
+                heading="heading"
+                streamScore="x Streams"
+                image="/phoebeBridges.png"
+              /> */}
+            </div>
+          </div>
+
+          <div className={styles.streamsContainer}>
+            <div className={styles.streamsTitle}>
+              <h4>
+                Other Streams in this bubble
+              </h4>
+           </div>
+            <div className={styles.streamBubbleContainer}>
+              {streamDataDisplay}
+            </div>
+
+          </div>
+
+        </div>
+        
+        {/* <div className={styles.videoContainerParent}>
             <video className={styles.videoContainer} ref={remoteVideoRef} autoPlay/>
         </div>
         <div className={styles.videoButtonContainer}>
             <ButtonBootstrap
-            text="Start Stream"
+            text="Play"
             onClick={answerHandler}
             primaryWide={true}
             />
-        </div>
-        {/* <HostedEventsContainer title="Upcoming events"> */}
-        {/* <div className={styles.streamPageContainer}>
-          <div className={styles.videoPlayer}>
-            
-          </div>
-
-          
-
-          <div className={styles.eventInfoBubble}>
-            <CurrentVideoBubble 
-                  text="Phoebe Bridgers Live"
-                  username="StreamerDreamer"
-                  image="/phoebeBridges.png"
-            />
-          </div>
-          
-          <div className={styles.videoInfoBubble}>
-            <SameEventVideoBubble 
-              heading="Bubble Phoebe Bridgers"
-              streamScore="480 Streams"
-              image="/phoebeBridges.png"
-            />
-          </div>
-          <br></br>
-          <VideoStreamContainer title={`Other streams from the the user`}>
-            <MiniWideBubble
-              eventName="testing"
-              userName="July 28th"
-              image="/phoebeStream.png"
-              url="categories/1"
-            />
-
-            <MiniWideBubble
-              text="testing 2"
-              date="July 28th"
-              image="/phoebeStream.png"
-              url="categories/2"
-            />
-
-            <MiniWideBubble
-              text="testing 3"
-              date="July 28th"
-              image="/phoebeStream.png"
-              url="categories/3"
-            />
-
-            <MiniWideBubble
-              text="testing"
-              date="July 28th"
-              image="/phoebeStream.png"
-              url="categories/1"
-            />
-          </VideoStreamContainer>
         </div> */}
+        {/* <HostedEventsContainer title="Upcoming events"> */}
+        
 
-        {/*<Footer loggedInJoinBubble={true}/>*/}
+        <Footer loggedInJoinBubble={true}/>
       </Background>
     );
 }
@@ -168,6 +164,7 @@ export const getServerSideProps = async (ctx) => {
 
   // get the req and res objects from context
   const {req, res} = ctx;
+  const {vid} = ctx.query;
 
   // get the token cookie
   const token = getCookie("token", {req, res});
@@ -176,6 +173,15 @@ export const getServerSideProps = async (ctx) => {
   const valid = token != null ? await isAuth(token): false;
   const username = token!= null ? await getUsername(token) : null;
 
+  // get bubble data from signal
+  const bubble = await getBubbleFromSignal(vid);
+
+  // get other streams
+  const streams = await getStreams(bubble.id);
+  
+  // get streamer
+  const streamData = await getUserNameFromStream(vid);
+
 
 
   // return props
@@ -183,6 +189,10 @@ export const getServerSideProps = async (ctx) => {
     props: {
         loggedIn: valid,
         user: username,
+        streams: streams,
+        bubble: bubble,
+        streamData: streamData
+
     }
   } 
 

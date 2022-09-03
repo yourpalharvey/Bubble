@@ -48,5 +48,11 @@ public class BubbleTagsServiceImplementation  implements BubbleTagsService{
         bubbleTags.save(newBubbleTag);
         return newBubbleTag;
     }
+
+    @Override
+    public List<Integer> getBubbleIdsByTagId(int id)
+    {
+        return bubbleTags.getBubbleIdsFromTagId(id);
+    }
     
 }

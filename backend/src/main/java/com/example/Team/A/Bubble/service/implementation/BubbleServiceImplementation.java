@@ -39,5 +39,22 @@ public class BubbleServiceImplementation  implements BubbleService{
         return newBubble;
     }
 
+    @Override
+    public List<Bubbles> getBubblesByCategoryId(int id)
+    {
+        return bubblesRepository.getBubbleByCategoryId(id);
+    }
+
+    @Override
+    public Bubbles getBubbleById(int id)
+    {
+        return bubblesRepository.getBubbleById(id);
+    }
+
+    @Override
+    public List<Bubbles> getBubblesByTag(int id)
+    {
+        return bubblesRepository.getBubbleByTag(id);
+    }
 
 }

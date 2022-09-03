@@ -36,7 +36,7 @@ const startStream = ({userId, bubbles}) => {
 
   return (
     <Background>
-      {/*<Navbar />*/}
+      <Navbar  loggedIn={userId ? true : false}/>
 
       <Head>
         <title>Bubble - Start Streaming</title>
@@ -44,7 +44,7 @@ const startStream = ({userId, bubbles}) => {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <div className={styles.container}>
+      <div className={styles.containerColumm}>
         <div className={styles.startStreamingButton}>
           <ButtonBootstrap
             text="Create stream"

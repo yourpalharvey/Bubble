@@ -1,6 +1,8 @@
 package com.example.Team.A.Bubble.repositories;
 
 import com.example.Team.A.Bubble.dto.Streams;
+import com.example.Team.A.Bubble.dto.Users;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,9 +26,16 @@ public interface StreamsRepository extends JpaRepository<Streams, Integer> {
     @Query(value = "SELECT * FROM streams s WHERE s.id = :id ;", nativeQuery = true)
     Streams getStream(Integer id);
 
+    // getBubbleId by Stream signal
+    @Query(nativeQuery = true, value = "SELECT bubble_id FROM streams WHERE signal_id = :signal ;")
+    Integer getBubbleIdBySignal(String signal);
+
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM streams WHERE signal_id = :signalName ", nativeQuery = true)
     void deleteStream(String signalName);
+
+    @Query(value = "SELECT user_id FROM streams WHERE signal_id = :signal ;", nativeQuery = true)
+    int getUserFromSignal(String signal);
     
 }

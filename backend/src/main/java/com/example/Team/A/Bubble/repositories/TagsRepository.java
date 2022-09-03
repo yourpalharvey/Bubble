@@ -11,5 +11,8 @@ public interface TagsRepository extends JpaRepository<Tags, Integer>{
 
     @Query(value = "SELECT * FROM tags;", nativeQuery = true)
     List<Tags> getAllTags();
+
+    @Query(value = "SELECT title FROM tags WHERE id = :id ;", nativeQuery = true)
+    String getTitleById(int id);
     
 }

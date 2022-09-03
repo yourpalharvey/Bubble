@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface TagsService {
     List<Tags> getAllTags();    
+    String getTitleById(int id);
 }

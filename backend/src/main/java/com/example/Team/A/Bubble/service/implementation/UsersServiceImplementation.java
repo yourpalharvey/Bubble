@@ -240,4 +240,10 @@ public class UsersServiceImplementation implements UsersService {
 
         return user;
     }
+
+    @Override
+    public String getUsernameFromId(int id)
+    {
+        return usersRepository.findUsernameById(id);
+    }
 }

@@ -22,4 +22,9 @@ public class TagsServiceImplementation implements TagsService{
         return tagsRepository.getAllTags();
     }
     
+    @Override
+    public String getTitleById(int id)
+    {
+        return tagsRepository.getTitleById(id);
+    }
 }

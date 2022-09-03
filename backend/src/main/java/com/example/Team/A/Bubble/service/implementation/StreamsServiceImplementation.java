@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.example.Team.A.Bubble.service.StreamsService;
 import com.example.Team.A.Bubble.repositories.StreamsRepository;
 import com.example.Team.A.Bubble.dto.Streams;
+import com.example.Team.A.Bubble.dto.Users;
 import com.example.Team.A.Bubble.models.StreamsModel;
 
 import lombok.NonNull;
@@ -60,6 +61,18 @@ public class StreamsServiceImplementation implements StreamsService{
             return false;
 
         }
+    }
+
+    @Override
+    public Integer getBubbleIdBySignal(String signal)
+    {
+        return streamsRepository.getBubbleIdBySignal(signal);
+    }
+
+    @Override
+    public int getUserFromSignal(String signal)
+    {
+        return streamsRepository.getUserFromSignal(signal);
     }
 
     

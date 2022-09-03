@@ -14,4 +14,7 @@ public interface BubbleTagsService {
 
     // add bubble Tag
     BubbleTags addBubbleTag(BubbleTagsModel bubbleTag);
+
+    // get BubbleIds from Tag id
+    List<Integer> getBubbleIdsByTagId(int id);
 }

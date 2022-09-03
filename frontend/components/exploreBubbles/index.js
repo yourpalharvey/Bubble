@@ -2,10 +2,39 @@ import styles from "./exploreBubbles.module.css";
 import { ExploreContentContainer } from "../../containers/exploreContentContainer";
 import { MidBubble, TallBubble } from "../bubbles";
 
-export const ExploreBubbles = () => {
+export const ExploreBubbles = ({title, data}) => {
+
+  let colours = ['--accent-red', '--teal', '--indigo', '--orange', '--blue', '--green'];
+
+  const randomise = (max) => {
+    return Math.floor(Math.random() * max)
+  }
+
+  const categoryData = data.slice(0,12).map(
+    (tag) => <MidBubble
+      key={tag.id}
+      text={tag.title}
+      streamCount="22 streams"
+      tag1="Pop"
+      tag2="Country"
+      tag3="Acoustic"
+      image={tag.image}
+      url={`streams/${tag.id}`}
+      colour={`var(${colours[randomise(colours.length)]})`}
+    />
+  )
+
+  if (data != null)
+  {
+    return (
+    <ExploreContentContainer topRow={true} title={title ? title : "All bubbles"}>
+        {categoryData}
+    </ExploreContentContainer>
+    )
+  }
   return (
     <>
-      <ExploreContentContainer topRow={true} title="All bubbles">
+      <ExploreContentContainer topRow={true} title={title ? title : "All bubbles"}>
         <MidBubble
           text="Taylor Swift Live"
           streamCount="22 streams"

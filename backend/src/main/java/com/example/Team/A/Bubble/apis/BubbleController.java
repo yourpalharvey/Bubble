@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import com.example.Team.A.Bubble.dto.Bubbles;
 import com.example.Team.A.Bubble.models.BubbleModel;
 
 @RestController
@@ -41,6 +42,24 @@ public class BubbleController {
     public ResponseEntity<BubbleModel> addBubble(@RequestBody BubbleModel bubble) {
         BubbleModel newBubble = new BubbleModel(bubbleService.addBubble(bubble));
         return ResponseEntity.ok(newBubble);
+    }
+
+    // get Bubbles where tagid is x
+    @RequestMapping(path = "/category/{id}",method = RequestMethod.GET)
+    public List<BubbleModel> getBubblesInCategory(@PathVariable(value = "id") int id) {
+        return bubbleService.getBubblesByCategoryId(id).stream().map(BubbleModel::new).collect(Collectors.toList());
+    }
+
+    // get bubbles by id
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public Bubbles getBubblesById(@PathVariable(value = "id") int id) {
+        return bubbleService.getBubbleById(id);
+    }
+
+    @RequestMapping(path = "/tag/{id}", method = RequestMethod.GET)
+    public List<BubbleModel> getBubbleFromTag(@PathVariable(value = "id") int id)
+    {
+        return bubbleService.getBubblesByTag(id).stream().map(BubbleModel::new).collect(Collectors.toList());
     }
 
     

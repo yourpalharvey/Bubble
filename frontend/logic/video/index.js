@@ -1,7 +1,8 @@
 import firebase from 'firebase/app'; //updates the firebase object
 import 'firebase/firestore'; // runs firebase side effects
 import { URLBASE } from '..';
-import { deleteRequest, postRequest } from '../requests';
+import { getBubble } from '../bubble';
+import { deleteRequest, getRequest, postRequest } from '../requests';
 
 const config = {
   apiKey: "AIzaSyAa_gVK4beOjjv3QjdHUDm2Gg6dowWUKFg",
@@ -72,9 +73,29 @@ const deleteStream = async (data) => {
 // TODO: get stream from database
 
 // TODO: get all streams from a bubble
+const getStreams = async (id) => {
+  const streams = await getRequest(`${URLBASE}/streams/get/bubble/${id}`);
+  return streams;
+}
 
 
+// get bubbleID from stream
+const getBubbleIdFromSignal = async (id) => {
+  const bubble = await getRequest(`${URLBASE}/streams/get/bubble-from-stream/${id}`);
+  return bubble;
+}
 
+const getBubbleFromSignal = async(id) => {
+  let bid = await getBubbleIdFromSignal(id);
+  let bubble = await getBubble(bid);
+  return bubble;
 
+}
 
-export { firestore, addStreamToDatabase, servers, deleteStream};
+const getUserNameFromStream = async (id) => {
+  const userId = await getRequest(`${URLBASE}/streams/get/user/${id}`);
+  const name = await getRequest(`${URLBASE}/users/getUserFromId/${JSON.stringify(userId.username[0])}`);
+  return JSON.stringify(name.username[0]);
+}
+
+export { firestore, addStreamToDatabase, servers, deleteStream, getStreams, getBubbleIdFromSignal, getBubbleFromSignal, getUserNameFromStream};

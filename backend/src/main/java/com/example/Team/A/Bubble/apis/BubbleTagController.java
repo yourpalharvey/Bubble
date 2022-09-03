@@ -51,4 +51,11 @@ public class BubbleTagController {
         return ResponseEntity.ok(newBubbleTag);
     }
 
+    // get bubble_ids for tag id
+    @RequestMapping(path = "/tag/{id}", method = RequestMethod.GET)
+    public List<Integer> getBubbleIdsByTagId(@PathVariable(value = "id") int id)
+    {
+        return bubbleTagsService.getBubbleIdsByTagId(id); //.stream().map(BubbleTagsModel::new).collect(Collectors.toList());
+    }
+
 }
