@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'; //updates the firebase object
 import 'firebase/firestore'; // runs firebase side effects
 import { URLBASE } from '..';
-import { deleteRequest, postRequest } from '../requests';
+import { deleteRequest, getRequest, postRequest } from '../requests';
 
 const config = {
   apiKey: "AIzaSyAa_gVK4beOjjv3QjdHUDm2Gg6dowWUKFg",
@@ -72,9 +72,12 @@ const deleteStream = async (data) => {
 // TODO: get stream from database
 
 // TODO: get all streams from a bubble
+const getStreams = async (id) => {
+  const streams = await getRequest(`${URLBASE}/streams/get/bubble/${id}`);
+  return streams;
+}
 
 
 
 
-
-export { firestore, addStreamToDatabase, servers, deleteStream};
+export { firestore, addStreamToDatabase, servers, deleteStream, getStreams};
