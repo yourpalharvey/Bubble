@@ -189,6 +189,8 @@ function DropdownMenu(props) {
     );
   }
 
+  if (props.loggedIn) {
+
   return (
     <div className={styles.dropdown}>
       <DropdownItem url="/explore">
@@ -207,4 +209,22 @@ function DropdownMenu(props) {
       <DropdownItem url="logout">Log Out</DropdownItem>
     </div>
   );
+  
+} else {
+
+  return (
+    <div className={styles.dropdown}>
+      <DropdownItem url="/myaccount">
+          Settings
+      </DropdownItem>
+      <hr></hr>
+      <DropdownItem url="/privacy">
+          Privacy Policy
+      </DropdownItem>
+      {/* <hr></hr> */}
+    </div>
+  );
+
+}
+
 }
