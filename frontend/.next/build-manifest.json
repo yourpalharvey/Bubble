@@ -15,6 +15,7 @@
   ],
   "rootMainFiles": [],
   "pages": {
+<<<<<<< HEAD
     "/": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -25,6 +26,8 @@
       "static/chunks/main.js",
       "static/chunks/pages/404.js"
     ],
+=======
+>>>>>>> origin/main
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -35,6 +38,7 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+<<<<<<< HEAD
     "/categories/Pop": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -49,6 +53,12 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/explore/music.js"
+=======
+    "/privacy": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/privacy.js"
+>>>>>>> origin/main
     ]
   },
   "ampFirstPages": []
