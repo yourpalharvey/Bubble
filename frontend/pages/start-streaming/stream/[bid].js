@@ -6,7 +6,7 @@ import styles from '../../../styles/StartStreaming.module.css'
 import { getCookie } from "cookies-next";
 import { isAuth, getUsername } from "../../../logic/auth";
 import { Navbar } from "../../../components/navbar";
-import { pc } from "../../../logic/video";
+import { servers } from "../../../logic/video";
 
 const bubbleStream = ({loggedIn, user}) => {
     const router = useRouter();
@@ -46,7 +46,7 @@ const bubbleStream = ({loggedIn, user}) => {
     };
 
     // handle Start Stream
-    const startStream = async () => {
+    const startStream = async (pc) => {
 		// get the video feed form webcam
 		const setVideo = await getVideo();
 
@@ -106,7 +106,7 @@ const bubbleStream = ({loggedIn, user}) => {
         <div className={styles.videoButtonContainer}>
           <ButtonBootstrap
             text={buttonText}
-            onClick={startStream}
+            onClick={startStream(new RTCPeerConnection(servers))}
             primaryWide={true}
           />
         </div>
