@@ -29,6 +29,13 @@ CREATE TABLE `category` (
   `title` varchar(25)
 );
 
+CREATE TABLE `sub_category`(
+    `sub_category_id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `sub_category_title` varchar(25),
+    `category_id` int NOT NULL,
+    CONSTRAINT FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`)
+);
+
 CREATE TABLE `tags` (
   `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` varchar(25),
@@ -70,57 +77,63 @@ CREATE TABLE `streams` (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-insert into category(category_title)
-Values('music');
-insert into category(category_title)
-Values('sport');
-insert into category(category_title)
-Values('art');
-insert into category(category_title)
-Values('theatre');
-
-insert into sub_category(sub_category_title, category_id)
-Values('Rock', 1);
-insert into sub_category(sub_category_title, category_id)
-Values('pop', 1);
-insert into sub_category(sub_category_title, category_id)
-Values('jazz', 1);
-insert into sub_category(sub_category_title, category_id)
-Values('hip hop', 1);
-
-insert into sub_category(sub_category_title, category_id)
-Values('rugby', 2);
-insert into sub_category(sub_category_title, category_id)
-Values('football', 2);
-insert into sub_category(sub_category_title, category_id)
-Values('surfing', 2);
-insert into sub_category(sub_category_title, category_id)
-Values('go karting', 2);
-
-insert into sub_category(sub_category_title, category_id)
-Values('fine art', 3);
-insert into sub_category(sub_category_title, category_id)
-Values('experimental', 3);
-insert into sub_category(sub_category_title, category_id)
-Values('modern art', 3);
-
-insert into sub_category(sub_category_title, category_id)
-Values('musical', 4);
-insert into sub_category(sub_category_title, category_id)
-Values('spoken word', 4);
-insert into sub_category(sub_category_title, category_id)
-Values('outdoor theatre', 4);
-
-Select *
-from users
-
-
-
-
 INSERT INTO `category`(`title`) VALUES ('Sport');
 INSERT INTO `category`(`title`) VALUES ('Music');
 INSERT INTO `category`(`title`) VALUES ('Theatre');
 INSERT INTO `category`(`title`) VALUES ('Art');
+
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('rugby', 1);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('football', 1);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('surfing', 1);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('go karting', 1);
+
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('rock', 2);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('pop', 2);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('jazz', 2);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('hip hop', 2);
+
+
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('musical', 3);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('spoken word', 3);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('outdoor theatre', 3);
+
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('fine art', 4);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('experimental', 4);
+INSERT INTO `sub_category`(`sub_category_title`, `category_id`) VALUES('modern art', 4);
+
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('Rock', 1);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('pop', 1);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('jazz', 1);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('hip hop', 1);
+
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('rugby', 2);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('football', 2);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('surfing', 2);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('go karting', 2);
+
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('fine art', 3);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('experimental', 3);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('modern art', 3);
+
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('musical', 4);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('spoken word', 4);
+-- insert into sub_category(sub_category_title, category_id)
+-- Values('outdoor theatre', 4);
+
+
 
 INSERT INTO `tags`(`title`, `category_id`, `image`) VALUES ('Skateboarding', 1, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Skateboard_l6mtul.png');
 INSERT INTO `tags`(`title`, `category_id`, `image`) VALUES ('Go-karting', 1, 'https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/GoKart_b7gui5.png');

@@ -18,8 +18,8 @@ public class UsersModel {
     private String password;
     private String email;
     private String dob;
-    private String token;
-    private Boolean auth;
+//    private String token;
+//    private Boolean auth;
     private boolean isChanged;
     // private String firstName;
     // private String lastName;
@@ -30,8 +30,8 @@ public class UsersModel {
         this.password = users.getPassword();
         this.email = users.getEmail();
         this.dob = users.getDob();
-        this.token = users.getToken();
-        this.auth = users.getAuth();
+//        this.token = users.getToken();
+//        this.auth = users.getAuth();
         // this.firstName = users.getFirstName();
         // this.lastName = users.getLastName();
     }

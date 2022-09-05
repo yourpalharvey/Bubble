@@ -32,11 +32,11 @@ public class Users {
     @Column(name = "dob")
     private String dob;
 
-    @Column(name = "token")
-    private String token;
-
-    @Column(name = "auth")
-    private Boolean auth;
+//    @Column(name = "token")
+//    private String token;
+//
+//    @Column(name = "auth")
+//    private Boolean auth;
 
 
 

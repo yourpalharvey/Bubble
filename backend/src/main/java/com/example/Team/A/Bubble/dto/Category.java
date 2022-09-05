@@ -19,13 +19,6 @@ public class Category {
 
     @Column(name = "title")
     private String title;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "native")
-    @Column(name = "category_id")
-    private Integer categoryId;
-
-    @Column(name = "category_title")
-    private String categoryTitle;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SubCategory> subCategories;

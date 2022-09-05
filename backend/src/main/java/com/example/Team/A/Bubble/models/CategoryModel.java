@@ -17,18 +17,12 @@ public class CategoryModel {
 
     private int id;
     private String title;
+    List<SubCategoryModel> subCategoryModels;
 
     public CategoryModel(Category category)
     {
         this.id = category.getId();
         this.title = category.getTitle();
-    private int categoryId;
-    private String categoryTitle;
-    private List<SubCategoryModel> subCategoryModels;
-
-    public CategoryModel(Category category){
-        this.categoryId = category.getCategoryId();
-        this.categoryTitle = category.getCategoryTitle();
         this.subCategoryModels = !ObjectUtils.isEmpty(category.getSubCategories()) ?
                 category.getSubCategories().stream().map(SubCategoryModel::new).collect(Collectors.toList()) : null;
     }

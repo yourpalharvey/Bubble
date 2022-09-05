@@ -15,6 +15,6 @@ public interface UsersService {
     Users signIn(SignInModel signInModel);
     Users forgetPassword(ForgetPasswordModel forgetPasswordModel);
     boolean checkUsernameIsAvailable(String username);
-    Users isAuth(TokenModel tokenModel);
+//    Users isAuth(TokenModel tokenModel);
     String getUsernameFromId(int id);
 }

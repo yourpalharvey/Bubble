@@ -17,6 +17,6 @@ public class SubCategoryModel {
         this.subCategoryId = subCategory.getSubCategoryId();
         this.subCategoryTitle = subCategory.getSubCategoryTitle();
         this.categoryId = !ObjectUtils.isEmpty(subCategory.getCategory()) ?
-                subCategory.getCategory().getCategoryId() : null;
+                subCategory.getCategory().getId() : null;
     }
 }

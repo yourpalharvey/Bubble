@@ -1,5 +1,6 @@
 package com.example.Team.A.Bubble.apis;
 
+import com.example.Team.A.Bubble.dto.Users;
 import com.example.Team.A.Bubble.models.ForgetPasswordModel;
 import com.example.Team.A.Bubble.models.TokenModel;
 import com.example.Team.A.Bubble.models.SignInModel;
@@ -43,10 +44,11 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
-    public ResponseEntity<String> signInUser(@RequestBody SignInModel signInModel){
-        JSONObject returnObj = new JSONObject();
-        returnObj.append("token", new UsersModel(usersService.signIn(signInModel)).getToken().toString());
-        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+    public ResponseEntity<UsersModel> signInUser(@RequestBody SignInModel signInModel){
+//        JSONObject returnObj = new JSONObject();
+//        returnObj.append("token", new UsersModel(usersService.signIn(signInModel)).getToken().toString());
+//        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+        return ResponseEntity.ok(new UsersModel(usersService.signIn(signInModel)));
     }
 
     @RequestMapping(value = "/forgetPassword", method = RequestMethod.PUT)
@@ -68,26 +70,26 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value = "/isAuth", method = RequestMethod.POST)
-    public ResponseEntity<String> isAuthorised(@RequestBody TokenModel token) {
-        JSONObject returnObj = new JSONObject();
-        returnObj.append("authorised", new UsersModel(usersService.isAuth(token)).getAuth().toString());
-        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/getUsername", method = RequestMethod.POST)
-    public ResponseEntity<String> getUsernameFromToken(@RequestBody TokenModel token) {
-        JSONObject returnObj = new JSONObject();
-        returnObj.append("username", new UsersModel(usersService.isAuth(token)).getUsername().toString());
-        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/getId", method = RequestMethod.POST)
-    public ResponseEntity<String> getIdFromToken(@RequestBody TokenModel token) {
-        JSONObject returnObj = new JSONObject();
-        returnObj.append("id", new UsersModel(usersService.isAuth(token)).getId());
-        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/isAuth", method = RequestMethod.POST)
+//    public ResponseEntity<String> isAuthorised(@RequestBody TokenModel token) {
+//        JSONObject returnObj = new JSONObject();
+//        returnObj.append("authorised", new UsersModel(usersService.isAuth(token)).getAuth().toString());
+//        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value = "/getUsername", method = RequestMethod.POST)
+//    public ResponseEntity<String> getUsernameFromToken(@RequestBody TokenModel token) {
+//        JSONObject returnObj = new JSONObject();
+//        returnObj.append("username", new UsersModel(usersService.isAuth(token)).getUsername().toString());
+//        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(value = "/getId", method = RequestMethod.POST)
+//    public ResponseEntity<String> getIdFromToken(@RequestBody TokenModel token) {
+//        JSONObject returnObj = new JSONObject();
+//        returnObj.append("id", new UsersModel(usersService.isAuth(token)).getId());
+//        return new ResponseEntity<String>(returnObj.toString(), HttpStatus.OK);
+//    }
 
     @RequestMapping(value = "/getUserFromId/{id}", method = RequestMethod.GET)
     public ResponseEntity<String> getUserFromId (@PathVariable( value = "id") int id)

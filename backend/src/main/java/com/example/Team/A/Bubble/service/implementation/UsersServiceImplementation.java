@@ -79,9 +79,9 @@ public class UsersServiceImplementation implements UsersService {
                 if (user.getEmail() != null){
                     helper.setTo(user.getEmail());
                     helper.setSubject("Welcome!");
-                    helper.setText("Your account has been verified\n" +
+                    helper.setText("Your account has been created\n" +
                             "\n" +
-                            "Hi, " + " " + user.getUsername() + "\n" + "\n" +
+                            "Hi," + " " + user.getUsername() + "\n" + "\n" +
                             "Congratulations, your account has been created!\n" +
                             "As always, if you have any questions please don’t hesitate to reach out to us via email at team44bubble@gmail.com\n" +
                             "\n" +
@@ -112,20 +112,20 @@ public class UsersServiceImplementation implements UsersService {
             int userID = user.getId();
 
             // use id to create JWT
-            try {
-                Algorithm algorithm = Algorithm.HMAC256("secret");
-                String token = JWT.create()
-                        .withIssuer("auth0")
-                        .withClaim("userID", userID)
-                        .sign(algorithm);
-
-                // return token
-                user.setToken(token);
-                return user;
-            } catch (JWTCreationException exception) {
-                System.out.println(exception);
-                //Invalid Signing configuration / Couldn't convert Claims.
-            }
+//            try {
+//                Algorithm algorithm = Algorithm.HMAC256("secret");
+//                String token = JWT.create()
+//                        .withIssuer("auth0")
+//                        .withClaim("userID", userID)
+//                        .sign(algorithm);
+//
+//                // return token
+//                user.setToken(token);
+//                return user;
+//            } catch (JWTCreationException exception) {
+//                System.out.println(exception);
+//                //Invalid Signing configuration / Couldn't convert Claims.
+//            }
 
             // return Token
             return user;
@@ -192,33 +192,33 @@ public class UsersServiceImplementation implements UsersService {
         return false;
     }
 
-    @Override
-    public Users isAuth(TokenModel tokenModel) {
-        String token = tokenModel.getToken();
-        // decode JWT
-        try {
-            Algorithm algorithm = Algorithm.HMAC256("secret"); //use more secure key
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("auth0")
-                    .build(); //Reusable verifier instance
-            DecodedJWT jwt = verifier.verify(token);
-
-            // user id
-            int userid = jwt.getClaim("userID").asInt();
-
-            // find user by id
-            Users user = usersRepository.findUserById(userid);
-
-            // add getAuth = true;
-            user.setAuth(true);
-
-            // if user != null, return true
-            return user;
-        } catch (JWTVerificationException exception) {
-            //Invalid signature/claims
-            return new Users();
-        }
-    }
+//    @Override
+//    public Users isAuth(TokenModel tokenModel) {
+//        String token = tokenModel.getToken();
+//        // decode JWT
+//        try {
+//            Algorithm algorithm = Algorithm.HMAC256("secret"); //use more secure key
+//            JWTVerifier verifier = JWT.require(algorithm)
+//                    .withIssuer("auth0")
+//                    .build(); //Reusable verifier instance
+//            DecodedJWT jwt = verifier.verify(token);
+//
+//            // user id
+//            int userid = jwt.getClaim("userID").asInt();
+//
+//            // find user by id
+//            Users user = usersRepository.findUserById(userid);
+//
+//            // add getAuth = true;
+//            user.setAuth(true);
+//
+//            // if user != null, return true
+//            return user;
+//        } catch (JWTVerificationException exception) {
+//            //Invalid signature/claims
+//            return new Users();
+//        }
+//    }
 
     public boolean checkUserName(List<Users> list, String userName) {
         return list.stream().anyMatch(users1 -> Objects.equals(users1.getUsername(), userName));
