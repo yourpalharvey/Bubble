@@ -206,7 +206,7 @@ function DropdownMenu(props) {
             Privacy Policy
         </DropdownItem>
         <hr></hr>
-        <DropdownItem url="logout">Log Out</DropdownItem>
+        <DropdownItem url="/">Log Out</DropdownItem>
       </div>
     );
   
