@@ -52,7 +52,7 @@ export default function Home({loggedIn, user}) {
 
   return (
     <Background>
-      <Navbar loggedIn={loggedIn} />
+      <Navbar loggedIn={true} />
 
       <Head>
         <title>Bubble</title>

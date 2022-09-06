@@ -70,7 +70,7 @@ export const Navbar = (props) => {
             <NavItems>
               <NavIcons icon={<SettingsIcon />}>
                 {/* Dropdown */}
-                <DropdownMenu>
+                <DropdownMenu loggedIn={props.loggedIn}>
 
                 </DropdownMenu>
               </NavIcons>
@@ -125,7 +125,7 @@ export const Navbar = (props) => {
             <NavItems>
               <NavIcons icon={<SettingsIcon />}>
                 {/* Dropdown */}
-                <DropdownMenu>
+                <DropdownMenu loggedIn={props.loggedIn}>
 
                 </DropdownMenu>
               </NavIcons>
@@ -189,22 +189,42 @@ function DropdownMenu(props) {
     );
   }
 
-  return (
-    <div className={styles.dropdown}>
-      <DropdownItem url="/explore">
-        {/* <Link href="/explore" className={"link"}> */}
-          My Profile
-        {/* </Link> */}
-      </DropdownItem>
-      <DropdownItem url="/myaccount">
-          Settings
-      </DropdownItem>
-      <hr></hr>
-      <DropdownItem url="/privacy">
-          Privacy Policy
-      </DropdownItem>
-      <hr></hr>
-      <DropdownItem url="logout">Log Out</DropdownItem>
-    </div>
-  );
+  if (props.loggedIn) {
+
+    return (
+      <div className={styles.dropdown}>
+        <DropdownItem url="/explore">
+          {/* <Link href="/explore" className={"link"}> */}
+            My Profile
+          {/* </Link> */}
+        </DropdownItem>
+        <DropdownItem url="/settings">
+            Settings
+        </DropdownItem>
+        <hr></hr>
+        <DropdownItem url="/privacy">
+            Privacy Policy
+        </DropdownItem>
+        <hr></hr>
+        <DropdownItem url="logout">Log Out</DropdownItem>
+      </div>
+    );
+  
+  } else {
+
+    return (
+      <div className={styles.dropdown}>
+        <DropdownItem url="/settings">
+            Settings
+        </DropdownItem>
+        <hr></hr>
+        <DropdownItem url="/privacy">
+            Privacy Policy
+        </DropdownItem>
+        {/* <hr></hr> */}
+      </div>
+    );
+
+  }
+
 }
