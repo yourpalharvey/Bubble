@@ -206,6 +206,10 @@ function DropdownMenu(props) {
           Privacy Policy
       </DropdownItem>
       <hr></hr>
+      <DropdownItem url="/accessibility">
+          Bubble Accessibility Statement
+      </DropdownItem>
+      <hr></hr>
       <DropdownItem url="logout">Log Out</DropdownItem>
     </div>
   );
@@ -221,7 +225,10 @@ function DropdownMenu(props) {
       <DropdownItem url="/privacy">
           Privacy Policy
       </DropdownItem>
-      {/* <hr></hr> */}
+      <hr></hr>
+      <DropdownItem url="/accessibility">
+          Bubble Accessibility Statement
+      </DropdownItem>
     </div>
   );
 
