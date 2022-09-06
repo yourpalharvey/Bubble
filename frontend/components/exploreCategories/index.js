@@ -2,11 +2,26 @@ import { ExploreContentContainer } from "../../containers/exploreContentContaine
 import { TallBubble } from "../bubbles";
 import styles from "./exploreCategories.module.css";
 
-export const ExploreCategories = () => {
+export const ExploreCategories = ({data}) => {
+
+  let colours = ['--accent-red', '--teal', '--indigo', '--orange', '--blue', '--green'];
+
+  const randomise = (max) => {
+    return Math.floor(Math.random() * max)
+  }
+
+  const categoryData = data.slice(0,12).map((tag) => <TallBubble 
+      key={tag.id}
+      text={tag.title}
+      image={tag.image}
+      url={`categories/${tag.id}`}
+      colour={`var(${colours[randomise(colours.length)]})`}
+    />
+  )
   return (
     <>
       <ExploreContentContainer topRow={true} title="All categories">
-        <TallBubble
+        {/*<TallBubble
           text="Pop"
           image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660828077/Bubble/TaylorSwift_xoyk4t.png"
           url="categories/1"
@@ -50,57 +65,12 @@ export const ExploreCategories = () => {
           image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Gallery_waibqd.png"
           url="categories/3"
           colour="var(--green)"
-        />
+        />*/}
+        {categoryData}
       </ExploreContentContainer>
 
+      
       <ExploreContentContainer bottomRow={true} seeMore="See more categories">
-        <TallBubble
-          text="Rock"
-          date="July 28th"
-          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/Rock_qbeh2v.png"
-          url="categories/1"
-          colour="var(--green)"
-        />
-
-        <TallBubble
-          text="Jazz"
-          date="July 28th"
-          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/Jazz_azjztx.png"
-          url="categories/2"
-          colour="var(--blue)"
-        />
-
-        <TallBubble
-          text="Rugby"
-          date="July 28th"
-          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836849/Bubble/rugby_gjhdnn.png"
-          url="categories/3"
-          colour="var(--orange)"
-        />
-
-        <TallBubble
-          text="Go Kart"
-          date="July 28th"
-          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836848/Bubble/GoKart_b7gui5.png"
-          url="categories/1"
-          colour="var(--accent-red)"
-        />
-
-        <TallBubble
-          text="Paintball"
-          date="July 28th"
-          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Paintball_fc4abo.png"
-          url="categories/2"
-          colour="var(--indigo)"
-        />
-
-        <TallBubble
-          text="Poetry"
-          date="July 28th"
-          image="https://res.cloudinary.com/ddrwijehn/image/upload/v1660836850/Bubble/Spokenword_gqrlcn.png"
-          url="categories/3"
-          colour="var(--teal)"
-        />
       </ExploreContentContainer>
     </>
   );

@@ -14,11 +14,12 @@ import { ExploreBubblesFilter } from "../../components/exploreBubblesFilter";
 import { ExploreStreamsFilter } from "../../components/exploreStreamsFilter";
 import { getCookie } from "cookies-next";
 import { isAuth, getUsername } from "../../logic/auth";
-
+import { URLBASE } from "../../logic";
+import { getRequest } from "../../logic/requests";
 import React, { useState } from "react";
 import { ExploreNav } from "../../objects/exploreNav";
 
-export default function Explore({ loggedIn, user }) {
+export default function Explore({ loggedIn, user, data}) {
   const [showCategories, setShowCategories] = useState(true);
   const handleShowCategories = () => setShowCategories(true);
   const handleCloseCategories = () => setShowCategories(false);
@@ -34,9 +35,9 @@ export default function Explore({ loggedIn, user }) {
   let contentRendered;
 
   if (showCategories == true) {
-    contentRendered = <ExploreCategoriesFilter music={true} />;
+    contentRendered = <ExploreCategoriesFilter music={true} data={data}/>;
   } else if (showBubbles == true) {
-    contentRendered = <ExploreBubblesFilter music={true} />;
+    contentRendered = <ExploreBubblesFilter music={true}/>;
   } else {
     contentRendered = <ExploreStreamsFilter music={true} />;
   }
@@ -106,11 +107,15 @@ export const getServerSideProps = async (ctx) => {
   const valid = token != null ? await isAuth(token) : false;
   const username = token != null ? await getUsername(token) : null;
 
+  // return tags
+  const tags = await getRequest(`${URLBASE}/tags`);
+
   // return props
   return {
     props: {
-      loggedIn: valid,
-      user: username,
-    },
+        loggedIn: valid,
+        user: username,
+        data: tags,
+    }
   };
 };

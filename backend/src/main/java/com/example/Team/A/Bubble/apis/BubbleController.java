@@ -1,82 +1,66 @@
 package com.example.Team.A.Bubble.apis;
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Team.A.Bubble.models.StreamsModel;
+import com.example.Team.A.Bubble.service.BubbleService;
+import com.example.Team.A.Bubble.service.StreamsService;
+import org.springframework.http.ResponseEntity;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import com.example.Team.A.Bubble.models.Bubble;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
+import com.example.Team.A.Bubble.dto.Bubbles;
+import com.example.Team.A.Bubble.models.BubbleModel;
 
 @RestController
-@RequestMapping("/create-bubble")
+@CrossOrigin(origins = "*")
+@RequestMapping("/bubble")
+@RequiredArgsConstructor
+@ResponseBody
 public class BubbleController {
 
+    @NonNull
+    private final BubbleService bubbleService;
+
+    // get all bubbles
+    @RequestMapping(method = RequestMethod.GET)
+    public List<BubbleModel> getAllBubbles() {
+        return bubbleService.getAllBubbles().stream().map(BubbleModel::new).collect(Collectors.toList());
+    }
+
+    // add a bubble
     @RequestMapping(method = RequestMethod.POST)
-    public String createBubble(@RequestBody String json) {
-
-        try {
-            // construct mapper
-            ObjectMapper mapper = new ObjectMapper();
-
-            // build object
-            Bubble bubble = mapper.readValue(json, Bubble.class);
-
-            // send to SQL
-
-            return bubble.getTitle();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error";
-        }
-
+    public ResponseEntity<BubbleModel> addBubble(@RequestBody BubbleModel bubble) {
+        BubbleModel newBubble = new BubbleModel(bubbleService.addBubble(bubble));
+        return ResponseEntity.ok(newBubble);
     }
 
-    @RequestMapping(path="/add-tags/{id}", method=RequestMethod.POST)
-    public boolean addTags(@RequestBody String json, @PathVariable("id") int id) {
-        try {
-            
-            // get JSON object
-            JSONObject object = new JSONObject(json);
-            
-            // get data from json request
-            String tag1, tag2, tag3;
-            try {
-                tag1 = object.getString("tag1");
-            } catch (Exception e) {
-                e.printStackTrace();
-                tag1 = "";
-            }
-            try {
-                tag2 = object.getString("tag2");
-            } catch (Exception e) {
-                e.printStackTrace();
-                tag2 = "";
-            }
-            try {
-                tag3 = object.getString("tag3");
-            } catch (Exception e) {
-                e.printStackTrace();
-                tag3 = "";
-            }
-
-            String[] tags = {tag1, tag2, tag3};
-            
-            // send to SQL, get back boolean and return that bool
-            
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            
-            return false;
-        }
+    // get Bubbles where tagid is x
+    @RequestMapping(path = "/category/{id}",method = RequestMethod.GET)
+    public List<BubbleModel> getBubblesInCategory(@PathVariable(value = "id") int id) {
+        return bubbleService.getBubblesByCategoryId(id).stream().map(BubbleModel::new).collect(Collectors.toList());
     }
 
+    // get bubbles by id
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public Bubbles getBubblesById(@PathVariable(value = "id") int id) {
+        return bubbleService.getBubbleById(id);
+    }
 
+    @RequestMapping(path = "/tag/{id}", method = RequestMethod.GET)
+    public List<BubbleModel> getBubbleFromTag(@PathVariable(value = "id") int id)
+    {
+        return bubbleService.getBubblesByTag(id).stream().map(BubbleModel::new).collect(Collectors.toList());
+    }
 
     
 }

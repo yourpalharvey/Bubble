@@ -1,7 +1,6 @@
 const { cleanText, cleanPassword, cleanEmail } = require("../cleaning");
 const { postRequest } = require("../requests");
-
-const URLBASE = "http://localhost:8080/";
+const {URLBASE} = require("../index");
 
 // log in user
 const handleLogin = async (username, password) => {
@@ -12,7 +11,7 @@ const handleLogin = async (username, password) => {
 	};
 	
 	// send post request
-	let response = await postRequest(`${URLBASE}users/signIn`, data);
+	let response = await postRequest(`${URLBASE}/users/signIn`, data);
 
 	if (response.hasOwnProperty("token"))
 	{
@@ -40,7 +39,7 @@ const handleSignup = async (username, password, dateOfBirth, email) => {
 			age: dateOfBirth,
 			email: email
 		}
-		let response = postRequest(`${URLBASE}users`, data);
+		let response = postRequest(`${URLBASE}/users`, data);
 		return response;
 	}
 	return false;
@@ -51,9 +50,17 @@ const isAuth = async (token) => {
 	// create json object
 	let data = {"token": token};
 	// post the token to the api, and get response
-	let response = await postRequest(`${URLBASE}users/isAuth`, data);
+	let response = await postRequest(`${URLBASE}/users/isAuth`, data);
+	
 	// return the value of the api request
-	return response.authorised[0];
+	if (response.hasOwnProperty("authorised"))
+	{
+		return response.authorised[0];
+	}
+	else
+	{
+		return false;
+	}
 
 }
 
@@ -63,10 +70,35 @@ const getUsername = async (token) => {
 	let data = {"token": token};
 
 	// post data to api
-	let response = await postRequest(`${URLBASE}users/getUsername`, data);
+	let response = await postRequest(`${URLBASE}/users/getUsername`, data);
 
 	// return value
-	return response.username[0];
+	if (response.hasOwnProperty("username"))
+	{
+		return response.username[0];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+const getId = async (token) => {
+	// create json Object
+	let data = {"token": token};
+
+	// post data to api
+	let response = await postRequest(`${URLBASE}/users/getId`, data);
+
+	// return value
+	if (response.hasOwnProperty("id"))
+	{
+		return response.id[0];
+	}
+	else
+	{
+		return null;
+	}
 }
 
 // check if username exists
@@ -78,7 +110,7 @@ const checkUsername = (username) => {
 	else if (cleanText(username) != false)
 	{
 		let requestJson = {"username": username};
-		return postRequest(`${URLBASE}users/check-username`, requestJson);
+		return postRequest(`${URLBASE}/users/check-username`, requestJson);
 	}
 	else
 	{
@@ -149,5 +181,6 @@ module.exports= {
 	checkPasswordValidBool,
 	checkEmailValidBool,
 	isAuth,
-	getUsername
+	getUsername,
+	getId
 }
