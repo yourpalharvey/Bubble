@@ -7,9 +7,13 @@ export const ExploreContentContainer = (props) => {
     return (
       <div className={styles.container}>
         <div className={styles.contentContainer}>
+          
           <ContainerHeader title={props.title} />
 
-          <div className={styles.cardContainer}>{props.children}</div>
+          <div className={styles.cardContainer}>
+            {props.children}
+          </div>
+
         </div>
       </div>
     );

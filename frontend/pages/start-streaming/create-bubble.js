@@ -6,9 +6,12 @@ import { CreateBubble1, CreateBubble2 } from "../../containers/createBubble";
 import styles from "../../styles/StartStreaming.module.css";
 import { getCookie } from "cookies-next";
 import { isAuth, getUsername } from "../../logic/auth";
+import { URLBASE } from "../../logic";
+import { getRequest } from "../../logic/requests";
 
-const createBubble = ({loggedIn, user}) => {
+const createBubble = ({loggedIn, user, catData, tagData}) => {
   const [progress, setProgress] = useState(5);
+  const [bubbleId, setBubbleId] = useState();
 
   return (
     <Background>
@@ -22,9 +25,9 @@ const createBubble = ({loggedIn, user}) => {
 
       <div className={styles.container}>
         {progress <= 50 ? (
-          <CreateBubble1 progress={progress} setProgress={setProgress} />
+          <CreateBubble1 progress={progress} setProgress={setProgress} setBubbleId={setBubbleId} data={catData}/>
         ) : (
-          <CreateBubble2 progress={progress} setProgress={setProgress} />
+          <CreateBubble2 progress={progress} setProgress={setProgress} data={tagData} bubbleId={bubbleId}/>
         )}
       </div>
     </Background>
@@ -46,7 +49,12 @@ export const getServerSideProps = async (ctx) => {
   const valid = token != null ? await isAuth(token): false;
   const username = token!= null ? await getUsername(token) : null;
 
-  // get user info
+  // get category data from database
+  const response = await getRequest(`${URLBASE}/category`);
+
+  // get tags
+  const tags = await getRequest(`${URLBASE}/tags`);
+  
 
   // get location
 
@@ -56,6 +64,8 @@ export const getServerSideProps = async (ctx) => {
     props: {
         loggedIn: valid,
         user: username,
+        catData: response,
+        tagData: tags
     }
   } 
 
