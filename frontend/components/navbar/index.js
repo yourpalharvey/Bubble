@@ -191,40 +191,40 @@ function DropdownMenu(props) {
 
   if (props.loggedIn) {
 
-  return (
-    <div className={styles.dropdown}>
-      <DropdownItem url="/explore">
-        {/* <Link href="/explore" className={"link"}> */}
-          My Profile
-        {/* </Link> */}
-      </DropdownItem>
-      <DropdownItem url="/myaccount">
-          Settings
-      </DropdownItem>
-      <hr></hr>
-      <DropdownItem url="/privacy">
-          Privacy Policy
-      </DropdownItem>
-      <hr></hr>
-      <DropdownItem url="logout">Log Out</DropdownItem>
-    </div>
-  );
+    return (
+      <div className={styles.dropdown}>
+        <DropdownItem url="/explore">
+          {/* <Link href="/explore" className={"link"}> */}
+            My Profile
+          {/* </Link> */}
+        </DropdownItem>
+        <DropdownItem url="/settings">
+            Settings
+        </DropdownItem>
+        <hr></hr>
+        <DropdownItem url="/privacy">
+            Privacy Policy
+        </DropdownItem>
+        <hr></hr>
+        <DropdownItem url="logout">Log Out</DropdownItem>
+      </div>
+    );
   
-} else {
+  } else {
 
-  return (
-    <div className={styles.dropdown}>
-      <DropdownItem url="/myaccount">
-          Settings
-      </DropdownItem>
-      <hr></hr>
-      <DropdownItem url="/privacy">
-          Privacy Policy
-      </DropdownItem>
-      {/* <hr></hr> */}
-    </div>
-  );
+    return (
+      <div className={styles.dropdown}>
+        <DropdownItem url="/settings">
+            Settings
+        </DropdownItem>
+        <hr></hr>
+        <DropdownItem url="/privacy">
+            Privacy Policy
+        </DropdownItem>
+        {/* <hr></hr> */}
+      </div>
+    );
 
-}
+  }
 
 }
