@@ -227,7 +227,7 @@ function DropdownMenu(props) {
       </DropdownItem>
       <hr></hr>
       <DropdownItem url="/accessibility">
-          Bubble Accessibility Statement
+          Accessibility Statement
       </DropdownItem>
     </div>
   );
