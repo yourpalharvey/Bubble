@@ -70,7 +70,7 @@ export const Navbar = (props) => {
             <NavItems>
               <NavIcons icon={<SettingsIcon />}>
                 {/* Dropdown */}
-                <DropdownMenu>
+                <DropdownMenu loggedIn={props.loggedIn}>
 
                 </DropdownMenu>
               </NavIcons>
@@ -125,7 +125,7 @@ export const Navbar = (props) => {
             <NavItems>
               <NavIcons icon={<SettingsIcon />}>
                 {/* Dropdown */}
-                <DropdownMenu>
+                <DropdownMenu loggedIn={props.loggedIn}>
 
                 </DropdownMenu>
               </NavIcons>
