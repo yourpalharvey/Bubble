@@ -17,8 +17,9 @@ public class Tags {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "category_id")
-    private Integer category_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @Column(name = "image")
     private String image;

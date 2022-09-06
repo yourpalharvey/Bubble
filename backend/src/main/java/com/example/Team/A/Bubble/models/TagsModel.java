@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.ObjectUtils;
 
 import javax.persistence.Column;
 
@@ -24,7 +25,8 @@ public class TagsModel {
     public TagsModel(Tags tags) {
         this.id = tags.getId();
         this.title = tags.getTitle();
-        this.category_id = tags.getCategory_id();
+        this.category_id = !ObjectUtils.isEmpty(tags.getCategory()) ?
+                tags.getCategory().getId() : null;
         this.image = tags.getImage();
         
     }
