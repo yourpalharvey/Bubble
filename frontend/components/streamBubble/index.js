@@ -11,8 +11,16 @@ export const CurrentVideoBubble = (props) => {
     return (
         <Link href={`/${props.url}`}>
             <div className={styles.currentVideoBubbleContainer}>
+                <div className={styles.currentVideoText}>
+                    <h3 className={styles.currentVideoHeading}>
+                        {props.text}
+                    </h3>
+                    <p className={styles.currentVideoUserName}>
+                        {props.username}
+                    </p>
+                </div>
 
-                <div className={styles.imageContainer}>
+                
                 <Image
                     src={props.image}
                     alt={`picture of ${props.text}`}
@@ -23,16 +31,6 @@ export const CurrentVideoBubble = (props) => {
                         overflow: 'hidden',
                     }}
                 />
-                </div>
-
-                <div className={styles.currentVideoText}>
-                    <h3 className={styles.currentVideoHeading}>
-                        {props.text}
-                    </h3>
-                    <p className={styles.currentVideoUserName}>
-                        {props.username}
-                    </p>
-                </div>
                 {/* <div className={styles.viewsButton}>
                     <BubbleBtn openBtn/>
                 </div> */}

@@ -1,6 +1,7 @@
 package com.example.Team.A.Bubble.models;
 
 import com.example.Team.A.Bubble.dto.Users;
+import com.example.Team.A.Bubble.repositories.UsersRepository;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
