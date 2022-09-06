@@ -152,15 +152,16 @@ import { Navbar } from "../components/navbar";
         <Background>
             <Navbar loggedIn={true}/>
         <div className="container my-5">
-                <span>
-                    <ButtonBootstrap
-                    secondarySmall={true}
-                    text="Back">
-                    </ButtonBootstrap>
-                    <h1 className="mt-4">Settings</h1>
-                </span>
 
                 <div className="mt-4">
+                    {/* <ButtonBootstrap
+                    secondarySmall={true}
+                    text="Back">
+                    </ButtonBootstrap> */}
+                    <h1>Settings</h1>
+                </div>
+
+                <div className="mt-2">
                     <input type="text" className="form-control mt-5" onChange={onChange} placeholder="Search..."/>
                 </div>
 
