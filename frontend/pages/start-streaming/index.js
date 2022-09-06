@@ -9,34 +9,53 @@ import { Shadow } from '../../objects/shadow';
 import { useEffect, useState } from 'react';
 import { Select } from '../../components/select';
 import { ButtonBootstrap } from "../../objects/buttonBootstrap";
-import { getRequest } from '../../logic/requests';
-import { getCookie } from 'cookies-next';
-import { isAuth, getId } from "../../logic/auth";
-import { URLBASE } from '../../logic';
 
-const startStream = ({userId, bubbles}) => {
+const startStream = (props) => {
   // handle going back
   const router = useRouter();
 
   // state for available bubbles
-  const [bubble, setBubble] = useState([]);
+  const [bubbles, setBubbles] = useState([]);
   const [currentBubble, setCurrentBubble] = useState();
 
-  // set data as dropdown option
-  const mapDataToOptions = () => {
-    let output = [];
-    bubbles.map(bub => {
-      output.push({"id": bub.id, "name": bub.title});
-    })
-    return output;
-  }
+  // function to get gelocation
+  const getLocation = () => {
+    let location = "0001";
+    return location;
+  };
+
+  // handle getting available bubbles to join
+
   useEffect(() => {
-    setBubble(mapDataToOptions);
+    /*
+            fetch(`/apiroute/location?${geoLocation}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setBubbles(data)
+                })
+                .catch((error) => {
+                    router.push('404');
+                })
+            */
+    setBubbles([
+      {
+        id: 1,
+        name: "bubble1",
+      },
+      {
+        id: 2,
+        name: "bubble2",
+      },
+      {
+        id: 3,
+        name: "bubble3",
+      },
+    ]);
   }, []);
 
   return (
     <Background>
-      <Navbar  loggedIn={userId ? true : false}/>
+      {/*<Navbar />*/}
 
       <Head>
         <title>Bubble - Start Streaming</title>
@@ -44,7 +63,7 @@ const startStream = ({userId, bubbles}) => {
         <link rel="icon" href="/logo.png" />
       </Head>
 
-      <div className={styles.containerColumm}>
+      <div className={styles.container}>
         <div className={styles.startStreamingButton}>
           <ButtonBootstrap
             text="Create stream"
@@ -55,7 +74,7 @@ const startStream = ({userId, bubbles}) => {
 
         <Select
           label="Available bubbles"
-          options={bubble}
+          options={bubbles}
           onChange={(e) => setCurrentBubble(e.target.value)}
         />
 
@@ -83,40 +102,26 @@ const startStream = ({userId, bubbles}) => {
 
 export default startStream;
 
-export const getServerSideProps = async (ctx) => {
-
-  // get bubbles
-  let bubbles = await getRequest(`${URLBASE}/bubble`);
+export const getServerSideProps = async (context) => {
 
 
-  // get the req and res objects from context
-  const {req, res} = ctx;
 
-  // get the token cookie
-  const token = getCookie("token", {req, res});
-
-  // if the token exists, return wheteher it is valid, otherwise set it as false
-  const valid = token != null ? await isAuth(token): false;
-  const id = token!= null ? await getId(token) : null;
-
-
-  if (valid)
-  {
-      return {
-          props: {
-            userId: id,
-            bubbles,
-          },
-      }
-  }
-  else
-  {
-      return {
-          redirect: {
-              destination: "/",
-              permanent: false,
-          },
-      }
-  }
+    if (!isMobile)
+    {
+        return {
+            props: {
+                
+            },
+        }
+    }
+    else
+    {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        }
+    }
 }
 

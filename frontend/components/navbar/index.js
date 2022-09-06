@@ -70,7 +70,7 @@ export const Navbar = (props) => {
             <NavItems>
               <NavIcons icon={<SettingsIcon />}>
                 {/* Dropdown */}
-                <DropdownMenu loggedIn={props.loggedIn}>
+                <DropdownMenu>
 
                 </DropdownMenu>
               </NavIcons>
@@ -125,7 +125,7 @@ export const Navbar = (props) => {
             <NavItems>
               <NavIcons icon={<SettingsIcon />}>
                 {/* Dropdown */}
-                <DropdownMenu loggedIn={props.loggedIn}>
+                <DropdownMenu>
 
                 </DropdownMenu>
               </NavIcons>
@@ -177,7 +177,7 @@ function DropdownMenu(props) {
 
   function DropdownItem(props) {
     return (
-      <Link href={props.url}>
+      <Link href={`${props.url}`}>
       <a className={styles.menuItem}>
         <span className={styles.iconButton}>{props.leftIcon}</span>
 
@@ -189,42 +189,22 @@ function DropdownMenu(props) {
     );
   }
 
-  if (props.loggedIn) {
-
-    return (
-      <div className={styles.dropdown}>
-        <DropdownItem url="/explore">
-          {/* <Link href="/explore" className={"link"}> */}
-            My Profile
-          {/* </Link> */}
-        </DropdownItem>
-        <DropdownItem url="/settings">
-            Settings
-        </DropdownItem>
-        <hr></hr>
-        <DropdownItem url="/privacy">
-            Privacy Policy
-        </DropdownItem>
-        <hr></hr>
-        <DropdownItem url="logout">Log Out</DropdownItem>
-      </div>
-    );
-  
-  } else {
-
-    return (
-      <div className={styles.dropdown}>
-        <DropdownItem url="/settings">
-            Settings
-        </DropdownItem>
-        <hr></hr>
-        <DropdownItem url="/privacy">
-            Privacy Policy
-        </DropdownItem>
-        {/* <hr></hr> */}
-      </div>
-    );
-
-  }
-
+  return (
+    <div className={styles.dropdown}>
+      <DropdownItem url="explore">
+        {/* <Link href="/explore" className={"link"}> */}
+          My Profile
+        {/* </Link> */}
+      </DropdownItem>
+      <DropdownItem url="myaccount">
+          Settings
+      </DropdownItem>
+      <hr></hr>
+      <DropdownItem url="explore">
+          Privacy Policy
+      </DropdownItem>
+      <hr></hr>
+      <DropdownItem url="logout">Log Out</DropdownItem>
+    </div>
+  );
 }

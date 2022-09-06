@@ -19,8 +19,6 @@
 
 .cardContainer {
     width: 100%;
-    height: auto;
-    flex-wrap: wrap;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;

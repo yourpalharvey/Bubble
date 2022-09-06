@@ -6,22 +6,17 @@
 
     border-radius: 1vh;
     position: relative;
+    top: -100px;
+    left: 190px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-}
-.imageContainer {
-    height: 6vw;
-    width: 10vw;
 }
 
 .currentVideoText {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    position: absolute;
+    left: 15vh;
 }
 
 .currentVideoHeading {
@@ -47,6 +42,8 @@
 
     border-radius: 1vh;
     position: relative;
+    top: -50px;
+    left: 190px;
     display: flex;
     flex-direction: row;
     justify-content: center;

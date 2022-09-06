@@ -1,5 +1,6 @@
 .container {
     width: 100vw;
+
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -24,5 +25,4 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    flex-wrap: wrap;
 }
