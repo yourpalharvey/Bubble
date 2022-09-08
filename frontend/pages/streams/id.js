@@ -43,4 +43,7 @@ const streams = ({loggedIn, streams, title}) => {
 
 
         <Footer loggedIn={loggedIn} />
-    </Backgroun
+    </Background>
+
+    )
+}
