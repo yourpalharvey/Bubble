@@ -21,5 +21,17 @@ CREATE TABLE `bubbles`(
     `tag3` varchar(25)
 );
 
+CREATE TABLE `streams` (
+  `id` int NOT NULL PRIMARY KEY,
+  `signal_id` varchar(40),
+  `bubble_id` int,
+  `user_id` int,
+  `bubble_image` varchar(120),
+  FOREIGN KEY (bubble_id) REFERENCES bubbles(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+
 Select * 
 from users
